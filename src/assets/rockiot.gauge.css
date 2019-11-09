@@ -1,0 +1,168 @@
+rockiot-gauge {
+    position:relative;
+    display: flex; 
+    max-width: 20rem;
+    width: 20rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+
+.dial__ticks {
+    fill: #a5a5a5;
+}
+
+.active {
+    fill: rgb(13, 166, 226);
+    stroke: rgb(13, 166, 226);
+    stroke-width:4;
+    transition:All .8s linear;
+}
+
+rockiot-gauge > .radial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+rockiot-gauge > .linear {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 30rem;
+}
+
+rockiot-gauge > .horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 15rem;
+    max-height: 15rem;
+}
+
+.outline {
+    fill: #444;
+}
+.fill {
+    fill: #00ff00;
+    stroke:transparent;
+}
+.scale {
+  stroke: #aaa;
+}
+
+.scaleNumbers {
+    font-size:.22rem;
+}
+
+.scaleNumbersLinear {
+    font-size:.7rem;
+}
+
+g > text {
+  text-anchor: middle;
+  dominant-baseline: alphabetic;
+  font-size: .7rem;
+  font-weight:normal;
+  stroke:none;
+}
+
+.rockiot-title-text {
+    font-size: .2rem;
+    stroke: unset;
+    fill: #b2b2b2;
+}
+
+.radial > .rockiot-gauge-title {
+  position:absolute;
+  top:7rem;
+  font-size:.6rem;
+}
+
+.radial > .rockiot-gauge-units {
+    position: absolute;
+    bottom: 4rem;
+    font-size: .6rem;
+}
+
+.rockiot-gauge-output {
+    margin-top: 1.5rem;
+    padding: .5rem;
+    color: rgb(204, 204, 204);
+    border-radius: .3rem;
+    min-width: 4rem;
+    font-size:3rem;
+}
+
+.rockiot-gauge-output > small > sup {
+    font-size:1rem;
+    position:absolute;
+    margin-top:.5rem;
+}
+
+.radial-full {
+    position: absolute;
+    margin: 0 auto;
+    fill: #fff;
+    font-size:6rem;
+}
+
+.linear > .rockiot-gauge-title {
+    margin-top:-1rem;
+    font-size:.6rem;
+  }
+  
+.linear > .rockiot-gauge-units {
+    font-size: .6rem;
+}
+
+.linear > .rockiot-gauge-output {
+    margin-top:.5rem;
+}
+
+.rockiot-linear-vertical {
+    transform: rotate(180deg);
+}
+
+.radial_full {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+}
+
+.radial_full > .rockiot-gauge-title {
+    position:absolute;
+    margin-top:2rem;
+    font-size:1rem;
+    flex:1 auto;
+  }
+  
+.radial_full > .rockiot-gauge-units {
+    font-size: 1rem;
+    position:absolute;
+    margin-top:4rem;
+    font-size:1rem;
+    flex:1 auto;
+}
+
+.radial_full > .rockiot-gauge-output {
+    font-size:4rem;
+    flex:1 auto;
+    position:absolute;
+    margin:0 auto;
+    margin-top:-2rem;
+    padding:0;
+    background:transparent!important;
+    border:0!important;
+}
+
+.panel_dark {
+    background: linear-gradient(135deg, #7d7e7d 0%,#0e0e0e 100%);
+    border-radius: 50%;
+    box-shadow: 4px 4px 5px 0px rgba(148,148,148,1);
+}

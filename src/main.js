@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import App from './App.vue'
+import vueCustomElement from 'vue-custom-element'
+import RockiotContainer from '@/components/rockiot.container.vue'
+import '@/assets/rockiot.gauge.css'
+
+Vue.use(vueCustomElement)
+Vue.customElement('rockiot-gauge', RockiotContainer)
 
 Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
