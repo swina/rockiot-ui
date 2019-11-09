@@ -1,8 +1,6 @@
 # rockiot-gauge
 
-**rockiot-gauge** is a **webcomponent** (custom HTML element) to create awesome gauges that you can insert in your HTML page as a normal HTML tag.
-
-**rockiot-gauge has no dependencis** (no external library, just pure javascript).
+**rockiot-gauge** is a **webcomponent** (custom HTML element) created sing Vue.js to add awesome gauges in your HTML pages.
 
 All elements created with rockiot-gauge are based on SVG.
 **rockiot-gauge doesn't use any canvas**. 
@@ -40,6 +38,9 @@ linear horizontal
 
 
 ## Project setup
+The source code has been created using Vue.js so you can create your vue project and change it as per you needs.
+
+
 ```
 npm install
 ```
