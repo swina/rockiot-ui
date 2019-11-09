@@ -1,6 +1,7 @@
 const path = require("path")
 const webpack = require('webpack')
 const glob = require("glob")
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   configureWebpack: {
@@ -11,7 +12,13 @@ module.exports = {
       filename: 'rockiot.[name].js'
     },
     optimization: {
-      splitChunks: false
+      splitChunks: false,
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          test: /\.js(\?.*)?$/i,
+        }),
+      ],
     },
   },
   chainWebpack:

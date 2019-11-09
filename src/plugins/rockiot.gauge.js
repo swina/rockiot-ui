@@ -84,6 +84,8 @@ export function drawScale(svg) {
     }
   }
 
+  
+
   export function Animation(options) {
     var duration = options.duration,
         currentIteration = 1,

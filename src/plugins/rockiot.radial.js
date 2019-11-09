@@ -52,7 +52,6 @@ export default (function(global, factory) {
       function animate() {
         var progress = currentIteration / iterations, 
             value = change * easing(progress) + start;
-        // console.log(progress + ", " + value);
         step(value, currentIteration);
         currentIteration += 1;
   
@@ -330,7 +329,7 @@ export default (function(global, factory) {
             [ 
               gaugeDialEl,
               gaugeValuePath,
-              gaugeValueElem,
+              //gaugeValueElem,
               gaugeTitleElem,
               gaugeUnitsElem,
             ]

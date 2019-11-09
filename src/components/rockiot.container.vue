@@ -4,10 +4,10 @@
         <rockiot-svg-linear :value="value" v-bind="_props" :id="serial" v-if="variation==='linear'"></rockiot-svg-linear>-->
         <component :is="component" :component="component" :id="serial" :value="value" v-bind="_props"></component>
         <!--<component :is="component" :component="component" :id="serial" :value="value" v-bind="_props"></component>-->
-        <div v-if="variation!='radial_pro'" class="rockiot-gauge-title" :style="textStyle">{{title}} <div class="rockiot-gauge-limits" v-if="!! parseInt(minmax)">{{min}}:{{max}}</div></div>
-        <div v-if="variation!='radial_pro'" class="rockiot-gauge-units" :style="textStyle">{{units}}</div>
-        <div v-if="variation!='radial_pro'" class="rockiot-gauge-output" :style="valueStyle">
-            {{parseInt(updatedValue)}}<small><sup>.{{formatDec}}</sup></small>
+        <div v-if="variation!='radial'" class="rockiot-gauge-title" :style="textStyle">{{title}} <div class="rockiot-gauge-limits" v-if="!! parseInt(minmax)">{{min}}:{{max}}</div></div>
+        <div v-if="variation!='radial'" class="rockiot-gauge-units" :style="textStyle">{{units}}</div>
+        <div v-if="variation!='radial_pro'" :id="'value-' + serial" class="rockiot-gauge-output" :style="valueStyle">
+            <div>{{parseInt(updatedValue)}}<small class="rockiot-output-dec" v-if="precision!='0'">.{{formatDec}}</small></div>
         </div>
     </div>
 </template>
@@ -48,13 +48,13 @@ export default {
             return RockiotTest
         },
         component(){
-            if ( this.variation === 'radial' ){
+            //if ( this.variation === 'radial' ){
                 //return RockiotSvgGauge
                 //return () => import ( /*webpackChunkName: "rockiotRadial" */ '@/components/rockiot.gauge.svg' )
-            }
-            if ( this.variation === 'radial_pro' ){
-                return RockiotRadialSvg
-                //return () => import ( /*webpackChunkName: "rockiotRadial" */ '@/components/rockiot.gauge.svg' )
+           // }
+            if ( this.variation === 'radial' ){
+                //return RockiotRadialSvg
+                return () => import ( /*webpackChunkName: "rockiotRadialSvg" */ '@/components/rockiot.radial.svg' )
             }   
 
             if ( this.orientation === 'vertical' && this.variation === 'linear' ){

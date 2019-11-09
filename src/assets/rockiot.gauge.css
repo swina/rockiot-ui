@@ -95,14 +95,21 @@ g > text {
     color: rgb(204, 204, 204);
     border-radius: .3rem;
     min-width: 4rem;
-    font-size:3rem;
+    font-size:2rem;
 }
 
-.rockiot-gauge-output > small > sup {
-    font-size:1rem;
+.radial > .rockiot-gauge-output {
     position:absolute;
-    margin-top:.5rem;
+    bottom:5rem;
+    margin-top: 1.5rem;
+    padding: .5rem;
+    color: rgb(204, 204, 204);
+    border-radius: .3rem;
+    min-width: 4rem;
+    font-size:2rem;
 }
+
+.rockiot-output-dec { font-size:.8rem; }
 
 .radial-full {
     position: absolute;
