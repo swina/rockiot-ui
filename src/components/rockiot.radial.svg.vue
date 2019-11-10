@@ -73,19 +73,19 @@ export default {
                 value: parseFloat(value),
                 valueColor: self.$attrs.valueColor,
                 serial: self.$attrs.serial,
-                gaugeClass: 'gauge gauge-' + self.$attrs.serial,
-                dialClass: 'dial dial-' + self.$attrs.size + ' dial-' + self.$attrs.serial ,
-                valueDialClass: 'value value-' + self.$attrs.size + ' value-' + self.$attrs.serial,
+                gaugeClass: 'rockiot-svg rockiot-svg-' + self.$attrs.serial + ' gauge-' + self.$attrs.serial,
+                dialClass: 'rockiot-dial rockiot-dial-' + self.$attrs.size + ' rockiot-dial-' + self.$attrs.serial ,
+                valueDialClass: 'rockiot-value rockiot-value-' + self.$attrs.size + ' rockiot-value-' + self.$attrs.serial,
                 svg: self.svg,
                 barColor: self.$attrs.barColor,
                 progressColor: self.$attrs.progressColor
             });
-            let svg = document.querySelector('.gauge-' + this.$attrs.serial)
-            svg.setAttribute('ref','gauge-' + this.$attrs.serial)
+            let svg = document.querySelector('.rockiot-svg-' + this.$attrs.serial)
+            svg.setAttribute('ref','rockiot-svg-' + this.$attrs.serial)
             this.customize = {
-                gauge: document.querySelector('.gauge-' + this.$attrs.serial ),
-                dial: document.querySelector('.dial-' + this.$attrs.serial ),
-                value: document.querySelector('.value-' + this.$attrs.serial )
+                gauge: document.querySelector('.rockiot-svg-' + this.$attrs.serial ),
+                dial: document.querySelector('.rockiot-dial-' + this.$attrs.serial ),
+                value: document.querySelector('.rockiot-value-' + this.$attrs.serial )
             }
             this.customize.dial.style.stroke = this.$attrs.barColor
             this.customize.value.style.stroke = this.$attrs.progressColor
@@ -118,24 +118,24 @@ export default {
 </script>
 
 <style>
-.dial-md {
+.rockiot-dial-md {
     stroke-width: 8;
 }
-.value-md {
+.rockiot-value-md {
     stroke-width: 8;
 }
 
-.dial-lg {
+.rockiot-dial-lg {
     stroke-width: 12;
 }
-.value-lg {
+.rockiot-value-lg {
     stroke-width: 12;
 }
 
-.dial-sm {
+.rockiot-dial-sm {
     stroke-width: 4;
 }
-.value-sm {
+.rockiot-value-sm {
     stroke-width: 4;
 }
 </style>

@@ -23,7 +23,7 @@ rockiot-gauge {
     transition:All .8s linear;
 }
 
-rockiot-gauge > .radial {
+rockiot-gauge > .rockiot-radial {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,24 +51,31 @@ rockiot-gauge > .horizontal {
     fill: #00ff00;
     stroke:transparent;
 }
-.scale {
+
+.rockiot-scale {
   stroke: #aaa;
 }
 
-.scaleNumbers {
-    font-size:.22rem;
-}
+
 
 .scaleNumbersLinear {
     font-size:.7rem;
 }
 
-g > text {
+.rockiot-svg > g > text , g > text {
   text-anchor: middle;
   dominant-baseline: alphabetic;
   font-size: .7rem;
   font-weight:normal;
   stroke:none;
+}
+
+.rockiot-svg > g > .scaleNumbers  {
+    font-size:.22rem;
+}
+
+.scaleNumbers {
+    font-size:.22rem;
 }
 
 .rockiot-title-text {
@@ -77,13 +84,13 @@ g > text {
     fill: #b2b2b2;
 }
 
-.radial > .rockiot-gauge-title {
+.rockiot-radial > .rockiot-gauge-title {
   position:absolute;
   top:7rem;
   font-size:.6rem;
 }
 
-.radial > .rockiot-gauge-units {
+.rockiot-radial > .rockiot-gauge-units {
     position: absolute;
     bottom: 4rem;
     font-size: .6rem;

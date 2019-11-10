@@ -13,12 +13,7 @@ module.exports = {
     },
     optimization: {
       splitChunks: false,
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          test: /\.js(\?.*)?$/i,
-        }),
-      ],
+      
     },
   },
   chainWebpack:

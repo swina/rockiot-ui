@@ -1,5 +1,5 @@
 <template>
-    <div :class="variation + ' ' + orientation">
+    <div :class="'rockiot-' + variation + ' ' + variation + ' ' + orientation + ' rockiot-' + orientation">
         <!--<rockiot-svg-gauge :value="value" v-bind="_props" :id="serial" v-if="variation==='radial'"></rockiot-svg-gauge>
         <rockiot-svg-linear :value="value" v-bind="_props" :id="serial" v-if="variation==='linear'"></rockiot-svg-linear>-->
         <component :is="component" :component="component" :id="serial" :value="value" v-bind="_props"></component>

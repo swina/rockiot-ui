@@ -82,13 +82,13 @@ export default (function(global, factory) {
         precision: 0,
         max: 100,
         min: 0,
-        valueDialClass: "value",
-        valueClass: "value-text",
+        valueDialClass: "rockiot-value value",
+        valueClass: "rockiot-value-text value-text",
         titleTextClass: "rockiot-title-text",
         unitsTextClass: "rockiot-units-text",
-        dialClass: "dial",
-        gaugeClass: "gauge",
-        scaleClass: "scale",
+        dialClass: "rockiot-dial dial",
+        gaugeClass: "rockiot-svg gauge",
+        scaleClass: "rockiot-scale scale",
         valueColor: '#eee',
         barColor: '#eee',
         progressColor: '#ff0000',
@@ -323,8 +323,13 @@ export default (function(global, factory) {
           })
           
         
+          var gaugeNeedle =  svg('circle',{
+            "class" : "rockiot-scale scale rockiot-needle-circle needle-circle",
+            cx: 50,
+            cy: 50,
+            r: 2,
+          })
           
-         
           var gaugeElement = svg("svg", {"viewBox": viewBox || "0 0 100 100", "class": gaugeClass},
             [ 
               gaugeDialEl,
@@ -336,9 +341,11 @@ export default (function(global, factory) {
           );
           
           
-
           elem.appendChild(gaugeElement);
-          
+
+          if ( needle ){
+            gaugeElement.appendChild(gaugeNeedle)
+          }
 
           if ( displayScale ){
           
@@ -394,14 +401,14 @@ export default (function(global, factory) {
         }
 
         function drawNeedle(){
-          var needleCoord = document.querySelector('.value-' + serial).getAttribute('d').split(' ')
+          var needleCoord = document.querySelector('.rockiot-value-' + serial).getAttribute('d').split(' ')
 
-          if ( document.querySelector('.needle-' + serial) ){
-            document.querySelector('.needle-' + serial).remove()
+          if ( document.querySelector('.rockiot-needle-' + serial) ){
+            document.querySelector('.rockiot-needle-' + serial).remove()
           }
-          document.querySelector('.gauge-' + serial).appendChild(
+          document.querySelector('.rockiot-svg-' + serial).appendChild(
             svg('line', {
-              "class": "scale needle needle-" + serial,
+              "class": "rockiot-scale rockiot-needle rockiot-needle-" + serial,
               fill: 'unset',
               "stroke-width": .4,
               x1: 50,
@@ -409,17 +416,11 @@ export default (function(global, factory) {
               x2: needleCoord[needleCoord.length-2],
               y2: needleCoord[needleCoord.length-1]
             }),
-            
           )
+        }
 
-          document.querySelector('.gauge-' + serial).appendChild( 
-            svg('circle',{
-              "class" : "scale needle-circle",
-              cx: 50,
-              cy: 50,
-              r: 2,
-            })
-          )
+        function drawNeedleCircle(){
+
         }
 
         function drawNumbers(){
@@ -523,6 +524,7 @@ export default (function(global, factory) {
         instance.setValue(value);
         if ( needle ){
           drawNeedle()
+          
         }  
         return instance;
       };
