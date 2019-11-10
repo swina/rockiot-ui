@@ -1,16 +1,16 @@
 <template>
-        <svg :class="'typeRange rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
+        <svg :class="'typeRange rockiot-linear-vertical rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
             
-            <g class="scale" :ref="'scale-' + $attrs.serial" stroke="red" :style="scaleStyle"></g>
+            <g class="rockiot-scale" :ref="'scale-' + $attrs.serial" stroke="red" :style="scaleStyle"></g>
 
-            <rect class="outline " :id="'outline-' + $attrs.serial" :style="fillStyle" 
+            <rect class="rockiot-outline " :id="'outline-' + $attrs.serial" :style="fillStyle" 
                 :x="offsetX" 
                 :height="svgheight-(offsetY*2)" 
                 :width="barHeight" 
                 :y="offsetY">
                
             </rect>
-            <rect class="fill " :style="outlineStyle" :id="'fill-' + $attrs.serial" 
+            <rect class="rockiot-fill " :style="outlineStyle" :id="'fill-' + $attrs.serial" 
                 :x="offsetX" 
                 :height="($attrs.max*factor) - pos" 
                 :width="barHeight" 
@@ -18,7 +18,7 @@
                 
             </rect>
 
-            <rect :id="'needle-' + $attrs.serial" class="needle" :style="animate('y')" height="1" 
+            <rect :id="'needle-' + $attrs.serial" class="rockiot-needle" :style="animate('y')" height="1" 
                 :y="($attrs.max*factor) - pos + offsetY"
                 :x="offsetX" 
                 :width="barHeight" :fill="$attrs.needleColor"/>
@@ -142,7 +142,7 @@ export default {
                 
                 var xPos = (this.svgwidth/2)
                 var scaleLineObj = {
-                    class: "scale",
+                    class: "scale rockiot-scale",
                     style: this.scaleStyle,
                     x1: this.scaleX,
                     y1: (n*fs) + this.offsetY,

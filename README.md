@@ -77,11 +77,22 @@ As for standard HTML tags, **rockiot-gauge** has different attributes in order t
 
 You can even customize **rockiot-gauge** changing the default CSS classes 
 
-| CSS class             | description   |     |     |      |
-|---	                |---	    |---	    |---	            |---	|
-| **rockiot-gauge**     | Gauge main container       |    	| | |
-| **gauge**             | SVG element main class       |    	| | |
-| **rockiot-gauge**     | Gauge main container       |    	| | |
+| CSS class                         | description                       | remarks    |  
+|---	                            |---	                            |---	    |	
+| **rockiot-gauge**                 | Gauge main container              | Main HTML Tag   	|
+| **.rockiot-radial**                | Gauge radial container            |    	| 
+| **.rockiot-linear**                | Gauge linear wrapper              | Gauge progress bar   	|
+| **.rockiot-linear-vertical**       | Gauge linear vertical wrapper     |    	|
+| **.rockiot-linear-horizontal**     | Gauge linear horizontal wrapper   |    	|
+| **.rockiot-svg**                   | Gauge SVG element                 |    	|
+| **.rockiot-dial**                  | Gauge radial dial path            | Gauge bar    	        |
+| **.rockiot-value**                 | Gauge radial value path           | Gauge progress bar   	|
+| **.rockiot-title-text**            | Gauge radial title                |    	|
+| **.rockiot-scale**                 | Gauge scale                       | Gauge scale elements  |
+| **.rockiot-output-radial**         | Gauge radial output wrapper       |    	|
+| **.rockiot-output-dec**            | Gauge radial decimals value       | 	    |
+
+
 
 
 

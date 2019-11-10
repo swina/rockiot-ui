@@ -11,7 +11,54 @@ rockiot-gauge {
     cursor: pointer;
 }
 
+.rockiot-radial {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
+.rockiot-title-text {
+    font-size:.22rem;
+}
+
+.rockiot-svg.rockiot-gauge-linear-vertical {
+    transform: rotate(180deg);
+}
+
+.scaleNumbers {
+    font-size:.22rem;
+}
+
+.rockiot-svg > g > text , g > text {
+    text-anchor: middle;
+    dominant-baseline: alphabetic;
+    font-weight:normal;
+    stroke:none;
+}
+
+.rockiot-output-radial {
+    position:absolute;
+    bottom:5rem;
+    font-size:1.5rem;
+    padding:.4rem;
+}
+
+.rockiot-needle {
+    stroke: #a8a8a8;
+}
+
+.rockiot-output-linear.rockiot-gauge-title , .rockiot-output-linear.rockiot-gauge-units   {
+    font-size:.8rem;
+    padding:.2rem;
+    color: #777;
+}
+
+.rockiot-output-linear.rockiot-gauge-output {
+    font-size:1.5rem;
+    padding: .4rem;
+    color: #777;
+}
+/*
 .dial__ticks {
     fill: #a5a5a5;
 }
@@ -43,7 +90,8 @@ rockiot-gauge > .horizontal {
     min-height: 15rem;
     max-height: 15rem;
 }
-
+*/
+/*
 .outline {
     fill: #444;
 }
@@ -56,12 +104,13 @@ rockiot-gauge > .horizontal {
   stroke: #aaa;
 }
 
-
+*/
 
 .scaleNumbersLinear {
     font-size:.7rem;
 }
 
+/*
 .rockiot-svg > g > text , g > text {
   text-anchor: middle;
   dominant-baseline: alphabetic;
@@ -125,22 +174,19 @@ rockiot-gauge > .horizontal {
     font-size:6rem;
 }
 
-.linear > .rockiot-gauge-title {
+.rockiot-output-linear.rockiot-gauge-title {
     margin-top:-1rem;
     font-size:.6rem;
   }
   
-.linear > .rockiot-gauge-units {
+.rockiot-output-linear.rockiot-gauge-units {
     font-size: .6rem;
 }
 
-.linear > .rockiot-gauge-output {
+.rockiot-output-linear > .rockiot-gauge-output {
     margin-top:.5rem;
 }
 
-.rockiot-linear-vertical {
-    transform: rotate(180deg);
-}
 
 .radial_full {
     display: flex;
@@ -180,3 +226,4 @@ rockiot-gauge > .horizontal {
     border-radius: 50%;
     box-shadow: 4px 4px 5px 0px rgba(148,148,148,1);
 }
+*/

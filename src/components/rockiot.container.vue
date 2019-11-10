@@ -1,38 +1,40 @@
 <template>
-    <div :class="'rockiot-' + variation + ' ' + variation + ' ' + orientation + ' rockiot-' + orientation">
-        <!--<rockiot-svg-gauge :value="value" v-bind="_props" :id="serial" v-if="variation==='radial'"></rockiot-svg-gauge>
-        <rockiot-svg-linear :value="value" v-bind="_props" :id="serial" v-if="variation==='linear'"></rockiot-svg-linear>-->
-        <component :is="component" :component="component" :id="serial" :value="value" v-bind="_props"></component>
-        <!--<component :is="component" :component="component" :id="serial" :value="value" v-bind="_props"></component>-->
-        <div v-if="variation!='radial'" class="rockiot-gauge-title" :style="textStyle">{{title}} <div class="rockiot-gauge-limits" v-if="!! parseInt(minmax)">{{min}}:{{max}}</div></div>
-        <div v-if="variation!='radial'" class="rockiot-gauge-units" :style="textStyle">{{units}}</div>
-        <div v-if="variation!='radial_pro'" :id="'value-' + serial" class="rockiot-gauge-output" :style="valueStyle">
+    <div :class="classe" :style="'width:' + this.svgwidth + ';height:' + this.svgheight">
+        <component :class="componentClass" :is="component" :component="component" :id="serial" :value="value" v-bind="_props"></component>
+        <div v-if="variation!='radial'" :class="'rockiot-output-' + variation + ' rockiot-gauge-title'" :style="textStyle">{{title}} <div class="rockiot-gauge-limits" v-if="!! parseInt(minmax)">{{min}}:{{max}}</div></div>
+        <div v-if="variation!='radial'" :class="'rockiot-output-' + variation + ' rockiot-gauge-units'" :style="textStyle">{{units}}</div>
+        <div :id="'value-' + serial" :class="'rockiot-output-' + variation + ' rockiot-gauge-output'" :style="valueStyle">
             <div>{{parseInt(updatedValue)}}<small class="rockiot-output-dec" v-if="precision!='0'">.{{formatDec}}</small></div>
-        </div>
+        </div> 
     </div>
 </template>
 
 <script>
-//import RockiotSvgGauge from '@/components/rockiot.gauge.svg'
-import RockiotSvgLinearV from '@/components/rockiot.linear.vertical.svg'
-import RockiotSvgLinearH from '@/components/rockiot.linear.horizontal.svg'
-//import RockiotSvgRadial from '@/components/rockiot.g.svg'
-import RockiotRadialSvg from '@/components/rockiot.radial.svg'
+//import RockiotSvgLinearV from '@/components/rockiot.linear.vertical.svg'
+//import RockiotSvgLinearH from '@/components/rockiot.linear.horizontal.svg'
+//import RockiotRadialSvg from '@/components/rockiot.radial.svg'
 
 /* eslint-disable */
 export default {
     name: 'RockiotGauge',
-    components: {
+    /*components: {
         //RockiotSvgGauge,
         RockiotSvgLinearV,
         RockiotSvgLinearH,
         //RockiotSvgRadial,
         RockiotRadialSvg
     },
+    */
     data:()=>({
         updatedValue: 0
     }),
     computed:{
+        classe(){
+            return 'rockiot-' + this.variation + ' rockiot-' + this.variation + '-' + this.orientation
+        },
+        componentClass(){
+             return 'rockiot-gauge-' + this.variation + '-' + this.orientation
+        },
         formatDec(){
             let v = parseFloat(this.value).toFixed(this.precision).toString()
             let num = v.split('.')
@@ -48,22 +50,17 @@ export default {
             return RockiotTest
         },
         component(){
-            //if ( this.variation === 'radial' ){
-                //return RockiotSvgGauge
-                //return () => import ( /*webpackChunkName: "rockiotRadial" */ '@/components/rockiot.gauge.svg' )
-           // }
             if ( this.variation === 'radial' ){
-                //return RockiotRadialSvg
                 return () => import ( /*webpackChunkName: "rockiotRadialSvg" */ '@/components/rockiot.radial.svg' )
             }   
 
             if ( this.orientation === 'vertical' && this.variation === 'linear' ){
-                return RockiotSvgLinearV
-                //return () => import ( /*webpackChunkName: "rockiotLinearV" */ '@/components/rockiot.linear.svg' )
+                //return RockiotSvgLinearV
+                return () => import ( /*webpackChunkName: "rockiotLinearV" */ '@/components/rockiot.linear.vertical.svg' )
             }
             if ( this.orientation === 'horizontal' && this.variation === 'linear' ){
-                return RockiotSvgLinearH
-                //return () => import ( /*webpackChunkName: "rockiotLinearH" */ '@/components/rockiot.linear.horizontal.svg' )
+                //return RockiotSvgLinearH
+                return () => import ( /*webpackChunkName: "rockiotLinearH" */ '@/components/rockiot.linear.horizontal.svg' )
             }
             if ( this.variation === 'radial_full' ){
                 //return RockiotSvgRadial
