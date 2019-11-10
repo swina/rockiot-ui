@@ -16,7 +16,7 @@ For this reason you can customize or even manipulate all elements using standard
 
 ## Demo 
 
-Demo [here](https://swina.github.io/rockiot-gauge)
+Demo [here](https://swina.github.io/rockiot-gauge) (*click on each gauge to check random values and animation*)
 
 ## Basic example
 
