@@ -1,5 +1,5 @@
 <template>
-    <div :class="classe" :style="'width:' + this.svgwidth + ';height:' + this.svgheight" @click="clicked">
+    <div :class="classe" :style="'width:' + svgwidth + ';height:' + svgheight" @click="clicked">
         <component :class="componentClass" :is="component" :component="component" :id="serial" :value="updatedValue" v-bind="_props"></component>
         <div v-if="variation!='radial'" :class="'rockiot-output-' + variation + ' rockiot-gauge-title'" :style="textStyle">{{title}} <div class="rockiot-gauge-limits" v-if="!! parseInt(minmax)">{{min}}:{{max}}</div></div>
         <div v-if="variation!='radial'" :class="'rockiot-output-' + variation + ' rockiot-gauge-units'" :style="textStyle">{{units}}</div>
@@ -25,7 +25,7 @@ export default {
              return 'rockiot-gauge-' + this.variation + '-' + this.orientation
         },
         formatDec(){
-            let v = parseFloat(this.value).toFixed(this.precision).toString()
+            let v = parseFloat(this.updatedValue).toFixed(this.precision).toString()
             let num = v.split('.')
             return num[1]
         },
@@ -85,11 +85,11 @@ export default {
         'progress-color'   : { type: String, required: false, default: '#00ff00' },
         'progress-border-color': { type: String, required: false, default: '#00ff00' },
         'scale-color'          : { type: String, required: false, default: '#aaa'},
-        'scale-text-color'      : { type: String, required: false, default: '#aaa' },
+        'scale-text-color'      : { type: String, required: false, default: '' },
         'needle-color'     : { type: String, required: false, default: '#777' },
         'needle-stroke'    : { type: String, required: false, default: '#000'},
         'text-color'    :  { type: String, required: false, default: '#777' },
-        'value-color'   :   { type: String, required: false, default: '#cecece' },
+        'value-color'   :   { type: String, required: false, default: '#777' },
         'value-bg'      :   { type: String, required: false, default: 'transparent' } ,
         'value-border'  :   { type: String, required: false, default: '0px solid #fac83c'},
         clickAction     :   { type: String, required: false, default: 'test'}

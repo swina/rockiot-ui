@@ -1,5 +1,5 @@
 <template>
-        <svg :class="'typeRange rockiot-linear-vertical rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
+        <svg :style="$attrs.svgStyle" :class="'typeRange rockiot-linear-vertical rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
             
             <g class="rockiot-scale" :ref="'scale-' + $attrs.serial" stroke="red" :style="scaleStyle"></g>
 
@@ -47,10 +47,12 @@ export default {
     }),
     computed:{
         scaleStyle(){
-            return 'stroke:' + this.$attrs.scaleColor + ';'
+            return 'stroke:' + this.$attrs.scaleColor + ';stroke-width:1;'
         },
         scaleTextColor(){
-            return 'stroke:' + this.$attrs.scaleTextColor + ';'
+            if ( this.$attrs.scaleTextColor ){
+                return 'fill:' + this.$attrs.scaleTextColor + ';font-size:.8rem;'
+            }
         },
         outlineStyle(){
             return 'fill:' + this.$attrs.barColor +';stroke:' + this.$attrs.barBorderColor + ';' + this.animate('height')
@@ -142,6 +144,7 @@ export default {
                 var scaleText = document.createElementNS(NS, "text");
                 var scaleTextObj = {
                     "class": "scaleNumbersLinear",
+                    style: this.scaleTextColor,
                     //style: this.scaleTextColor + ';transform:translate3d(-50px, 4px, 51px);',
                     //x: (this.offsetX+30)+h+20, 
                     //x: this.svgwidth/2 + this.offsetX + 5,

@@ -391,6 +391,7 @@ export default (function(global, factory) {
                       x: 50,
                       y: yT-1,
                       "class" : "scaleNumbers",
+                      fill: scaleColor,
                       transform :'rotate(' + ( (n* factor) + startTick) + ' 50 50)' 
                     })
 

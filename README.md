@@ -1,7 +1,7 @@
 # rockiot-gauge
 
 
-**rockiot-gauge** is a **webcomponent** (custom HTML element) created sing Vue.js to add awesome gauges in your HTML pages.
+**rockiot-gauge** is a **webcomponent** (custom HTML element) created using Vue.js, to add awesome gauges in your HTML pages.
 
 All elements created with rockiot-gauge are based on SVG.
 **rockiot-gauge doesn't use any canvas**. 

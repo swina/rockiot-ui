@@ -76,6 +76,49 @@ rockiot-gauge {
     padding: .4rem;
     color: #777;
 }
+
+
+
+.gauge_dark_gradient {
+    background: linear-gradient(135deg, #7d7e7d 0%,#0e0e0e 100%);
+    box-shadow: 4px 4px 5px 0px rgba(148,148,148,1);
+    border:1rem solid black;
+}
+
+.gauge_dark_gradient_light {
+    
+    border: 1.4rem solid #ced2ce;
+    background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%);
+    box-shadow: 4px 4px 5px 0px rgba(148,148,148,1);
+}
+
+.gauge_silver_gradient {
+    background: linear-gradient(to bottom, #fcfff4 0%,#dfe5d7 40%,#71736f 100%);
+    border: 1rem solid #e8e8e8;
+    box-shadow: 4px 4px 5px 0px rgba(148,148,148,1);
+}
+
+.gauge_round_lg {
+    width:300px;
+    height:300px;
+    border-radius: 99rem;
+}
+
+.gauge_vertical_lg {
+    width: 150px;
+    height: 450px;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    border:.1rem solid black;
+}
+
+.gauge_horizontal_lg {
+    width: 450px;
+    height: 150px;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    border:.1rem solid black;
+}
 /*
 .dial__ticks {
     fill: #a5a5a5;
@@ -239,9 +282,12 @@ rockiot-gauge > .horizontal {
     border:0!important;
 }
 
-.panel_dark {
+.gauge_dark_gradient {
     background: linear-gradient(135deg, #7d7e7d 0%,#0e0e0e 100%);
     border-radius: 50%;
     box-shadow: 4px 4px 5px 0px rgba(148,148,148,1);
+    width:300px;
+    height:300px;
+    border:1rem solid black;
 }
 */

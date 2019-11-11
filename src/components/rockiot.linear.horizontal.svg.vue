@@ -1,5 +1,5 @@
 <template>
-        <svg :class="'typeRange rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
+        <svg :style="$attrs.svgStyle" :class="'typeRange rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
             
             <g class="scale" :ref="'scale-' + $attrs.serial" stroke="red" :style="scaleStyle"></g>
 
