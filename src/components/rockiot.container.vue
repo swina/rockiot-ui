@@ -1,6 +1,6 @@
 <template>
-    <div :class="classe" :style="'width:' + this.svgwidth + ';height:' + this.svgheight">
-        <component :class="componentClass" :is="component" :component="component" :id="serial" :value="value" v-bind="_props"></component>
+    <div :class="classe" :style="'width:' + this.svgwidth + ';height:' + this.svgheight" @click="clicked">
+        <component :class="componentClass" :is="component" :component="component" :id="serial" :value="updatedValue" v-bind="_props"></component>
         <div v-if="variation!='radial'" :class="'rockiot-output-' + variation + ' rockiot-gauge-title'" :style="textStyle">{{title}} <div class="rockiot-gauge-limits" v-if="!! parseInt(minmax)">{{min}}:{{max}}</div></div>
         <div v-if="variation!='radial'" :class="'rockiot-output-' + variation + ' rockiot-gauge-units'" :style="textStyle">{{units}}</div>
         <div :id="'value-' + serial" :class="'rockiot-output-' + variation + ' rockiot-gauge-output'" :style="valueStyle">
@@ -10,23 +10,12 @@
 </template>
 
 <script>
-//import RockiotSvgLinearV from '@/components/rockiot.linear.vertical.svg'
-//import RockiotSvgLinearH from '@/components/rockiot.linear.horizontal.svg'
-//import RockiotRadialSvg from '@/components/rockiot.radial.svg'
-
 /* eslint-disable */
 export default {
     name: 'RockiotGauge',
-    /*components: {
-        //RockiotSvgGauge,
-        RockiotSvgLinearV,
-        RockiotSvgLinearH,
-        //RockiotSvgRadial,
-        RockiotRadialSvg
-    },
-    */
     data:()=>({
-        updatedValue: 0
+        updatedValue: 0,
+        timer:{}
     }),
     computed:{
         classe(){
@@ -46,25 +35,17 @@ export default {
         valueStyle(){
             return 'color:' + this.valueColor + ';background:' + this.valueBg + ';border:' + this.valueBorder + ';'
         },
-        test(){
-            return RockiotTest
-        },
         component(){
+            
             if ( this.variation === 'radial' ){
-                return () => import ( /*webpackChunkName: "rockiotRadialSvg" */ '@/components/rockiot.radial.svg' )
+                return () => import ( /*webpackChunkName: "rockiot.gauges" */ '@/components/rockiot.radial.svg' )
             }   
 
             if ( this.orientation === 'vertical' && this.variation === 'linear' ){
-                //return RockiotSvgLinearV
-                return () => import ( /*webpackChunkName: "rockiotLinearV" */ '@/components/rockiot.linear.vertical.svg' )
+                return () => import ( /*webpackChunkName: "rockiot.gauges" */ '@/components/rockiot.linear.vertical.svg' )
             }
             if ( this.orientation === 'horizontal' && this.variation === 'linear' ){
-                //return RockiotSvgLinearH
-                return () => import ( /*webpackChunkName: "rockiotLinearH" */ '@/components/rockiot.linear.horizontal.svg' )
-            }
-            if ( this.variation === 'radial_full' ){
-                //return RockiotSvgRadial
-                //return () => import ( /*webpackChunkName: "rockiotLinearH" */ '@/components/rockiot.linear.horizontal.svg' )
+                return () => import ( /*webpackChunkName: "rockiot.gauges" */ '@/components/rockiot.linear.horizontal.svg' )
             }
         }
     },
@@ -110,7 +91,24 @@ export default {
         'text-color'    :  { type: String, required: false, default: '#777' },
         'value-color'   :   { type: String, required: false, default: '#cecece' },
         'value-bg'      :   { type: String, required: false, default: 'transparent' } ,
-        'value-border'  :   { type: String, required: false, default: '0px solid #fac83c'}
+        'value-border'  :   { type: String, required: false, default: '0px solid #fac83c'},
+        clickAction     :   { type: String, required: false, default: 'test'}
+    },
+    methods:{
+        clicked(){
+            if ( this.clickAction === 'test' ){
+                let self = this
+                if ( !this.timer[this.serial]){
+                    this.timer[this.serial] = setInterval ( () => {
+                        self.updatedValue= (Math.random() * (self.max - (self.min*-1)) + 1) + (self.min*-1)},1000)
+                } else {
+                    clearInterval(this.timer[this.serial])
+                    this.timer[this.serial]= null
+                }
+            } else {
+                this.$emit('click')
+            }    
+        }
     },
     mounted(){
         if ( parseInt(this.value) > parseInt(this.max) ){

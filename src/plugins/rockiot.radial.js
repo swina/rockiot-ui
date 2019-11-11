@@ -536,3 +536,9 @@ export default (function(global, factory) {
   
     return Gauge;
   });
+
+export function setSVGAttributes(elmt, oAtt) {
+    for (var prop in oAtt) {
+      elmt.setAttributeNS(null, prop, oAtt[prop]);
+    }
+}

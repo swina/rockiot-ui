@@ -24,8 +24,7 @@
 </template>
 
 <script>
-import { setSVGAttributes } from '@/plugins/rockiot.gauge.js'
-//import 'snapsvg-cjs'
+import { setSVGAttributes } from '@/plugins/rockiot.radial.js'
 
 /* eslint-disable */
 export default {
@@ -205,7 +204,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -117,26 +117,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.rockiot-dial-md {
-    stroke-width: 8;
-}
-.rockiot-value-md {
-    stroke-width: 8;
-}
-
-.rockiot-dial-lg {
-    stroke-width: 12;
-}
-.rockiot-value-lg {
-    stroke-width: 12;
-}
-
-.rockiot-dial-sm {
-    stroke-width: 4;
-}
-.rockiot-value-sm {
-    stroke-width: 4;
-}
-</style>
