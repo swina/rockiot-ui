@@ -61,7 +61,6 @@ export default {
                 dialStartAngle: parseInt(self.$attrs.startangle),
                 dialEndAngle: parseInt(self.$attrs.endangle),
                 max: parseInt(self.$attrs.max),
-                // custom label renderer
                 label: function(value) {
                     return Math.round(self.$attrs.value)// + "/" + self.$attrs.max;
                 },
@@ -78,7 +77,9 @@ export default {
                 valueDialClass: 'rockiot-value rockiot-value-' + self.$attrs.size + ' rockiot-value-' + self.$attrs.serial,
                 svg: self.svg,
                 barColor: self.$attrs.barColor,
-                progressColor: self.$attrs.progressColor
+                progressColor: self.$attrs.progressColor,
+                needleColor: self.$attrs.needleColor,
+                scaleColor: self.$attrs.scaleColor
             });
             let svg = document.querySelector('.rockiot-svg-' + this.$attrs.serial)
             svg.setAttribute('ref','rockiot-svg-' + this.$attrs.serial)

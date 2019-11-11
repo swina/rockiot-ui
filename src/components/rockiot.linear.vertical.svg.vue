@@ -67,7 +67,6 @@ export default {
         }, 
         '$attrs.value'(v){
             this.pos = parseInt(v)*this.factor
-            //this.updateGauge()
             this.oldValue = v
         },
         
@@ -79,20 +78,7 @@ export default {
             }
             return ''
         },
-        updateGauge(){
-            /*
-            this.snapObject.select('#fill-' + this.$attrs.serial).animate({
-                x : this.offsetX,
-                width : this.barHeight,
-                height : (this.$attrs.max*this.factor) - this.pos,
-                y : this.offsetY
-                } , parseInt(this.$attrs.animation) , mina.linear )
-            this.snapObject.select('#needle-' + this.$attrs.serial).animate({
-                y : (this.$attrs.max*this.factor) - this.pos + this.offsetY
-                }, parseInt(this.$attrs.animation), mina.linear )
-            */
-            
-        },
+        
         gaugeSize(){
             switch(this.$attrs.size){
                 case 'md':
@@ -194,15 +180,14 @@ export default {
         this.gaugeSize()
         if ( parseInt(this.$attrs.value) > parseInt(this.$attrs.max) ){
             this.$attrs.value = 0
+            
         }
         
-        //this.snapObject = Snap(this.svg)
         this.pos = parseInt(this.$attrs.value) * this.factor
         
         if ( !! parseInt(this.$attrs.scale) ){
             this.createScale()
         }
-        this.updateGauge()
 
     }
 }

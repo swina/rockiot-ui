@@ -89,12 +89,15 @@ export default (function(global, factory) {
         dialClass: "rockiot-dial dial",
         gaugeClass: "rockiot-svg gauge",
         scaleClass: "rockiot-scale scale",
+        needleClass: "rockiot-needle",
         valueColor: '#eee',
         barColor: '#eee',
         progressColor: '#ff0000',
+        needleColor: "#777",
         showValue: true,
         showScale: false,
         showSmallScale: false,
+        scaleColor: '#aaa',
         gaugeColor: null,
         serial: 'gauge',
         title: '',
@@ -240,8 +243,10 @@ export default (function(global, factory) {
             instance,
             gaugeScale,
             needle = opts.needle,
+            needleColor = opts.needleColor,
             ticks = opts.ticks,
             scaleClass = opts.scaleClass,
+            scaleColor = opts.scaleColor,
             valueCoord = false,
             serial = opts.serial;
         
@@ -376,6 +381,7 @@ export default (function(global, factory) {
                     y1: yT,
                     x2: 50,
                     y2: yT+dT,
+                    "stroke": scaleColor,
                     "stroke-width":.4,
                     transform :'rotate(' + ( (n* factor) + startTick) + ' 50 50)' 
                   })
@@ -411,6 +417,7 @@ export default (function(global, factory) {
               "class": "rockiot-scale rockiot-needle rockiot-needle-" + serial,
               fill: 'unset',
               "stroke-width": .4,
+              stroke: needleColor,
               x1: 50,
               y1: 50,
               x2: needleCoord[needleCoord.length-2],
@@ -419,9 +426,6 @@ export default (function(global, factory) {
           )
         }
 
-        function drawNeedleCircle(){
-
-        }
 
         function drawNumbers(){
           var rad = getAngle(100, 360 - Math.abs(startAngle - endAngle));

@@ -16,7 +16,8 @@
       <strong>We're sorry but rockiot-gauge doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div style="display:flex;flex-direction:column;align-items:center;max-width:100%;flex-wrap:wrap">
-    
+    <h1>rockiot-gauge</h1>
+    <div><small>Click on the gauge to see in action</small></div>
     <div style="display:flex;flex-direction:row;">
 
       <rockiot-gauge 
@@ -27,6 +28,7 @@
         progress-color="#03a9f4" 
         value-color="#cdcdcd"
         needle-color="#ff0000" 
+        scale-color="#555",
         value-border="0px solid #5ecad8"
         svgwidth="300"
         svgheight="300"
@@ -61,6 +63,7 @@
           bar-border-color="#888" <br>
           progress-color="#03a9f4" <br>
           value-color="#cdcdcd" <br>
+          scale-color="#555"<br>
           needle-color="#ff0000" <br>
           value-border="0px solid #5ecad8" <br>
           svgwidth="300" <br>
@@ -73,12 +76,12 @@
       variation="radial"
       id="radial_2"
       serial="radial_2" 
-      bar-color="#00ff0050" 
+      bar-color="#555" 
       bar-border-color="#888" 
-      progress-color="#5d7162" 
+      progress-color="#00ff00" 
       value-color="#cdcdcd"
       needle-color="#ff0000" 
-      value-border="2px solid #5ecad8"
+      value-border="2px solid #00ff00"
       value-bg="#222"
       svgwidth="300"
       svgheight="300"
@@ -95,12 +98,12 @@
         variation="radial"<br>
         id="radial_2"<br>
         serial="radial_2" <br>
-        bar-color="#00ff0050"<br> 
+        bar-color="#555"<br> 
         bar-border-color="#888"<br> 
-        progress-color="#5d7162"<br> 
+        progress-color="#00ff00"<br> 
         value-color="#cdcdcd"<br>
         needle-color="#ff0000"<br> 
-        value-border="2px solid #5ecad8"<br>
+        value-border="2px solid #00ff00"<br>
         value-bg="#222"<br>
         svgwidth="300"<br>
         svgheight="300"<br>
@@ -117,15 +120,17 @@
       </code>
     </div>
     <div style="display:flex;flex-direction:row;">
+        
       <rockiot-gauge
         serial="radial_3"
         id="radial_3"
         min="0"
         max="50"
-        startangle="180"
-        endangle="0"
+        startangle="271"
+        endangle="270"
         value="22"
-        title="test"
+        title="Full range"
+        units="rpm"
         radius="md"
         size="md"
         scale="1"
@@ -142,10 +147,11 @@
           serial="radial_3"<br>
           min="0"<br>
           max="50"<br>
-          startangle="180"<br>
-          endangle="0"<br>
+          startangle="271"<br>
+          endangle="270"<br>
           value="22"<br>
-          title="test"<br>
+          title="Full range"<br>
+          units="rpm"<br>
           radius="md"<br>
           size="md"<br>
           scale="1"<br>
@@ -195,7 +201,7 @@
             scale="1"<br> 
             smallscale="1"<br>
             ticks="10"<br> 
-            progress-color="#ff0000"<br> 
+            progress-color="#32ab32"<br> 
             needle-color="#fff"<br> 
             needle-stroke="#000"<br>
             onclick="startTimer(this)"&gt;<br>
@@ -208,7 +214,7 @@
         <rockiot-gauge 
           id="linear_2"
           serial="linear_2"
-          progress-color="#ff0000" 
+          progress-color="#ff8800" 
           needle-color="#fff" 
           needle-stroke="#000"
           value="50" 
@@ -239,23 +245,22 @@
             scale="1"<br> 
             smallscale="1"<br>
             ticks="10"<br> 
-            progress-color="#ff0000"<br> 
+            progress-color="#ff8800"<br> 
             needle-color="#fff"<br> 
             needle-stroke="#000"<br>
-            onclick="startTimer(this)"&gt;<br>
-            &lt;/rockiot-gauge&gt;
+            onclick="startTimer(this)"&gt;&lt;/rockiot-gauge&gt;
         </code>
       </div>
-      
+      <div style="display:flex;flex-direction:row;">
         <rockiot-gauge 
-        id="oasassasss"
-        progress-color="#ff0000" 
+        id="linear_3"
+        progress-color="#32ab32" 
         needle-color="#fff" 
         needle-stroke="#000"
         value="50" 
         variation="linear"
         title="Temperature"
-        serial="000sss0002" 
+        serial="linear_3" 
         size="sm"
         sgvwidth="120"
         sgvheight="370" 
@@ -265,6 +270,29 @@
         scale="1" 
         smallscale="1"
         ticks="10" onclick="startTimer(this)"></rockiot-gauge>  
+
+        <code style="margin:2rem; min-width:20rem; width:20rem; padding:2rem;background:#eaeaea;">
+          &lt;rockiot-gauge<br>
+            id="linear_3"<br>
+            progress-color="#ff0000" <br>
+            needle-color="#fff" <br>
+            needle-stroke="#000"<br>
+            value="50" <br>
+            variation="linear"<br>
+            title="Temperature"<br>
+            serial="linear_3" <br>
+            size="sm"<br>
+            sgvwidth="120"<br>
+            sgvheight="370" <br>
+            min="0" <br>
+            max="20" <br>
+            needle="1" <br>
+            scale="1" <br>
+            smallscale="1"<br>
+            ticks="10" <br>
+            onclick="startTimer(this)"&gt;&lt;/rockiot-gauge&gt;
+          </code>
+        </div>
 
       <!--
         <rockiot-gauge 
@@ -285,9 +313,9 @@
         smallscale="1"
         ticks="10" onclick="startTimer(this)"></rockiot-gauge> 
       -->
-
+      <div style="display:flex;flex-direction:row;">
         <rockiot-gauge 
-        id="asdasdasda"
+        id="linear_4"
         progress-color="#567fa5" 
         needle-color="#fff" 
         needle-stroke="#000"
@@ -295,7 +323,7 @@
         variation="linear"
         orientation="horizontal"
         title="Pressure"
-        serial="dssa" 
+        serial="linear_4" 
         size="md"
         min="0" 
         max="100" 
@@ -305,8 +333,32 @@
         animation="100"
         ticks="10" onclick="startTimer(this)"></rockiot-gauge> 
 
+        <code style="margin:2rem; min-width:20rem; width:20rem; padding:2rem;background:#eaeaea;">
+          &lt;rockiot-gauge<br>
+            id="linear_4"<br>
+            progress-color="#567fa5" <br>
+            needle-color="#fff" <br>
+            needle-stroke="#000"<br>
+            value="50"<br> 
+            variation="linear"<br>
+            orientation="horizontal"<br>
+            title="Pressure"<br>
+            serial="linear_4" <br>
+            size="md"<br>
+            min="0" <br>
+            max="100" <br>
+            needle="1" <br>
+            scale="1" <br>
+            smallscale="1"<br>
+            animation="100"<br>
+            ticks="10" <br>
+            onclick="startTimer(this)"&gt;<br>
+          &lt;/rockiot-gauge&gt;
+        </code>
+    </div>
+    <div style="display:flex;flex-direction:row;">  
         <rockiot-gauge 
-        id="dsassqas"
+        id="linear_5"
         progress-color="#ff8800" 
         needle-color="#fff" 
         needle-stroke="#000"
@@ -314,7 +366,7 @@
         variation="linear"
         orientation="horizontal"
         title="Pressure"
-        serial="0212" 
+        serial="linear_5" 
         size="sm"
         min="0" 
         max="100" 
@@ -323,129 +375,26 @@
         smallscale="1"
         ticks="10" onclick="startTimer(this)"></rockiot-gauge> 
 
-
-        <rockiot-gauge
-          id="csasas"
-          svgwidth="120"
-          svgheight="250"
-          title="Linear Vertical"
-          units="px" 
-          serial="001asasasas" 
-          variation="linear" 
-          size="md" 
-          scale="1" 
-          min="0" 
-          max="100" 
-          value="22"
-          bar-color="#333"
-          progress-color="#ff8800"  onclick="startTimer(this)"></rockiot-gauge>
-      <!--svg-style="background: linear-gradient(135deg, #7d7e7d 0%,#0e0e0e 100%);box-shadow: 3px 3px 3px 0px rgba(179,179,179,1);padding:1rem;border-radius:99rem;"
-      
-      <rockiot-gauge 
-      id="due"
-      bar-color="#eaeaea" 
-      bar-border-color="#eaeaea" 
-      progress-color="#878257" 
-      scale-color="#878257"
-      text-color="#888"
-      needle-color="#ff0000" 
-      value-border="2px solid #5ecad8"
-      value="33" 
-      title="Another"
-      serial="0000004" 
-      svgwidth="300"
-      svgheight="300"
-      size="sm" 
-      min="-20" 
-      max="50" onclick="startTimer(this)"></rockiot-gauge>
-
-      <rockiot-gauge 
-      id="bar1"
-      progress-color="#ff0000" 
-      needle-color="#fff" 
-      needle-stroke="#000"
-      value="50" 
-      variation="linear"
-      title="Temperature"
-      serial="0000002" 
-      size="md" 
-      degree="270"
-      min="0" 
-      max="100" 
-      needle="1" 
-      scale="1" 
-      ticks="10" onclick="startTimer(this)"></rockiot-gauge>
-
-      <rockiot-gauge 
-      id="bar2"
-      bar-color="#eaeaea" 
-      bar-border-color="transparent" 
-      progress-color="#5ecad8" 
-      needle-color="#000" 
-      value="12" 
-      variation="linear"
-      title="Temperature"
-      serial="0000005" 
-      size="lg" 
-      degree="270"
-      min="0" 
-      max="100" 
-      needle="1" 
-      scale="0" 
-      ticks="10" onclick="startTimer(this)"></rockiot-gauge>
-
-      <rockiot-gauge 
-      style="margin-left:1rem;background: linear-gradient(135deg, #7d7e7d 0%,#0e0e0e 100%);  padding:2rem;border-radius:.6rem;max-height:120px;height:120px;padding-top:6rem;"
-      id="bar3"
-      bar-color="#222" 
-      bar-border-color="transparent"
-      progress-color="#00ff00" 
-      needle-color="#ff0000" 
-      needle-stroke="#ff0000"
-      scale-color="#fafafa"
-      scale-text-color="#dedede"
-      svgwidth="370"
-      svgheight="90"
-      value="50"
-      variation="linear"
-      orientation="horizontal"
-      title="Humidity"
-      serial="a1" 
-      size="sm"
-      min="0" 
-      max="100" 
-      needle="1" 
-      animation="400"
-      scale="1" 
-      ticks="100" minor-ticks="1" onclick="startTimer(this)"></rockiot-gauge>
-
-      <rockiot-gauge 
-      style="margin-left:1rem;background: linear-gradient(135deg, #b5bdc8 0%,#828c95 36%,#28343b 100%); max-width:140px; border-radius:.6rem;"
-      id="bar4"
-      bar-color="#444" 
-      bar-border-color="transparent"
-      progress-color="#5ecaff" 
-      needle-color="#ff0000" 
-      needle-stroke="#ff0000"
-      scale-color="#fafafa"
-      scale-text-color="#fafafa"
-      svgwidth="120"
-      svgheight="370"
-      value="50"
-      variation="linear"
-      orientation="vertical"
-      title="Power"
-      serial="a1" 
-      size="sm"
-      min="0" 
-      max="100" 
-      needle="1" 
-      animation="400"
-      scale="1" 
-      ticks="100" minor-ticks="1" onclick="startTimer(this)"></rockiot-gauge>
-      
-      <rockiot-gauge width="200" height="200" svgwidth="250" svgheight="250" id="t001" serial="t001" title="Humidity" value="11" min="0" max="100" variation="radial_full"  onclick="startTimer(this)"></rockiot-gauge>
-    -->
+        <code style="margin:2rem; min-width:20rem; width:20rem; padding:2rem;background:#eaeaea;">
+          &lt;rockiot-gauge<br>
+          id="linear_5"<br>
+          progress-color="#ff8800" <br>
+          needle-color="#fff" <br>
+          needle-stroke="#000"<br>
+          value="50" <br>
+          variation="linear"<br>
+          orientation="horizontal"<br>
+          title="Pressure"<br>
+          serial="linear_5" <br>
+          size="sm"<br>
+          min="0" <br>
+          max="100" <br>
+          needle="1" <br>
+          scale="1" <br>
+          smallscale="1"<br>
+          ticks="10" <br>onclick="startTimer(this)"&gt;<br>
+          &lt;/rockiot-gauge&gt; 
+        </code>
     </div>
     <div>
         <h3>&lt;rockiot-gauge&gt;</h3>

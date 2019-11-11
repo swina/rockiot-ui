@@ -44,10 +44,6 @@ rockiot-gauge {
     padding:.4rem;
 }
 
-.rockiot-needle {
-    stroke: #a8a8a8;
-}
-
 .rockiot-output-linear.rockiot-gauge-title , .rockiot-output-linear.rockiot-gauge-units   {
     font-size:.8rem;
     padding:.2rem;

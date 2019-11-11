@@ -30,7 +30,7 @@ export default {
     }),
     computed:{
         classe(){
-            return 'rockiot-' + this.variation + ' rockiot-' + this.variation + '-' + this.orientation
+            return 'rockiot-' + this.variation + ' rockiot-' + this.variation + '-' + this.orientation + ' rockiot-' + this.variation + '-' + this.serial
         },
         componentClass(){
              return 'rockiot-gauge-' + this.variation + '-' + this.orientation
@@ -114,7 +114,7 @@ export default {
     },
     mounted(){
         if ( parseInt(this.value) > parseInt(this.max) ){
-            this.updatedValue = this.max
+            this.updatedValue = 0
         } else {
             this.updatedValue = this.value
         }
