@@ -99,14 +99,14 @@ rockiot-gauge {
 }
 
 .gauge_round_lg {
-    width:300px;
-    height:300px;
+    width:20rem;
+    height:20rem;
     border-radius: 99rem;
 }
 
 .gauge_vertical_lg {
-    width: 150px;
-    height: 450px;
+    width: 8rem;
+    height: 30rem;
     padding: 1.5rem;
     border-radius: 1.5rem;
     border:.1rem solid black;
