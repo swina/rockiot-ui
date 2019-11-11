@@ -1,5 +1,6 @@
 # rockiot-gauge
 
+
 **rockiot-gauge** is a **webcomponent** (custom HTML element) created sing Vue.js to add awesome gauges in your HTML pages.
 
 All elements created with rockiot-gauge are based on SVG.
@@ -9,7 +10,7 @@ For this reason you can customize or even manipulate all elements using standard
 
 ### Gauges ###
 
-- radial
+- radial (adapted JS from [naikus](https://github.com/naikus/svg-gauge))
 - linear vertical
 - linear horizontal
 
@@ -101,7 +102,7 @@ You can even customize **rockiot-gauge** changing the default CSS classes
 
 
 
-## Project setup
+## VUE Project setup
 The source code has been created using Vue.js so you can create your vue project and change it as per you needs.
 
 
@@ -131,3 +132,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Credits
+For radial gauge used and adapted JS library from [naikus](https://github.com/naikus/svg-gauge)
+
+### License 
+This project is licensed under MIT
