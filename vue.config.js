@@ -1,6 +1,7 @@
 const TerserPlugin = require('terser-webpack-plugin');
-
+const path = require('path')
 module.exports = {
+  
   filenameHashing: false,
   runtimeCompiler: false,
   configureWebpack: {
@@ -10,6 +11,12 @@ module.exports = {
     output: {
       filename: 'rockiot.[name].js'
     },
+    resolve: {
+      alias: {
+       vue$: "vue/dist/vue.esm.js"
+      },
+      extensions: ["*", ".js", ".vue", ".json"]
+     },
     optimization: {
       runtimeChunk: 'single',
       splitChunks: false,

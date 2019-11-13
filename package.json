@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-bundle": "vue-cli-service build --target wc --name rockiot-gauge src/components/rockiot.container.vue",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -20,6 +21,17 @@
     "css-loader": "^3.2.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "rollup": "^1.26.5",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-uglify": "^6.0.3",
+    "rollup-plugin-vue": "^5.1.2",
     "style-loader": "^1.0.0",
     "terser-webpack-plugin": "^2.2.1",
     "vue-template-compiler": "^2.6.10",

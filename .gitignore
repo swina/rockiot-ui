@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
+build
 trash
+test
 
 # local env files
 .env.local

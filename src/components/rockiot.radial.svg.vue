@@ -60,11 +60,13 @@ export default {
                 dialRadius: self.dialRadius,
                 dialStartAngle: parseInt(self.$attrs.startangle),
                 dialEndAngle: parseInt(self.$attrs.endangle),
+                min: parseInt(self.$attrs.min),
                 max: parseInt(self.$attrs.max),
                 label: function(value) {
                     return Math.round(self.$attrs.value)// + "/" + self.$attrs.max;
                 },
                 title: self.$attrs.title,
+                titleColor: self.$attrs.textColor,
                 units: self.$attrs.units,
                 showScale: !! parseInt(self.$attrs.scale),
                 showSmallScale: !! parseInt(self.$attrs.smallscale),

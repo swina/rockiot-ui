@@ -158,7 +158,7 @@ export default (function(global, factory) {
       }
   
       function getValueInPercentage(value, min, max) {
-        var newMax = max - min, newVal = value - min;
+        var newMax = max - (min*-1), newVal = value - (min*-1);
         return 100 * newVal / newMax;
         // var absMin = Math.abs(min);
         // return 100 * (absMin + value) / (max + absMin);
@@ -238,6 +238,7 @@ export default (function(global, factory) {
             gaugeUnitsElem,
             label = opts.label,
             title = opts.title,
+            titleColor = opts.titleColor,
             units = opts.units,
             viewBox = opts.viewBox,
             instance,
@@ -249,7 +250,6 @@ export default (function(global, factory) {
             scaleColor = opts.scaleColor,
             valueCoord = false,
             serial = opts.serial;
-        
         if(startAngle < endAngle) {
           console.log("WARN! startAngle < endAngle, Swapping");
           var tmp = startAngle;
@@ -286,6 +286,7 @@ export default (function(global, factory) {
           gaugeTitleElem = svg('text',{
             x: 50,
             y: 35,
+            fill: titleColor,
             "class" : titleTextClass,
             "text-anchor": "middle",
             "alignment-baseline": "middle",
@@ -297,6 +298,7 @@ export default (function(global, factory) {
           gaugeUnitsElem = svg('text',{
             x: 50,
             y: 38,
+            fill: titleColor,
             "class" : titleTextClass,
             "text-anchor": "middle",
             "alignment-baseline": "middle",
@@ -362,7 +364,12 @@ export default (function(global, factory) {
 
             var startTick = startAngle+90
             var factor = (360-(startAngle-endAngle))/(ticks*10)
-
+            var scaleOffsetNumber = min
+            if ( opts.min < 0 ){
+              limit = Math.abs(opts.min)+limit
+              scaleOffsetNumber = opts.min
+              min = 0
+            }
             for ( var n=0 ; n < (ticks*10)+1 ; n++ ){
                 var yT = 50-opts.dialRadius+(opts.dialRadius/10)
                 if ( opts.dialRadius > 40 ){
@@ -394,8 +401,8 @@ export default (function(global, factory) {
                       fill: scaleColor,
                       transform :'rotate(' + ( (n* factor) + startTick) + ' 50 50)' 
                     })
-
-                    tickNr.append(parseFloat(n*(limit/ticks/10)).toFixed(0))
+                    
+                    tickNr.append( parseFloat(n*(limit/ticks/10)+parseInt(scaleOffsetNumber)).toFixed(0))
                     gaugeScale.appendChild(tickNr)
                   }
 
@@ -452,6 +459,9 @@ export default (function(global, factory) {
         }
         
         function updateGauge(theValue, frame) {
+          if ( opts.min < 0 ){
+            theValue += (opts.min*-1)
+          }
           var val = getValueInPercentage(theValue, min, limit),
               // angle = getAngle(val, 360 - Math.abs(endAngle - startAngle)),
               angle = getAngle(val, 360 - Math.abs(startAngle - endAngle)),
