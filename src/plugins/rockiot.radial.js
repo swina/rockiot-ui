@@ -151,14 +151,23 @@ export default (function(global, factory) {
       }
   
       function normalize(value, min, limit) {
+        
         var val = Number(value);
+        if ( value < 0 ){
+          val += (min*-1)
+        }
+        //console.log ( 'normalize=>',val , min , limit + min)
         if(val > limit) return limit;
         if(val < min) return min;
         return val;
       }
   
       function getValueInPercentage(value, min, max) {
-        var newMax = max - (min*-1), newVal = value - (min*-1);
+        var mFactor = 1
+        if ( min <  0 ){
+          max -= (min*-1)
+        }
+        var newMax = max - (min*mFactor), newVal = value - (min*mFactor);
         return 100 * newVal / newMax;
         // var absMin = Math.abs(min);
         // return 100 * (absMin + value) / (max + absMin);
@@ -212,7 +221,7 @@ export default (function(global, factory) {
         var gaugeContainer = elem,
             limit = opts.max,
             min = opts.min,
-            value = normalize(opts.value, min, limit),
+            value = opts.value,//normalize(opts.value, opts.min, opts.max),
             precision = opts.precision,
             radius = opts.dialRadius - opts.offset,
             offset = opts.offset,
@@ -370,6 +379,10 @@ export default (function(global, factory) {
               scaleOffsetNumber = opts.min
               min = 0
             }
+            if ( opts.min > 0 ){
+              scaleOffsetNumber = opts.min
+              limit -= Math.abs(min) 
+            }
             for ( var n=0 ; n < (ticks*10)+1 ; n++ ){
                 var yT = 50-opts.dialRadius+(opts.dialRadius/10)
                 if ( opts.dialRadius > 40 ){
@@ -393,9 +406,17 @@ export default (function(global, factory) {
                     transform :'rotate(' + ( (n* factor) + startTick) + ' 50 50)' 
                   })
                   
+                  var numberOffset = 0
                   if ( n % 10 === 0 ){
+                    
+                    if ( n === 0 && (startAngle - endAngle) === 1 ){
+                      numberOffset = 2
+                    }
+                    if ( n === ((ticks*10)) && ( startAngle - endAngle ) === 1 ){
+                      numberOffset = -2
+                    }
                     var tickNr = svg('text',{
-                      x: 50,
+                      x: 50 + numberOffset,
                       y: yT-1,
                       "class" : "scaleNumbers",
                       fill: scaleColor,
@@ -459,15 +480,26 @@ export default (function(global, factory) {
         }
         
         function updateGauge(theValue, frame) {
-          if ( opts.min < 0 ){
-            theValue += (opts.min*-1)
+          var lm = limit
+          var mn = min
+          
+          //if ( opts.min < 0 ){
+          //  theValue += Math.abs(opts.min)
+            
+          //}
+          if ( opts.min > 0 ){
+            mn = opts.min
+            lm += opts.min
           }
-          var val = getValueInPercentage(theValue, min, limit),
+          if ( opts.min < 0 ){
+            mn = opts.min
+          }
+          
+          var val = getValueInPercentage(theValue, mn, lm),
               // angle = getAngle(val, 360 - Math.abs(endAngle - startAngle)),
               angle = getAngle(val, 360 - Math.abs(startAngle - endAngle)),
               // this is because we are using arc greater than 180deg
               flag = angle <= 180 ? 0 : 1;
-          
           gaugeValuePath.setAttribute("d", pathString(radius, startAngle, angle + startAngle, flag));
           var parent = document.querySelector('.gauge-' + serial)
           if ( needle ){
@@ -505,7 +537,20 @@ export default (function(global, factory) {
             limit = max;
           },
           setValue: function(val) {
-            value = normalize(val, min, limit);
+           
+           
+            value = val
+            /*if ( min > 0 ){
+              var lm = opts.max-min
+              
+              value = (lm*val)/100
+              console.log ('set value of % =>' , val, min , lm , ' = ' , value )
+            }
+            */
+            if ( value < 0 ){
+              value += min
+            }
+            //value = normalize(val, min, limit);
             if(gaugeColor) {
               setGaugeColor(value, 0)
             }
@@ -513,7 +558,12 @@ export default (function(global, factory) {
           },
           setValueAnimated: function(val, duration) {
             var oldVal = value;
-            value = normalize(val, min, limit);
+            value = val
+            if ( value < 0 ){
+              value += min
+            }
+
+            //value = normalize(val, min, limit)//limit);
             if(oldVal === value) {
               return;
             }

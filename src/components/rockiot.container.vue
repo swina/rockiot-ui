@@ -98,11 +98,15 @@ export default {
         clicked(){
             if ( this.clickAction === 'test' ){
                 let self = this
+                
                 if ( !this.timer[this.serial]){
                     this.timer[this.serial] = setInterval ( () => {
-                        self.updatedValue= (Math.random() * (self.max - (self.min*-1)) + 1) + (self.min*-1)},1000)
-                        if ( self.updatedValue > self.max ){
+                        self.updatedValue= (Math.random() * (parseInt(self.max) - (parseInt(self.min))) + 1) + (parseInt(self.min))},1000)
+                        if ( parseFloat(self.updatedValue) > self.max ){
                             self.updateValue = self.max
+                        }
+                        if ( parseFloat(self.updatedValue) < self.min ){
+                            self.updateValue = self.min
                         }
                 } else {
                     clearInterval(this.timer[this.serial])

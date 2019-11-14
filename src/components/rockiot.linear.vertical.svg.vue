@@ -12,14 +12,13 @@
             </rect>
             <rect class="rockiot-fill " :style="outlineStyle" :id="'fill-' + $attrs.serial" 
                 :x="offsetX" 
-                :height="($attrs.max*factor) - pos" 
+                :height="pos"
                 :width="barHeight" 
                 :y="offsetY">
                 
             </rect>
-
             <rect :id="'needle-' + $attrs.serial" class="rockiot-needle" :style="animate('y')" height="1" 
-                :y="($attrs.max*factor) - pos + offsetY"
+                :y="pos+offsetY"
                 :x="offsetX" 
                 :width="barHeight" :fill="$attrs.needleColor"/>
         </svg> 
@@ -38,6 +37,7 @@ export default {
         barHeight: 40,
         scaleY: -20,
         factor: 3.5,
+        range: 100,
         svg: null,
         scaleX: 90,
         offsetText: 10,
@@ -66,13 +66,23 @@ export default {
             this.fillStyle()
         }, 
         '$attrs.value'(v){
-            this.pos = parseInt(v)*this.factor
+            //this.pos = parseInt(v)*this.factor
+            this.pos = this.normalize(v)*this.posFactor
             this.oldValue = v
         },
         
     },
     methods:{
-         animate(attr){
+        normalize(val){
+            if ( Number(this.$attrs.min) < 0 ){
+                return (Number(this.$attrs.max)-(val + (parseInt(this.$attrs.min)*-1))/(this.range)*100)
+            } else {
+                return Number(this.$attrs.max)-(Number(this.$attrs.max)*((val/this.range)*100)/100)
+            }
+            //console.log ( val + (parseInt(this.$attrs.min)*-1))/(this.range)*100 )
+            //return (Number(this.$attrs.max)-(val + (parseInt(this.$attrs.min)*-1))/(this.range)*100)
+        },
+        animate(attr){
             if ( this.$attrs.animation ) {
                 return 'transition: ' + attr + ' ' + parseFloat(this.$attrs.animation/1000) + 's linear;'
             }
@@ -145,22 +155,18 @@ export default {
                 var scaleTextObj = {
                     "class": "scaleNumbersLinear",
                     style: this.scaleTextColor,
-                    //style: this.scaleTextColor + ';transform:translate3d(-50px, 4px, 51px);',
-                    //x: (this.offsetX+30)+h+20, 
-                    //x: this.svgwidth/2 + this.offsetX + 5,
-                    x: this.svgwidth-15,// - this.barHeight,//xPos + this.barHeight * 1.2,
+                    x: this.svgwidth-15,
                     y: (n*fs) + this.offsetY + 5,
                 }
                 setSVGAttributes(scaleText, scaleTextObj)
                 
-
-                var tick = parseInt(this.$attrs.max)/parseInt(this.$attrs.ticks)
+                var range = parseInt(this.$attrs.max)-parseInt(this.$attrs.min)
+                var tick = range/parseInt(this.$attrs.ticks)
                 txt = parseInt(this.$attrs.max)-(n*tick)/minor
                 if ( n % 10 === 0 || minor === 1){
-                    scaleText.textContent = parseInt(txt) //parseInt(n * (tick)) + (parseInt(this.$attrs.min))
+                    scaleText.textContent = parseInt(txt)
                     this.svg.scale.appendChild(scaleText);
                 }    
-                //n++
             }
         },
     },
@@ -177,19 +183,17 @@ export default {
         var height = parseInt(this.svgheight) - ( this.offsetY*2 )
         this.svg = this.$refs[id]
         this.svg.scale = this.$refs['scale-' + id]
-        this.factor = height / parseInt(this.$attrs.max )
+        this.factor = height / (parseInt(this.$attrs.max )-parseInt(this.$attrs.min))
+        this.posFactor = height / Number(this.$attrs.max)
         this.gaugeSize()
         if ( parseInt(this.$attrs.value) > parseInt(this.$attrs.max) ){
             this.$attrs.value = 0
-            
         }
-        
-        this.pos = parseInt(this.$attrs.value) * this.factor
-        
+        this.range = Number(this.$attrs.max) - Number(this.$attrs.min)
+        this.pos = this.normalize(Number(this.$attrs.value)) * this.posFactor
         if ( !! parseInt(this.$attrs.scale) ){
             this.createScale()
         }
-
     }
 }
 </script>

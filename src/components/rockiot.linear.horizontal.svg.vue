@@ -5,7 +5,7 @@
 
             <rect class="outline" :id="'outline-' + $attrs.serial" :style="outlineStyle" 
                 :x="offsetX" 
-                :width="$attrs.max*factor" 
+                :width="$attrs.max*posFactor" 
                 :height="barHeight" 
                 :y="offsetY-barHeight"/>
                 
@@ -36,7 +36,9 @@ export default {
         offsetY: 60,
         barHeight: 20,
         scaleY: 0,
+        range:100,
         factor: 3.5,
+        posFactor: 3.5,
         svg: null,
         scaleX: 90,
         offsetText: 10,
@@ -65,33 +67,23 @@ export default {
         }, 
         '$attrs.value'(v){
 
-            this.pos = parseInt(v)*this.factor
+            //this.pos = parseInt(v)*this.posFactor + this.normalize(v)
+            this.pos = this.normalize(v)*this.posFactor
             this.aniPos[0] = this.oldValue
             this.aniPos[1] = this.pos
             this.oldValue = this.pos
-            //this.updateGauge()
         },
         
     },
     methods:{
+        normalize(val){
+            return (val + (parseInt(this.$attrs.min)*-1))/(this.range)*100 
+        },
         animate(attr){
             if ( this.$attrs.animation ) {
                 return 'transition: ' + attr + ' ' + parseFloat(this.$attrs.animation/1000) + 's linear;'
             }
             return ''
-        },
-        updateGauge(){
-            /*
-            this.snapObject.select('#fill-' + this.$attrs.serial).animate({
-                x : this.offsetX,
-                width : this.pos,
-                height : this.barHeight,
-                y : this.offsetY-this.barHeight
-                } , parseInt(this.$attrs.animation) , mina.linear )
-            this.snapObject.select('#needle-' + this.$attrs.serial).animate({
-                x : this.pos + this.offsetX
-                }, parseInt(this.$attrs.animation), mina.linear )
-                */
         },
         gaugeSize(){
             switch(this.$attrs.size){
@@ -163,11 +155,13 @@ export default {
                         y: this.offsetY - 30 + this.scaleY,
                     }
                     setSVGAttributes(scaleText, scaleTextObj)
-                    var tick = (parseInt(this.$attrs.max)-parseInt(this.$attrs.min))/parseInt(this.$attrs.ticks)
-                    txt = parseInt(this.$attrs.min)+(n*tick)
+                    //var range = parseInt(this.$attrs.max)-(parseInt(this.$attrs.min))
 
+                    var tick = this.range/(parseInt(this.$attrs.ticks))
+                    txt = parseInt(this.$attrs.min)+(n/10*tick)//tick)
+                    //console.log ( range , tick , this.factor )
                     
-                        scaleText.textContent = parseInt(txt)/10 //parseInt(n * (tick)) + (parseInt(this.$attrs.min))
+                        scaleText.textContent = parseInt(txt)///10 //parseInt(n * (tick)) + (parseInt(this.$attrs.min))
                         this.svg.scale.appendChild(scaleText);
                         
                 }
@@ -188,19 +182,18 @@ export default {
         var width = parseInt(this.svgwidth) - ( this.offsetX*2 )
         this.svg = this.$refs[id]
         this.svg.scale = this.$refs['scale-' + id]
-        this.factor = width / parseInt(this.$attrs.max )
-        
-        //this.snapObject = Snap(this.svg)
+        this.posFactor = width / parseInt(this.$attrs.max )
+        this.range = parseInt(this.$attrs.max ) - (parseInt(this.$attrs.min))
+        this.factor = width / this.range
         if ( parseInt(this.$attrs.value) > parseInt(this.$attrs.max) ){
             this.$attrs.value = this.$attrs.max
         }
-        this.pos = parseInt(this.$attrs.value) * this.factor
-        //this.updateGauge()
+        this.pos = this.normalize(Number(this.$attrs.value))*this.posFactor
         this.gaugeSize()
         if ( !! parseInt(this.$attrs.scale) ){
             this.createScale()
         }
-        this.aniPos[1] = this.$attrs.value*this.factor
+        this.aniPos[1] = this.pos//this.factor
     }
 }
 </script>
