@@ -153,12 +153,12 @@ export default (function(global, factory) {
       function normalize(value, min, limit) {
         
         var val = Number(value);
-        if ( value < 0 ){
-          val += (min*-1)
+        if ( Number(value) < 0 ){
+          val += min
         }
-        //console.log ( 'normalize=>',val , min , limit + min)
+        console.log ( 'normalize animated=>',val , min , limit + min)
         if(val > limit) return limit;
-        if(val < min) return min;
+        //if(val < min) return min;
         return val;
       }
   
@@ -550,6 +550,8 @@ export default (function(global, factory) {
             if ( value < 0 ){
               value += min
             }
+
+            console.log ( 'set value=> ', value , min , limit )
             //value = normalize(val, min, limit);
             if(gaugeColor) {
               setGaugeColor(value, 0)
@@ -559,11 +561,11 @@ export default (function(global, factory) {
           setValueAnimated: function(val, duration) {
             var oldVal = value;
             value = val
-            if ( value < 0 ){
-              value += min
-            }
+            //if ( value < 0 ){
+            //  value += min
+            //}
 
-            //value = normalize(val, min, limit)//limit);
+            value = normalize(val, min, limit)//limit);
             if(oldVal === value) {
               return;
             }

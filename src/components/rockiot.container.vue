@@ -92,7 +92,7 @@ export default {
         'value-color'       :   { type: String, required: false, default: '#777' },
         'value-bg'          :   { type: String, required: false, default: 'transparent' } ,
         'value-border'      :   { type: String, required: false, default: '0px solid #fac83c'},
-        clickAction         :   { type: String, required: false, default: 'test'}
+        clickAction         :   { type: String, required: false, default: ''}
     },
     methods:{
         clicked(){
@@ -103,10 +103,10 @@ export default {
                     this.timer[this.serial] = setInterval ( () => {
                         self.updatedValue= (Math.random() * (parseInt(self.max) - (parseInt(self.min))) + 1) + (parseInt(self.min))},1000)
                         if ( parseFloat(self.updatedValue) > self.max ){
-                            self.updateValue = self.max
+                            self.updatedValue = self.max
                         }
                         if ( parseFloat(self.updatedValue) < self.min ){
-                            self.updateValue = self.min
+                            self.updatedValue = self.min
                         }
                 } else {
                     clearInterval(this.timer[this.serial])

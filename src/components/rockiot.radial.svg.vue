@@ -1,5 +1,5 @@
 <template>
-    <div :ref="$attrs.serial" :width="$attrs.svgwidth" :height="$attrs.svgwidth" :id="$attrs.serial" :style="'width:'+$attrs.svgwidth+'px;height:'+$attrs.svgheight+'px;' + $attrs.svgStyle">
+    <div :ref="$attrs.serial" :width="$attrs.svgwidth" :height="$attrs.svgwidth" :id="$attrs.serial" :style="'width:'+$attrs.svgwidth+'px;height:'+$attrs.svgheight+'px;' + $attrs.svgStyle" :value="$attrs.value">
 
     </div>
 </template>
@@ -16,14 +16,17 @@ export default {
         customize: null
     }),
     watch:{
-        '$attrs.value'(v){
+        '$attrs.value'(v){ 
+            //this.gauge.setValue(v)
+            this.gauge.setValueAnimated(v,Number(this.$attrs.animation)/1000)
+            /*
             if ( this.progressColor.length > 1 ){
-                this.gauge.setValueAnimated(v,.7)
+                this.gauge.setValueAnimated(v,this.$attrs.animation)
                 this.setColor()
             } else {
-                this.gauge.setValueAnimated(v,.7)
+                this.gauge.setValueAnimated(v,this.$attrs.animation)
             }
-            
+            */
         }
     },
     computed:{

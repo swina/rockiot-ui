@@ -36,17 +36,17 @@
           value-border="0px solid #5ecad8"
           svgwidth="300"
           svgheight="300"
-          value="52" 
+          value="10" 
           precision="0"
-          title="Pressure"
+          title="Garden Temperature"
           serial="radial_1" 
           scale="1"
           smallscale="1" 
           needle="1"
           radius="lg"
           size="md" 
-          min="20" 
-          max="100">
+          min="-20" 
+          max="50" clickAction="" onclick="subscribe(this)" active="0">
         </rockiot-gauge>
       
         <code style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
@@ -378,7 +378,7 @@
           scale="1" 
           smallscale="1"
           ticks="10">
-        </rockiot-gauge> 
+        </rockiot-gauge>  
 
         <code style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
           &lt;rockiot-gauge<br>
@@ -402,5 +402,7 @@
         </code>
       </div>
     </div>
+    
+  
   </body>
 </html>
