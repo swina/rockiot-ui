@@ -1,5 +1,5 @@
 <template>
-    <div :ref="$attrs.serial" :width="$attrs.svgwidth" :height="$attrs.svgwidth" :id="$attrs.serial" :style="'width:'+$attrs.svgwidth+'px;height:'+$attrs.svgheight+'px;' + $attrs.svgStyle" :value="$attrs.value">
+    <div :class="$attrs.gaugeClass" :ref="$attrs.serial" :width="$attrs.svgwidth" :height="$attrs.svgwidth" :id="$attrs.serial" :style="'width:'+$attrs.svgwidth+'px;height:'+$attrs.svgheight+'px;' + $attrs.svgStyle" :value="$attrs.value">
 
     </div>
 </template>
@@ -68,7 +68,7 @@ export default {
                 label: function(value) {
                     return Math.round(self.$attrs.value)// + "/" + self.$attrs.max;
                 },
-                title: self.$attrs.title,
+                name: self.$attrs.name,
                 titleColor: self.$attrs.textColor,
                 units: self.$attrs.units,
                 showScale: !! parseInt(self.$attrs.scale),

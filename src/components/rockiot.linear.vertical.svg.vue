@@ -1,5 +1,5 @@
 <template>
-        <svg :style="$attrs.svgStyle" :class="'typeRange rockiot-linear-vertical rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
+        <svg :style="$attrs.svgStyle" :class="' rockiot-linear-vertical rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
             
             <g class="rockiot-scale" :ref="'scale-' + $attrs.serial" stroke="red" :style="scaleStyle"></g>
 
@@ -172,6 +172,13 @@ export default {
     },
     mounted(){
         let id = this.$attrs.serial
+        /*
+        if ( this.$attrs.svgwidth ){
+            this.svgwidth = this.$attrs.svgwidth
+        }
+        if ( this.$attrs.svgheight ){
+            this.svgheight = this.$attrs.svgheight
+        }
         if ( this.$attrs.variation === 'linear' && this.$attrs.svgwidth < this.$attrs.svgheight ){
             this.svgwidth = this.$attrs.svgwidth
             this.svgheight = this.$attrs.svgheight
@@ -180,7 +187,8 @@ export default {
             this.svgwidth = this.$attrs.svgheight
             this.svgheight = this.$attrs.svgwidth
         }
-        var height = parseInt(this.svgheight) - ( this.offsetY*2 )
+        */
+        var height = parseInt(this.svgheight) - ( this.offsetY*1 )
         this.svg = this.$refs[id]
         this.svg.scale = this.$refs['scale-' + id]
         this.factor = height / (parseInt(this.$attrs.max )-parseInt(this.$attrs.min))

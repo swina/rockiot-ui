@@ -100,7 +100,7 @@ export default (function(global, factory) {
         scaleColor: '#aaa',
         gaugeColor: null,
         serial: 'gauge',
-        title: '',
+        name: 'Gauge',
         units: '',
         ticks: 10,
         needle: false,
@@ -246,7 +246,7 @@ export default (function(global, factory) {
             gaugeTitleElem,
             gaugeUnitsElem,
             label = opts.label,
-            title = opts.title,
+            name = opts.name,
             titleColor = opts.titleColor,
             units = opts.units,
             viewBox = opts.viewBox,
@@ -302,7 +302,7 @@ export default (function(global, factory) {
             "dominant-baseline": "central"
           })
 
-          gaugeTitleElem.append ( title )
+          gaugeTitleElem.append ( name )
 
           gaugeUnitsElem = svg('text',{
             x: 50,

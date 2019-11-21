@@ -20,14 +20,41 @@
       <h1>rockiot-gauge</h1>
 
       <div style="margin-bottom:2rem;"><small>Click on the gauge to see in action</small></div>
+      <div style="display:flex;flex-direction:row;align-items:center;background:#163853">
+        
+        <rockiot-gauge 
+          id="radial_0"
+          serial="radial_0"
+          name="Test"
+          startAngle="180"
+          endAngle="0"
+          bar-color="#111f2d"
+          progress-color="#03a9f4"
+          click-action="test">
+        </rockiot-gauge>
+
+        
+        <code id="code_radial_0" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
+        </code>
+      </div>
+
+      <div style="display:flex;flex-direction:row;align-items:center;background:#163853">
+        
+
+        <rockiot-gauge type="chart" id="chart_0" serial="chart_0" name="Chart 0" min="0" max="100" value="20" click-action="test">
+
+        </rockiot-gauge>
+        <code id="code_chart_0" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
+        </code>
+      </div>
 
       <div style="display:flex;flex-direction:row;align-items:center">
-
+        
         <rockiot-gauge
           id="radial_1"
           serial="radial_1"
-          class="gauge_dark_gradient gauge_round_lg"
-          title="Garden Temperature"
+          gauge-class="gauge_dark_gradient gauge_round_lg"
+          name="Garden Temperature"
           units="°C"
           variation="radial"
           value="10"
@@ -60,12 +87,12 @@
         <rockiot-gauge
           id="radial_2"
           serial="radial_2"
-          class="gauge_dark_gradient_light gauge_round_lg"
+          gauge-class="gauge_dark_gradient_light gauge_round_lg"
           variation="radial"
           value="33"
           min="0"
           max="100"
-          title="Humidity"
+          name="Humidity"
           scale="1"
           smallscale="1"
           radius="lg"
@@ -88,8 +115,8 @@
         <rockiot-gauge
           id="radial_3"
           serial="radial_3"
-          class="gauge_silver_gradient gauge_round_lg"
-          title="Full range"
+          gauge-class="gauge_silver_gradient gauge_round_lg"
+          name="Full range"
           value="-10"
           units="rpm"
           min="-20"
@@ -118,9 +145,9 @@
         <rockiot-gauge
           id="linear_1"
           serial="linear_1"
-          class="gauge_dark_gradient gauge_vertical_lg"
+          gauge-class="gauge_dark_gradient gauge_vertical_lg"
           variation="linear"
-          title="Temperature"
+          name="Temperature"
           value="50"
           min="-20"
           max="100"
@@ -130,12 +157,12 @@
           smallscale="1"
           ticks="10"
           sgvwidth="120"
-          sgvheight="370"
+          sgvheight="340"
           bar-color="#222"
           progress-color="#ff0000"
           needle-color="#fff"
           needle-stroke="#000"
-          scale-text-color="#fafafa"
+          scale-text-color="#cdcdcd"
           click-action="test">
         </rockiot-gauge>
 
@@ -148,7 +175,7 @@
         <rockiot-gauge
           id="linear_2"
           serial="linear_2"
-          title="Temperature"
+          name="Temperature"
           variation="linear"
           value="50"
           min="0"
@@ -173,7 +200,7 @@
         <rockiot-gauge
           id="linear_3"
           serial="linear_3"
-          title="Temperature"
+          name="Temperature"
           variation="linear"
           value="10"
           min="0"
@@ -200,7 +227,7 @@
           serial="linear_4"
           variation="linear"
           orientation="horizontal"
-          title="Pressure"
+          name="Pressure"
           value="40"
           min="-20"
           max="100"
@@ -227,7 +254,7 @@
           serial="linear_5"
           variation="linear"
           orientation="horizontal"
-          title="Pressure"
+          name="Pressure"
           value="50"
           min="0"
           max="100"
@@ -251,11 +278,9 @@
     const gauges = document.querySelectorAll('rockiot-gauge')
     var attrs
     gauges.forEach ( (gauge) => {
-      console.log ( gauge.attributes )
       attrs = gauge.attributes
       var code = '&lt;rockiot-gauge<br>'
       Object.keys(attrs).forEach( (i)=> {
-        console.log ( attrs[i] )
         code += attrs[i].name + '=' + '\"' + attrs[i].value + '\"' + '<br>'
       })
       code += '&gt;<br>&lt;/rockiot-gauge&gt;'

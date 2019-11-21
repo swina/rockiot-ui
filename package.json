@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "vue": "^2.6.10",
-    "vue-custom-element": "^3.2.10"
+    "vue-custom-element": "^3.2.10",
+    "vue-google-charts": "^0.3.2"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",

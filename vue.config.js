@@ -20,12 +20,12 @@ module.exports = {
     optimization: {
       runtimeChunk: 'single',
       splitChunks: false,
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          test: /\.js(\?.*)?$/i,
-        }),
-      ],
+      //minimize: true,
+      //minimizer: [
+      //  new TerserPlugin({
+      //    test: /\.js(\?.*)?$/i,
+      //  }),
+      //],
     },
   },
   chainWebpack:
