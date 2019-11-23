@@ -4,9 +4,10 @@
       <div :class="classe + ' rockiot-ui-' + type" @click="showControl=!showControl">
             <rockiot-chart-control v-bind="_props" :showControl="showControl" @startTest="clickGauge=!clickGauge" @setting="areaChart=!areaChart"></rockiot-chart-control>
             <component v-if="type==='chart'" :is="chartComponent" :component="chartComponent" :type="areaChart" v-bind="_props" :value="updatedValue" />
+
             <component v-if="type==='gauge'" :is="gaugeComponent" :component="gaugeComponent" v-bind="_props" :value="updatedValue"/>
-            <component v-if="type==='level'" :is="levelComponent" :component="levelComponent" v-bind="_props" :value="updatedValue"/>
-            <rockiot-box-value v-if="type==='box'" v-bind="_props" :value="updatedValue"/>
+
+            <rockiot-box-value v-if="type==='number-box'" v-bind="_props" :value="updatedValue"/>
         </div>
     </div>
 </template>
@@ -69,6 +70,9 @@ export default {
           }
           if ( this.variation === 'radial' ){
             return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.radial.svg' )
+          }
+          if ( this.variation === 'level' ){
+            return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.level.gauge' )
           }
         },
         chartComponent(){

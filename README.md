@@ -1,47 +1,135 @@
-# rockiot-gauge
+# rockiot-ui
 
 
-**rockiot-gauge** is a **webcomponent** (custom HTML element) created using Vue.js, to add awesome gauges in your HTML pages.
+**rockiot-ui** is a **webcomponent** (custom HTML element) created using Vue.js, to add awesome gauges in your HTML pages.
 
-All elements created with rockiot-gauge are based on SVG.
-**rockiot-gauge doesn't use any canvas**. 
+All elements created with rockiot-ui are based on SVG.
+**rockiot-ui doesn't use any canvas**.
 
 For this reason you can customize or even manipulate all elements using standard CSS classes and JS.
 
-### Gauges ###
+### Elements ###
+
+**Gauges**
 
 - radial (adapted JS from [naikus](https://github.com/naikus/svg-gauge))
 - linear vertical
 - linear horizontal
+- level
+
+**Charts** *using google charts*
+- line charts
+- area charts
+
+**Other**
+- number box
 
 
-## Demo 
 
-Demo [here](https://rockiot-gauge.firebaseapp.com) (*click on each gauge to check random values and animation*)
+## Demo
 
-## Basic example
+Demo [here](https://rockiot-ui.firebaseapp.com)
+
+## How to use
+
+**Gauges**
+
+*Attributes for gauges*
+
+```type="gauge"``` set a gauge component.
+
+```variation="radial"``` set the gauge variation (radial/linear/level).
+
 
 radial
 ```
-<rockiot-gauge serial="001" variation="radial" min="0" max="100" value="22"></rockiot-gauge>
+<rockiot-ui
+  type="gauge"
+  variation="radial"
+  serial="001"
+  variation="radial"
+  min="0"
+  max="100"
+  value="22">
+</rockiot-ui>
 ```
 
 linear vertical
 ```
-<rockiot-gauge serial="001" variation="linear" min="0" max="100" value="22"></rockiot-gauge>
+<rockiot-ui
+   type="gauge"
+   variation="linear"
+   serial="001"
+   min="0"
+   max="100"
+   value="22">
+</rockiot-ui>
 ```
 
 linear horizontal
 ```
-<rockiot-gauge serial="001" variation="linear" orientation="horizontal" min="0" max="100" value="22"></rockiot-gauge>
+<rockiot-ui
+  type="gauge"
+  variation="linear"
+  orientation="horizontal"
+  serial="001"
+  min="0"
+  max="100"
+  value="22">
+</rockiot-ui>
 ```
+
+level
+```
+<rockiot-ui
+  type="gauge"
+  variation="level"
+  serial="001"
+  min="0"
+  max="100"
+  value="22">
+</rockiot-ui>
+```
+
+**Charts**
+
+*In order to use charts elements you need an active internet connection*
+
+line chart
+```
+<rockiot-ui
+  type="chart"
+  variation="line"
+  serial="001"
+  min="0"
+  max="100"
+  value="22">
+</rockiot-ui>
+```
+
+**Others**
+
+Number Box
+A number box is simply a box with an animated number value.
+
+```
+<rockiot-ui
+  type="number-box"
+  serial="nb-1"
+  min="0"
+  max="100"
+  value="22">
+</rockiot-ui>
+```
+
+
 
 
 
 
 ## Attributes
 
-As for standard HTML tags, **rockiot-gauge** has different attributes in order to control and customize it.
+As for standard HTML tags, **rockiot-ui** has different attributes in order to control and customize it.
 
 
 
@@ -79,14 +167,14 @@ As for standard HTML tags, **rockiot-gauge** has different attributes in order t
 | **value-border-color**     | no  	    | 0px solid #eaeaea  	    | Gauge display value border color |    	|
 
 
-## CSS Classes 
+## CSS Classes
 
-You can even customize **rockiot-gauge** changing the default CSS classes 
+You can even customize **rockiot-ui** changing the default CSS classes
 
 | CSS class                         | description                       | remarks    |  
-|---	                            |---	                            |---	    |	
-| **rockiot-gauge**                 | Gauge main container              | Main HTML Tag   	|
-| **.rockiot-radial**                | Gauge radial container            |    	| 
+|---	                            |---	                            |---	    |
+| **rockiot-ui**                 | Gauge main container              | Main HTML Tag   	|
+| **.rockiot-radial**                | Gauge radial container            |    	|
 | **.rockiot-linear**                | Gauge linear wrapper              | Gauge progress bar   	|
 | **.rockiot-linear-vertical**       | Gauge linear vertical wrapper     |    	|
 | **.rockiot-linear-horizontal**     | Gauge linear horizontal wrapper   |    	|
@@ -136,5 +224,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Credits
 For radial gauge used and adapted JS library from [naikus](https://github.com/naikus/svg-gauge)
 
-### License 
+### License
 This project is licensed under MIT

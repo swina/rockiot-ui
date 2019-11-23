@@ -54,12 +54,9 @@ export default {
 
     }
   }),
-  props:{
-    type: { type: Boolean , required: false, default: true }
-  },
   computed:{
     cType(){
-      if ( this.type ){
+      if ( this.$attrs.variation === 'area' ){
         return 'AreaChart'
       }
       return 'LineChart'
