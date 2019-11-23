@@ -350,7 +350,7 @@ export default (function(global, factory) {
             [
               gaugeDialEl,
               gaugeValuePath,
-              //gaugeValueElem,
+              gaugeValueElem,
               gaugeTitleElem,
               gaugeUnitsElem,
             ]
@@ -575,7 +575,7 @@ export default (function(global, factory) {
             }
             Animation({
               start: oldVal || 0,
-              end: value,
+              end: parseFloat(value).toFixed(precision),
               duration: duration || 1,
               step: function(val, frame) {
                 updateGauge(val, frame);

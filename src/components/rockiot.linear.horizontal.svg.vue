@@ -1,31 +1,37 @@
 <template>
+  <div style="padding-top:1rem;">
         <svg :style="$attrs.svgStyle" :class="'typeRange rockiot-gauge rockiot-gauge-' + $attrs.size" :height="svgheight" :width="svgwidth" :view-box="'0 0 ' + svgwidth + ' ' + svgheight" :ref="$attrs.serial" :id="$attrs.serial">
-            
+
             <g class="scale" :ref="'scale-' + $attrs.serial" stroke="red" :style="scaleStyle"></g>
 
-            <rect class="outline" :id="'outline-' + $attrs.serial" :style="outlineStyle" 
-                :x="offsetX" 
-                :width="$attrs.max*posFactor" 
-                :height="barHeight" 
+            <rect class="outline" :id="'outline-' + $attrs.serial" :style="outlineStyle"
+                :x="offsetX"
+                :width="$attrs.max*posFactor"
+                :height="barHeight"
                 :y="offsetY-barHeight"/>
-                
-            <rect class="fill" :style="fillStyle" :id="'fill-' + $attrs.serial" 
-                :x="offsetX" 
-                :width="pos" 
-                :height="barHeight" 
+
+            <rect class="fill" :style="fillStyle" :id="'fill-' + $attrs.serial"
+                :x="offsetX"
+                :width="pos"
+                :height="barHeight"
                 :y="offsetY-barHeight">
             </rect>
 
-            <rect :id="'needle-' + $attrs.serial" class="needle" :style="animate('x')" width="1" 
-                :x="this.pos + this.offsetX" 
-                :y="offsetY-barHeight-5" 
+            <rect :id="'needle-' + $attrs.serial" class="needle" :style="animate('x')" width="1"
+                :x="this.pos + this.offsetX"
+                :y="offsetY-barHeight-5"
                 :height="barHeight+10" :fill="$attrs.needleColor"/>
-        </svg> 
+        </svg>
+        <div class="rockiot-gauge-linear-vertical-output">
+          <div class="rockiot-gauge-linear-vertical-name">
+            {{this.$attrs.name}} {{this.$attrs.units}}
+          </div>
+            <h2 :class="'rockiot-gauge-' + $attrs.variation + '-' + $attrs.orientation + '-value'"><animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number></h2>
+        </div>
+      </div>
 </template>
 
 <script>
-import { setSVGAttributes } from '@/plugins/rockiot.radial.js'
-
 /* eslint-disable */
 export default {
     name: 'RockiotSvgLinearH',
@@ -46,6 +52,7 @@ export default {
         snapObject: null,
         aniPos:[0,0],
         oldValue: 0,
+        aniValue:0
     }),
     computed:{
         scaleStyle(){
@@ -64,20 +71,34 @@ export default {
     watch:{
         '$attrs.barColor'(v){
             this.fillStyle()
-        }, 
+        },
         '$attrs.value'(v){
 
-            //this.pos = parseInt(v)*this.posFactor + this.normalize(v)
-            this.pos = this.normalize(v)*this.posFactor
-            this.aniPos[0] = this.oldValue
-            this.aniPos[1] = this.pos
-            this.oldValue = this.pos
+            if ( parseFloat(v) > parseInt(this.$attrs.max) ){
+              this.pos = this.normalize(parseFloat(this.$attrs.max))*this.posFactor
+            } else {
+              this.pos = this.normalize(v)*this.posFactor//this.pos = this.normalize(v)*this.posFactor
+            }
+            this.animateReset(v)
         },
-        
+
     },
     methods:{
+      animateReset(v){
+        this.aniValue = parseInt(v)
+        this.$refs['num_' + this.$attrs.serial].reset(this.oldValue,v)
+        this.$refs['num_' + this.$attrs.serial].start()
+      },
+      animateEnd(){
+        if ( this.oldValue != 0 ){
+          this.oldValue = this.$attrs.value
+        }
+      },
+      formatter(num){
+        return num.toFixed(this.$attrs.precision)
+      },
         normalize(val){
-            return (val + (parseInt(this.$attrs.min)*-1))/(this.range)*100 
+            return (val + (parseInt(this.$attrs.min)*-1))/(this.range)*100
         },
         animate(attr){
             if ( this.$attrs.animation ) {
@@ -112,7 +133,12 @@ export default {
                     this.scaleY = -15
                     break
             }
-            
+
+        },
+        setSVGAttributes(elmt, oAtt) {
+            for (var prop in oAtt) {
+              elmt.setAttributeNS(null, prop, oAtt[prop]);
+            }
         },
         createScale(){
             var NS = "http://www.w3.org/2000/svg";
@@ -125,7 +151,7 @@ export default {
                 var h = 5
                 if ( !! parseInt(this.$attrs.smallscale) ){
                     if ( n % 10 != 0 && n > 0 ){
-                        
+
                         h = 0
                     }
                 }
@@ -137,9 +163,9 @@ export default {
                     x2: sa + this.offsetX,
                     y2: this.offsetY -20 - h + this.scaleY
                 };
-                setSVGAttributes(scaleLine, scaleLineObj);
+                this.setSVGAttributes(scaleLine, scaleLineObj);
                 this.svg.scale.appendChild(scaleLine);
-                
+
                 if ( n % 10 === 0 || n === 0 ){
 
                     var mg = 0
@@ -151,26 +177,30 @@ export default {
                         "class": "scaleNumbersLinear",
                         stroke: 'transparent',
                         style: this.scaleTextColor,
-                        x: sa + this.offsetX, 
+                        x: sa + this.offsetX,
                         y: this.offsetY - 30 + this.scaleY,
                     }
-                    setSVGAttributes(scaleText, scaleTextObj)
+                    this.setSVGAttributes(scaleText, scaleTextObj)
                     //var range = parseInt(this.$attrs.max)-(parseInt(this.$attrs.min))
 
                     var tick = this.range/(parseInt(this.$attrs.ticks))
                     txt = parseInt(this.$attrs.min)+(n/10*tick)//tick)
                     //console.log ( range , tick , this.factor )
-                    
+
                         scaleText.textContent = parseInt(txt)///10 //parseInt(n * (tick)) + (parseInt(this.$attrs.min))
                         this.svg.scale.appendChild(scaleText);
-                        
+
                 }
                 n++
             }
         },
     },
+    beforeMount(){
+      this.aniValue = parseInt(this.$attrs.value)
+    },
     mounted(){
         let id = this.$attrs.serial
+        this.aniValue = parseInt(this.$attrs.value)
        if ( this.$attrs.variation === 'linear' && this.$attrs.svgwidth > this.$attrs.svgheight ){
             this.svgwidth = this.$attrs.svgwidth
             this.svgheight = this.$attrs.svgheight

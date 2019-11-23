@@ -6,7 +6,7 @@
 <script>
 /* eslint-disable */
 //import SvgGauge from 'svg-gauge'
-import '@/plugins/rockiot.radial'
+//import '../plugins/rockiot.radial'
 export default {
     name: 'RockiotRadialSvg',
     data:()=>({
@@ -16,7 +16,7 @@ export default {
         customize: null
     }),
     watch:{
-        '$attrs.value'(v){ 
+        '$attrs.value'(v){
             //this.gauge.setValue(v)
             this.gauge.setValueAnimated(v,Number(this.$attrs.animation)/1000)
             /*
@@ -68,6 +68,8 @@ export default {
                 label: function(value) {
                     return Math.round(self.$attrs.value)// + "/" + self.$attrs.max;
                 },
+                ticks: self.$attrs.ticks,
+                precision: Number(self.$attrs.precision),
                 name: self.$attrs.name,
                 titleColor: self.$attrs.textColor,
                 units: self.$attrs.units,
@@ -76,6 +78,7 @@ export default {
                 needle: !! parseInt(self.$attrs.needle),
                 value: parseFloat(value),
                 valueColor: self.$attrs.valueColor,
+                valueClass: self.$attrs.valueClass,
                 serial: self.$attrs.serial,
                 gaugeClass: 'rockiot-svg rockiot-svg-' + self.$attrs.serial + ' gauge-' + self.$attrs.serial,
                 dialClass: 'rockiot-dial rockiot-dial-' + self.$attrs.size + ' rockiot-dial-' + self.$attrs.serial ,
@@ -101,10 +104,10 @@ export default {
         if ( this.$attrs.progressColor.split(';').length > 1 ){
             this.progressColor = this.$attrs.progressColor.split(';')
         }
-        
+
         this.createGauge()
         this.setColor()
-        
+
         //let pippo = document.querySelector('.gauge-' + this.$attrs.serial)
         this.svg = document.querySelector('.gauge-' + this.$attrs.serial)
 
@@ -118,7 +121,7 @@ export default {
         this.svg.W = this.$attrs.svgwidth
         this.svg.min = this.$attrs.min
         this.svg.max = this.$attrs.max
-        
+
     }
 }
 </script>

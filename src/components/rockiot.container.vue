@@ -1,34 +1,26 @@
 <template>
     <div class="rockiot-wrapper">
-        <div :class="classe" :style="'width:' + svgwidth + ';height:' + svgheight" @mouseover="showControl=!showControl" @mouseout="showControl=!showControl">
-            
-            <component :class="componentClass" :is="component" :component="component" :id="serial" :value="updatedValue" v-bind="_props" v-if="type==='gauge'"></component>
-            
-            <div v-if="variation!='radial' && type==='gauge'" :class="'rockiot-output-' + variation + ' rockiot-gauge-title'" :style="textStyle">{{name}} <div class="rockiot-gauge-limits" v-if="!! parseInt(minmax)">{{min}}:{{max}}</div></div>
-            
-            <div v-if="variation!='radial' && type==='gauge'" :class="'rockiot-output-' + variation + ' rockiot-gauge-units'" :style="textStyle">{{units}}</div>
-            
-            <div v-if="type==='gauge'" :id="'value-' + serial" :class="'rockiot-output-' + variation + ' rockiot-gauge-output'" :style="valueStyle">
-                <div>{{parseInt(updatedValue)}}<small class="rockiot-output-dec" v-if="precision!='0'">.{{formatDec}}</small></div>
-            </div>
-
-            <rockiot-gauge-control v-bind="_props" :showControl="showControl" @startTest="clickGauge=!clickGauge" @viewChart="showChart=!showChart"></rockiot-gauge-control>
-            
-        </div>
-        <div :class="chartClass + ' gauge-chart ' + variation + '-gauge-chart'" @click="showChart=!showChart">
-            <component :is="chartComponent" :component="chartComponent" v-bind="_props" :value="updatedValue" />
+      <div class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
+      <div :class="classe + ' rockiot-ui-' + type" @click="showControl=!showControl">
+            <rockiot-chart-control v-bind="_props" :showControl="showControl" @startTest="clickGauge=!clickGauge" @setting="areaChart=!areaChart"></rockiot-chart-control>
+            <component v-if="type==='chart'" :is="chartComponent" :component="chartComponent" :type="areaChart" v-bind="_props" :value="updatedValue" />
+            <component v-if="type==='gauge'" :is="gaugeComponent" :component="gaugeComponent" v-bind="_props" :value="updatedValue"/>
+            <component v-if="type==='level'" :is="levelComponent" :component="levelComponent" v-bind="_props" :value="updatedValue"/>
+            <rockiot-box-value v-if="type==='box'" v-bind="_props" :value="updatedValue"/>
         </div>
     </div>
 </template>
 
 <script>
 /* eslint-disable */
-import RockiotGaugeControl from '@/components/rockiot.gauge.control.vue'
+import RockiotChartControl from './rockiot.gauge.control.vue'
+import RockiotBoxValue from './rockiot.box.value.vue'
 
 export default {
-    name: 'RockiotGauge',
+    name: 'RockiotUI',
     components: {
-        RockiotGaugeControl
+        RockiotChartControl,
+        RockiotBoxValue
     },
     data:()=>({
         updatedValue: 0,
@@ -36,29 +28,20 @@ export default {
         showChart: false,
         showControl: false,
         clickGauge: false,
+        areaChart: false
     }),
     computed:{
         classe(){
-            if ( this.variation != 'linear' ){
-                return 'rockiot-' + this.variation + ' rockiot-' + this.variation + '-' + this.orientation + ' rockiot-' + this.variation + '-' + this.serial
-            } else {
-                return this.gaugeClass + ' rockiot-' + this.variation + ' rockiot-' + this.variation + '-' + this.orientation + ' rockiot-' + this.variation + '-' + this.serial
-            }
+            return this.chartClass + ' rockiot-' + this.type + '-' + this.serial
         },
         componentClass(){
-            if ( !this.showChart ){ 
+            if ( !this.showChart ){
                 return 'rockiot-gauge-' + this.variation + '-' + this.orientation
             } else {
                 return 'rockiot-gauge-' + this.variation + '-' + this.orientation
             }
         },
-        chartClass(){
-            if ( !this.showChart && this.type != 'chart' ){
-                return 'hide'
-            } else {
-                return ''
-            }
-        },
+
         controlClass(){
             if ( !this.showControl ){
                 return 'no-visible'
@@ -77,22 +60,23 @@ export default {
         valueStyle(){
             return 'color:' + this.valueColor + ';background:' + this.valueBg + ';border:' + this.valueBorder + ';'
         },
-        component(){
-
-            if ( this.variation === 'radial' ){
-                return () => import ( /*webpackChunkName: "rockiot.gauges" */ '@/components/rockiot.radial.svg' )
-            }
-
-            if ( this.orientation === 'vertical' && this.variation === 'linear' ){
-                return () => import ( /*webpackChunkName: "rockiot.gauges" */ '@/components/rockiot.linear.vertical.svg' )
-            }
-            if ( this.orientation === 'horizontal' && this.variation === 'linear' ){
-                return () => import ( /*webpackChunkName: "rockiot.gauges" */ '@/components/rockiot.linear.horizontal.svg' )
-            }
+        gaugeComponent(){
+          if ( this.variation === 'linear' && this.orientation === 'vertical' ){
+            return () => import ( /*webpackChunkName: "build/rockiot.gauge.linear" */ './rockiot.linear.vertical.svg' )
+          }
+          if ( this.variation === 'linear' && this.orientation === 'horizontal' ){
+            return () => import ( /*webpackChunkName: "build/rockiot.gauge.linear" */ './rockiot.linear.horizontal.svg' )
+          }
+          if ( this.variation === 'radial' ){
+            return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.radial.svg' )
+          }
         },
         chartComponent(){
-            return () => import ( /*webpackChunkName: "rockiot.gauges" */ '@/components/rockiot.chart.line.svg' )
+            return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.chart.line.svg' )
         },
+        levelComponent(){
+          return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.level.gauge' )
+        }
     },
     watch:{
         value(v){
@@ -128,24 +112,27 @@ export default {
         svgheight           : { type: String, required: false, default: '300' },
         'svg-style'         : { type: String, required: false, default: '' },
         animation           : { type: String, required: false, default: '500' },
-        'gauge-class'       : { type: String, required: false, default: '' },
+        'chart-class'       : { type: String, required: false, default: '' },
+        background          : { type: String, required: false, default: 'none' },
         'bar-color'         : { type: String, required: false, default: '#444' },
         'bar-border-color'  : { type: String, required: false, default: 'transparent' },
         'progress-color'    : { type: String, required: false, default: '#00ff00' },
         'progress-border-color': { type: String, required: false, default: '#00ff00' },
         'scale-color'          : { type: String, required: false, default: '#aaa'},
-        'scale-text-color'      : { type: String, required: false, default: '' },
+        'scale-text-color'  : { type: String, required: false, default: '#111' },
         'needle-color'      : { type: String, required: false, default: '#777' },
         'needle-stroke'     : { type: String, required: false, default: '#000'},
         'text-color'        :  { type: String, required: false, default: '#777' },
         'value-color'       :   { type: String, required: false, default: '#777' },
         'value-bg'          :   { type: String, required: false, default: 'transparent' } ,
         'value-border'      :   { type: String, required: false, default: '0px solid #fac83c'},
+        'value-class'       : { type: String, required: false, default: '' },
+        'control-color'     : { type: String, required: false, default: '#333' },
+        'control-bg'        : { type: String, required: false, default: '#fff' },
         clickAction         :   { type: String, required: false, default: ''}
     },
     methods:{
         clicked(){
-            console.log ( 'clicked')
             if ( this.clickAction === 'test' ){
                 let self = this
 
@@ -165,7 +152,8 @@ export default {
             } else {
                 this.$emit('click')
             }
-        }
+        },
+
     },
     mounted(){
         if ( parseInt(this.value) > parseInt(this.max) ){
@@ -173,7 +161,7 @@ export default {
         } else {
             this.updatedValue = this.value
         }
-    
+
     }
 }
 </script>

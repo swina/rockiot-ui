@@ -11,269 +11,225 @@
       td , th { text-align: left; font-size:.8rem; padding:1rem; }
     </style>
   </head>
-  <body style="background:rgb(255, 255, 255);font-family:Arial">
+  <body style="min-height:100vh;width:100vw;margin:0;padding:0;background:#374353;background:url('img/demo-3-bg.jpg') no-repeat center center;background-size:cover;font-family:monospace">
     <noscript>
       <strong>We're sorry but rockiot-gauge doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div style="display:flex;flex-direction:column;align-items:center;max-width:100%;flex-wrap:wrap">
+    <div class="body-wrapper"></div>
+    <div  style="display:flex;flex-direction:column;align-items:center;max-width:100%;flex-wrap:wrap">
 
-      <h1>rockiot-gauge</h1>
+      <div style="width:20rem;text-align:center;position:absolute;top:0;background:#272626;color:white;border-bottom-right-radius:.5rem;border-bottom-left-radius:.5rem;padding:.4rem;font-size:1.4rem;">rockiot-ui</div>
 
-      <div style="margin-bottom:2rem;"><small>Click on the gauge to see in action</small></div>
-      <div style="display:flex;flex-direction:row;align-items:center;background:#163853">
-        
-        <rockiot-gauge 
-          id="radial_0"
-          serial="radial_0"
-          name="Test"
-          startAngle="180"
-          endAngle="0"
-          bar-color="#111f2d"
-          progress-color="#03a9f4"
-          click-action="test">
-        </rockiot-gauge>
+      <div class="rockiot-dashboard" style="margin-top:2.5rem;">
 
-        
-        <code id="code_radial_0" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
+        <div class="rockiot-panel">
+
+          <rockiot-ui
+            class="rockiot-element"
+            type="chart"
+            id="chart_0"
+            serial="chart_0"
+            name="Bandwidth"
+            min="0"
+            max="100"
+            value="0"
+            units="Mb/s"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            progress-color="#4ea5f1"
+            control-color="#bababa"
+            control-bg="#000"
+            svgwidth="450"
+            svgheight="295">
+          </rockiot-ui>
+
+          <rockiot-ui
+            class="rockiot-element"
+            type="gauge"
+            variation="linear"
+            orientation="horizontal"
+            id="linear_1"
+            serial="linear_1"
+            name="Level"
+            min="20"
+            max="100"
+            value="60"
+            units="%"
+            size="md"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            bar-color="#111"
+            progress-color="#4ea5f1"
+            control-bg="none"
+            control-color="#fafafa"
+            scale="1"
+            smallscale="1"
+            needle="1"
+            needle-color="#ff0000"
+            background="#000">
+          </rockiot-ui>
+
+        </div>
+        <div class="rockiot-panel">
+          <rockiot-ui
+            class="rockiot-element"
+            type="gauge"
+            variation="radial"
+            id="radial_0"
+            serial="radial_0"
+            name="Humidity"
+            min="0"
+            max="100"
+            value="20"
+            units="%"
+            precision="2"
+            value-class="rockiot-radial-value-text"
+            scale="1"
+            smallscale="1"
+            ticks="5"
+            size="md"
+            radius="lg"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            bar-color="#00000060"
+            progress-color="#4ea5f1"
+            control-bg="none"
+            control-color="#eaeaea"
+            needle="1"
+            svgwidth="300"
+            svgheight="300"
+            needle-color="#ff0000"
+            background="#000">
+          </rockiot-ui>
+          <div class="rockiot-element">
+            <div style="display:flex;flex-direction:row;justify-content:space-around;">
+              <rockiot-ui
+                id="box_1"
+                serial="box_1"
+                type="box"
+                min="100"
+                max="5000"
+                value="0"
+                units=""
+                name="Visitors"
+                value-color="#4ea5f1"
+                precision="0"
+                click-action="test">
+              </rockiot-ui>
+              <rockiot-ui
+                id="box_2"
+                serial="box_2"
+                type="box"
+                min="0"
+                max="50"
+                value="0"
+                units=""
+                name="New Visitors"
+                value-color="#00ff00"
+                precision="0"
+                click-action="test">
+              </rockiot-ui>
+
+            </div>
+          </div>
+          <!--<rockiot-ui
+            class="rockiot-element"
+            type="chart"
+            id="chart_1"
+            serial="chart_1"
+            name="Chart 1"
+            min="0"
+            max="100"
+            value="20"
+            units="%"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            progress-color="#4ea5f1"
+            control-color="#bababa"
+            control-bg="none"
+            svgwidth="300"
+            svgheight="205">
+          </rockiot-ui>-->
+        </div>
+        <div class="rockiot-panel">
+          <rockiot-ui
+            class="rockiot-element"
+            type="gauge"
+            variation="linear"
+            id="linear_0"
+            serial="linear_0"
+            name="Pool"
+            min="15"
+            max="32"
+            value="22"
+            units="°C"
+            size="sm"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            bar-color="#111"
+            progress-color="#4ea5f1"
+            control-bg="none"
+            control-color="#fafafa"
+            scale="1"
+            smallscale="1"
+            needle="1"
+            needle-color="#ff0000"
+            background="#000">
+          </rockiot-ui>
+        </div>
+        <div class="rockiot-panel">
+          <rockiot-ui
+            class="rockiot-element"
+            id="level_1"
+            serial="level_1"
+            type="level"
+            variation="radial"
+            min="0"
+            max="100"
+            value="0"
+            units="%"
+            name="Water Level"
+            svgwidth="300"
+            svgheight="300"
+            bar-color="#111"
+            text-color="yellow"
+            progress-color="#4ea5f1"
+            click-action="test">
+          </rockiot-ui>
+          <rockiot-ui
+            class="rockiot-element"
+            id="level_2"
+            serial="level_2"
+            type="level"
+            variation="radial"
+            min="0"
+            max="100"
+            value="0"
+            units="%"
+            name="Pool Level"
+            bar-color="#111"
+            progress-color="#4ea5f1"
+            click-action="test"/>
+        </div>
+
       </div>
 
-      <div style="display:flex;flex-direction:row;align-items:center;background:#163853">
-        
 
-        <rockiot-gauge type="chart" id="chart_0" serial="chart_0" name="Chart 0" min="0" max="100" value="20" click-action="test">
-
-        </rockiot-gauge>
-        <code id="code_chart_0" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-      </div>
-
-      <div style="display:flex;flex-direction:row;align-items:center">
-        
-        <rockiot-gauge
-          id="radial_1"
-          serial="radial_1"
-          gauge-class="gauge_dark_gradient gauge_round_lg"
-          name="Garden Temperature"
-          units="°C"
-          variation="radial"
-          value="10"
-          min="-20"
-          max="50"
-          precision="0"
-          scale="1"
-          smallscale="1"
-          needle="1"
-          radius="lg"
-          size="md"
-          svgwidth="300"
-          svgheight="300"
-          bar-color="#888"
-          bar-border-color="#888"
-          progress-color="#03a9f4"
-          value-color="#cdcdcd"
-          needle-color="#ff0000"
-          scale-color="#7fa9ce"
-          value-border="0px solid #5ecad8"
-          click-action="test"
-          active="0">
-        </rockiot-gauge>
-
-        <code id="code_radial_1" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-      </div>
-
-      <div style="display:flex;flex-direction:row;align-items:center">
-        <rockiot-gauge
-          id="radial_2"
-          serial="radial_2"
-          gauge-class="gauge_dark_gradient_light gauge_round_lg"
-          variation="radial"
-          value="33"
-          min="0"
-          max="100"
-          name="Humidity"
-          scale="1"
-          smallscale="1"
-          radius="lg"
-          size="sm"
-          bar-color="#111"
-          bar-border-color="#111"
-          progress-color="#00ff00"
-          value-color="#cdcdcd"
-          needle-color="#ff0000"
-          value-border="2px solid #4c524c"
-          value-bg="#222"
-          click-action="test">
-        </rockiot-gauge>
-        <code id="code_radial_2" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-      </div>
-
-      <div style="display:flex;flex-direction:row;align-items:center">
-
-        <rockiot-gauge
-          id="radial_3"
-          serial="radial_3"
-          gauge-class="gauge_silver_gradient gauge_round_lg"
-          name="Full range"
-          value="-10"
-          units="rpm"
-          min="-20"
-          max="50"
-          startangle="270"
-          endangle="269.9999999"
-          radius="md"
-          size="md"
-          scale="1"
-          needle="1"
-          smallscale="1"
-          progress-color="#ff8800"
-          bar-border-color="transparent"
-          value-color="#000"
-          scale-color="#222"
-          variation="radial"
-          click-action="test">
-        </rockiot-gauge>
-
-        <code id="code_radial_3" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-
-      </div>
-
-      <div style="display:flex;flex-direction:row;align-items:center">
-        <rockiot-gauge
-          id="linear_1"
-          serial="linear_1"
-          gauge-class="gauge_dark_gradient gauge_vertical_lg"
-          variation="linear"
-          name="Temperature"
-          value="50"
-          min="-20"
-          max="100"
-          size="lg"
-          needle="1"
-          scale="1"
-          smallscale="1"
-          ticks="10"
-          sgvwidth="120"
-          sgvheight="340"
-          bar-color="#222"
-          progress-color="#ff0000"
-          needle-color="#fff"
-          needle-stroke="#000"
-          scale-text-color="#cdcdcd"
-          click-action="test">
-        </rockiot-gauge>
-
-        <code id="code_linear_1" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-
-      </div>
-
-      <div style="display:flex;flex-direction:row;align-items:center">
-        <rockiot-gauge
-          id="linear_2"
-          serial="linear_2"
-          name="Temperature"
-          variation="linear"
-          value="50"
-          min="0"
-          max="100"
-          needle="1"
-          scale="1"
-          smallscale="1"
-          ticks="10"
-          size="md"
-          sgvwidth="120"
-          sgvheight="370"
-          progress-color="#ff8800"
-          needle-color="#fff"
-          needle-stroke="#000"
-          click-action="test">
-        </rockiot-gauge>
-        <code id="code_linear_2" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-      </div>
-
-      <div style="display:flex;flex-direction:row;align-items:center">
-        <rockiot-gauge
-          id="linear_3"
-          serial="linear_3"
-          name="Temperature"
-          variation="linear"
-          value="10"
-          min="0"
-          max="20"
-          needle="1"
-          scale="1"
-          smallscale="1"
-          ticks="10"
-          size="sm"
-          sgvwidth="120"
-          sgvheight="370"
-          progress-color="#32ab32"
-          needle-color="#fff"
-          needle-stroke="#000"
-          click-action="test">
-        </rockiot-gauge>
-        <code id="code_linear_3" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-      </div>
-
-      <div style="display:flex;flex-direction:row;align-items:center">
-        <rockiot-gauge
-          id="linear_4"
-          serial="linear_4"
-          variation="linear"
-          orientation="horizontal"
-          name="Pressure"
-          value="40"
-          min="-20"
-          max="100"
-          needle="1"
-          scale="1"
-          smallscale="1"
-          ticks="10"
-          size="md"
-          animation="100"
-          progress-color="#567fa5"
-          needle-color="#fff"
-          needle-stroke="#000"
-          value-color="#777"
-          svg-style="border:1px solid black;border-radius:1rem;"
-          click-action="test">
-        </rockiot-gauge>
-        <code id="code_linear_4" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-      </div>
-
-      <div style="display:flex;flex-direction:row;align-items:center">
-        <rockiot-gauge
-          id="linear_5"
-          serial="linear_5"
-          variation="linear"
-          orientation="horizontal"
-          name="Pressure"
-          value="50"
-          min="0"
-          max="100"
-          needle="1"
-          scale="1"
-          smallscale="1"
-          ticks="10"
-          size="sm"
-          progress-color="#ff8800"
-          needle-color="#fff"
-          needle-stroke="#000"
-          click-action="test">
-        </rockiot-gauge>
-
-        <code id="code_linear_5" style="margin:2rem; min-width:30rem; width:30rem; padding:2rem;background:#eaeaea;">
-        </code>
-      </div>
     </div>
-
+    <script>
+    function fill(obj){
+      obj.style.opacity = 0;
+      obj.style.background = "linear-gradient(to bottom, #fff , #fff 80% , #000 80% , #000 100%)"
+      obj.style.opacity = 1;
+        console.log ( 'fill' , obj.style )
+    }
+    </script>
+    <!--
     <script>
     const gauges = document.querySelectorAll('rockiot-gauge')
     var attrs
@@ -287,5 +243,6 @@
       document.getElementById('code_' + gauge.getAttribute('id')).innerHTML = code
     })
     </script>
+  -->
   </body>
 </html>
