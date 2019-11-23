@@ -1,9 +1,16 @@
 # rockiot-ui
 
 
-**rockiot-ui** is a **webcomponent** (custom HTML element) created using Vue.js, to add awesome gauges in your HTML pages.
+**rockiot-ui** is a **webcomponent** (custom HTML element) created using Vue.js, to add awesome gauges, charts and other components in your HTML pages.
+
+Typical use of **rockiot-ui** elements
+
+- IoT dashboards
+- SaaS metric dashboards
+- Weather Stations
 
 All elements created with rockiot-ui are based on SVG.
+
 **rockiot-ui doesn't use any canvas**.
 
 For this reason you can customize or even manipulate all elements using standard CSS classes and JS.
