@@ -184,10 +184,9 @@ export default {
                     //var range = parseInt(this.$attrs.max)-(parseInt(this.$attrs.min))
 
                     var tick = this.range/(parseInt(this.$attrs.ticks))
-                    txt = parseInt(this.$attrs.min)+(n/10*tick)//tick)
-                    //console.log ( range , tick , this.factor )
+                    txt = parseInt(this.$attrs.min)+(n/10*tick)
 
-                        scaleText.textContent = parseInt(txt)///10 //parseInt(n * (tick)) + (parseInt(this.$attrs.min))
+                        scaleText.textContent = parseInt(txt)
                         this.svg.scale.appendChild(scaleText);
 
                 }

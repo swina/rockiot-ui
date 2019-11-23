@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div :class="'rockiot-chart-control ' + controlClass">
-      <span title="Test">
+    <div :class="'rockiot-ui-control ' + controlClass + ' rockiot-ui-control-' + $attrs.type + '-' + $attrs.variation + '-' + $attrs.orientation">
+      <span title="Test" v-if="$attrs.testIcon==='1'">
         <svg height="20" width="20" title="Test" @click="$emit('startTest')">
             <g>
                 <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>
@@ -10,21 +10,6 @@
             </g>
         </svg>
       </span>
-      <!--<span title="Chart" v-if="$attrs.type != 'chart'">
-        <svg height='20' width='20' @click="$emit('viewChart')">
-            <g>
-                <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" fill="#ffffff"/>
-                <path stroke="#0f0f00" id="svg_4" d="m32.06051,3.03514c-4.74208,0 -8.58619,3.84411 -8.58619,8.58619c0,4.74208 3.84411,8.58619 8.58619,8.58619c4.74208,0 8.58619,-3.84411 8.58619,-8.58619c0,-4.74208 -3.84411,-8.58619 -8.58619,-8.58619zm4.95416,7.97652c-0.8572,0.98599 -2.18938,1.31209 -3.3585,0.93695l-4.24643,4.88327c-0.45253,0.51987 -1.24002,0.57304 -1.75989,0.12111s-0.57482,-1.24002 -0.12288,-1.75989l4.25233,-4.88859c-0.52755,-1.10178 -0.38813,-2.45995 0.46493,-3.44062c0.80758,-0.93046 2.03991,-1.27074 3.15942,-0.98894l-1.62697,1.89754l0.53228,1.5484l1.60806,0.31252l1.6311,-1.90227c0.44189,1.07165 0.27943,2.34652 -0.53346,3.28052z" stroke-width="null" fill="none"/>
-                <path stroke="#191919" id="svg_6" d="m-4.02733,9.12076c0.848,-1.09249 1.01845,-2.58335 0.55714,-3.83716l-1.70242,2.22455l-1.67818,-0.36561l-0.55606,-1.8114l1.69812,-2.21938c-1.16806,-0.32929 -2.45492,0.06825 -3.29918,1.15641c-0.89038,1.14719 -1.03609,2.73582 -0.48499,4.02473l-4.43753,5.71802c-0.47217,0.60792 -0.41465,1.52996 0.12789,2.05884c0.54254,0.52851 1.36523,0.46463 1.83724,-0.1433l4.43233,-5.71238c1.22009,0.44065 2.61114,0.05908 3.50564,-1.09332l0,0z" stroke-width="null" fill="#ffffff"/>
-                <line stroke="#191919" stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="9.69975" x2="7.88058" y1="15.06894" x1="4.14412" fill-opacity="null" stroke-opacity="null" fill="none"/>
-                <line stroke="#191919" stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="10.9243" x2="9.79591" y1="9.29156" x1="7.56659" fill-opacity="null" stroke-opacity="null" fill="none"/>
-                <line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="3.0746" x2="15.57329" y1="11.17549" x1="9.32493" fill-opacity="null" stroke-opacity="null" stroke="#191919" fill="none"/>
-                <line stroke="#666666" stroke-linecap="null" stroke-linejoin="null" id="svg_9" y2="16.04267" x2="3.76734" y1="3.63978" x1="3.76734" fill-opacity="null" fill="none"/>
-                <line stroke-linecap="null" stroke-linejoin="null" id="svg_10" y2="15.53993" x2="16.42762" y1="15.53993" x1="3.73594" -opacity="null" stroke="#666666" fill="none"/>
-            </g>
-        </svg>
-      </span>
-      -->
       <span title="Settings" @click="$emit('setting')">
         <svg width="20" height="20">
             <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>
@@ -33,21 +18,36 @@
 
         </svg>
       </span>
-      <span title="Connect">
+      <span title="Connect" @click="$emit('connect')">
         <svg width="20" height="20">
             <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>
             <path :stroke="$attrs.controlColor" id="svg_4" d="m32.06051,3.03514c-4.74208,0 -8.58619,3.84411 -8.58619,8.58619c0,4.74208 3.84411,8.58619 8.58619,8.58619c4.74208,0 8.58619,-3.84411 8.58619,-8.58619c0,-4.74208 -3.84411,-8.58619 -8.58619,-8.58619zm4.95416,7.97652c-0.8572,0.98599 -2.18938,1.31209 -3.3585,0.93695l-4.24643,4.88327c-0.45253,0.51987 -1.24002,0.57304 -1.75989,0.12111s-0.57482,-1.24002 -0.12288,-1.75989l4.25233,-4.88859c-0.52755,-1.10178 -0.38813,-2.45995 0.46493,-3.44062c0.80758,-0.93046 2.03991,-1.27074 3.15942,-0.98894l-1.62697,1.89754l0.53228,1.5484l1.60806,0.31252l1.6311,-1.90227c0.44189,1.07165 0.27943,2.34652 -0.53346,3.28052z" stroke-width="null" fill="none"/>
             <path id="svg_17" d="m15.19678,9.64773l-2.01723,-0.80057l1.62498,-4.09353c0.14509,-0.36531 -0.03316,-0.77984 -0.39951,-0.92493c-0.36634,-0.14509 -0.78036,0.03368 -0.92493,0.39951l-1.62498,4.09353l-2.52866,-1.00369l1.62446,-4.09353c0.14561,-0.36583 -0.03316,-0.78036 -0.39899,-0.92545c-0.36583,-0.14457 -0.78036,0.03368 -0.92493,0.39951l-1.62498,4.09353l-2.01619,-0.80005l-0.83632,2.10687l1.11406,0.44252l-1.31459,3.31161c-0.31608,0.79798 0.0741,1.70115 0.87208,2.01827l0.84254,0.33474l-0.45443,1.1436c-0.21089,0.53112 0.04923,1.13375 0.58138,1.34516l0.4819,0.1912c0.53164,0.21141 1.13375,-0.04923 1.34516,-0.58087l0.45443,-1.1436l0.96276,0.38189c0.79798,0.3166 1.70166,-0.07358 2.01878,-0.87156l1.31356,-3.31161l0.99385,0.39433l0.83581,-2.10687z" fill-opacity="null" stroke-width="null" :stroke="$attrs.controlColor" fill="none"/>
         </svg>
       </span>
+      <template v-for="(icon,index) in icons">
+        <span :key="'rockiot-ui-icon-' + index" :title="icon.action" @click="$emit(icon.action,$attrs.serial)">
+
+          <svg width="20" height="20">
+            <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>
+            <g v-html="renderIcon(extra_icons[icon.icon])"/>
+          </svg>
+        </span>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
+const extra_icons = {
+  circle : '<ellipse stroke="_stroke_" ry="6.8125" rx="6.8125" id="svg_5" cy="10.09375" cx="9.875" stroke-width="2" fill="_fill_"/>',
+  trash: '<rect id="svg_10" height="12.24999" width="9.12499" y="4.90625" x="5.3125" fill-opacity="null" stroke-opacity="null" stroke="_stroke_" fill="_fill_"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="17.03125" x2="7.4375" y1="5.15625" x1="7.4375" fill-opacity="null" stroke-opacity="null" stroke="_stroke_" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="17.0319" x2="9.6875" y1="5.15625" x1="9.6875" fill-opacity="null" stroke-opacity="null" stroke="_stroke_" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="17.54124" x2="12.0625" y1="5.03125" x1="12.0625" fill-opacity="null" stroke-opacity="null" stroke="_stroke_" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="3.53125" x2="13.5625" y1="3.53125" x1="5.8125" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="_stroke_" fill="_fill_"/>'
+}
 export default {
-    name: 'RockiotGaugeControl',
+    name: 'RockiotUIControl',
     data:()=>({
+      icons: [],
+      extra_icons:{}
     }),
     computed:{
         controlClass(){
@@ -57,6 +57,29 @@ export default {
                 return ''
             }
         },
+    },
+    methods:{
+      renderIcon(svg){
+        svg = this.replaceAll(svg,'_stroke_',this.$attrs.controlColor)
+        svg = this.replaceAll(svg,'_fill_',this.$attrs.controlBg)
+        return  svg //svg.replaceAll('_stroke_',this.$attrs.controlColor).replace('_fill_',this.$attrs.controlBg)
+      },
+      replaceAll(str , find , replace ){
+        return str.replace(new RegExp(find, 'g'), replace);
+      }
+    },
+    beforeMount(){
+      if ( this.$attrs.controlIcons ){
+        let array = this.$attrs.controlIcons.split(';')
+        this.icons = array.map( i => {
+          return {
+            icon: i.split(',')[0],
+            action: i.split(',')[1]
+          }
+        })
+      }
+      this.extra_icons = extra_icons
     }
+
 }
 </script>

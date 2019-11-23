@@ -103,7 +103,6 @@ export default {
           return num.toFixed(this.$attrs.precision)
         },
         normalize(val){
-            console.log( this.range )
             if ( Number(this.$attrs.min) < 0 ){
                 return (Number(this.$attrs.max)-(val + (parseInt(this.$attrs.min)*-1))/(this.range)*100)
             } else {
@@ -114,8 +113,7 @@ export default {
                 return Number(this.$attrs.max)-(Number(this.$attrs.max)*((val/this.range)*100)/100)
               }
             }
-            //console.log ( val + (parseInt(this.$attrs.min)*-1))/(this.range)*100 )
-            //return (Number(this.$attrs.max)-(val + (parseInt(this.$attrs.min)*-1))/(this.range)*100)
+
         },
         animate(attr){
             if ( this.$attrs.animation ) {

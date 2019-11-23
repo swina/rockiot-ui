@@ -7,6 +7,7 @@
   animation-name: fadein;
   animation-duration: 2s;
   animation-iteration-count: 1;
+  overflow-x:hidden;
 }
 
 @keyframes fadein {
@@ -14,6 +15,10 @@
     25% { background:#00000025 }
     50% { background:#00000050 }
     100% { background:transparent;}
+}
+
+rockiot-ui , .rockiot-element {
+  margin:.3rem;
 }
 
 .rockiot-dashboard {
@@ -24,12 +29,62 @@
   max-width:98%;
 }
 
+.rockiot-dashboard-ui {
+  position:fixed;
+  top:0;
+  left:0;
+  padding:.2rem;
+  background:#000;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  cursor:pointer;
+  flex-direction:row;
+  border-bottom-right-radius:99rem;
+  width:2rem;
+  height:2rem;
+  z-index:100;
+}
+
+.rockiot-dashboard-drawer {
+  display:flex;
+  flex-direction:column;
+  position:absolute;
+  top:0;
+  left:0;
+  min-width:20rem;
+  min-height:100vh;
+  background:#333;
+  z-index:49;
+  align-items: left;
+  padding-top:2rem;
+}
+
+.rockiot-dashboard-menu-item {
+  display:flex;
+  align-items: center;
+  justify-content:flex-start;
+  padding:.2rem;
+  font-weight:normal;
+  font-size:1rem;
+}
+
 .rockiot-panel {
   display:flex;
   flex-direction: column;
   flex: 1 1 auto;
   max-width:40%;
 }
+
+.rockiot-element {
+  background:#272626;
+  color:#ababab;
+  padding:.5rem;
+  opacity:.95;
+  border-radius:.2rem;
+  display:block;
+}
+
 
 rockiot-chart {
     position:relative;
@@ -102,18 +157,8 @@ rockiot-chart {
   font-family: Arial;
   font-weight:normal;
 }
-rockiot-ui , .rockiot-element {
-  margin:.3rem;
-}
 
-.rockiot-element {
-  background:#272626;
-  color:#ababab;
-  padding:.5rem;
-  opacity:.95;
-  border-radius:.2rem;
-  display:block;
-}
+
 
 .rockiot-wrapper {
     position: relative;
@@ -324,7 +369,7 @@ rockiot-ui , .rockiot-element {
     font-size: 0.5rem;
 }
 
-.rockiot-chart-control {
+.rockiot-ui-control {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -339,12 +384,35 @@ rockiot-ui , .rockiot-element {
     justify-content:center;
     font-size: 0.5rem;
     position: absolute;
-    top:-2rem;
+    top:0rem;
     right:0;
-    z-index:10;
+    z-index:50;
 }
 
-.rockiot-chart-control > span {
+.rockiot-ui-control-gauge-linear-vertical {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    padding: .2rem;
+    border-radius: 99rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content:center;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    position: absolute;
+    bottom: 0rem;
+    top: unset;
+    z-index: 50;
+    width: 100%;
+}
+
+.rockiot-ui-control > span {
     margin-right:.2rem;
     cursor: pointer;
 }

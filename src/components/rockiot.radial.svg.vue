@@ -50,7 +50,6 @@ export default {
             for ( var n = 0 ; n < this.progressColor.length ; n++ ){
                 let color = self.progressColor[n].split(',')
                 if ( parseFloat(v) < parseFloat(color[0]) ){
-                    console.log ( 'change color to' , v , color[0] , color[1] )
                     this.customize.value.style.stroke = color[1]
                     break
                 }

@@ -14,7 +14,6 @@ export default {
   }),
   watch:{
       '$attrs.value'(v){
-        console.log ( v )
           this.animateReset(v)
       },
   },
@@ -35,9 +34,6 @@ export default {
   },
   beforeMount(){
     this.aniValue = parseInt(this.$attrs.value)
-  },
-  mounted(){
-    console.log ( this.$attrs.value )
   }
 }
 </script>

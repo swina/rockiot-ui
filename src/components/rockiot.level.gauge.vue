@@ -31,7 +31,6 @@ export default {
   computed:{
     mask(){
       let pc = this.normalize(parseFloat(this.$attrs.value))
-      console.log ( 'mask=>' , pc )
       return (100-pc)
     },
     level(){
@@ -75,7 +74,6 @@ export default {
     this.range = Number(this.$attrs.max) - Number(this.$attrs.min)
     this.aniValue = parseInt(this.$attrs.value)
     this.perc = this.normalize(parseFloat(this.$attrs.value))
-    console.log ( 'perc=>' , this.perc )
   },
   mounted(){
 
