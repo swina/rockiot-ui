@@ -214,23 +214,10 @@ You can even customize **rockiot-ui** changing the default CSS classes
 | **.rockiot-ui-control**             | Component control icons bar             |  	|
 | **.rockiot-ui-control-gauge-linear-vertical**             | Component control icons bar for linear vertical gauge           |  	|
 
-| **.rockiot-ui-gauge**               | Gauge linear vertical wrapper     |    	|
-| **.rockiot-linear-horizontal**     | Gauge linear horizontal wrapper   |    	|
-| **.rockiot-svg**                   | Gauge SVG element                 |    	|
-| **.rockiot-dial**                  | Gauge radial dial path            | Gauge bar    	        |
-| **.rockiot-value**                 | Gauge radial value path           | Gauge progress bar   	|
-| **.rockiot-title-text**            | Gauge radial title                |    	|
-| **.rockiot-scale**                 | Gauge scale                       | Gauge scale elements  |
-| **.rockiot-output-radial**         | Gauge radial output wrapper       |    	|
-| **.rockiot-output-dec**            | Gauge radial decimals value       | 	    |
-
-
-
 
 
 ## VUE Project setup
 The source code has been created using Vue.js so you can create your vue project and change it as per you needs.
-
 
 ```
 npm install
@@ -242,8 +229,18 @@ npm run serve
 ```
 
 ### Compiles and minifies for production
+
+Using vue-cli (destination folder dist)
+
 ```
 npm run build
+
+```
+Using laravel-mix (destination folder build)
+
+```
+npm run prod
+
 ```
 
 ### Run your tests
