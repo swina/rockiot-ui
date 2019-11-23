@@ -37,6 +37,9 @@ For this reason you can customize or even manipulate all elements using standard
 
 Demo [here](https://rockiot-gauge.firebaseapp.com)
 
+**demo** *folder contains all files to run a demo on a web server*
+
+
 ## How to use
 
 **Gauges**
