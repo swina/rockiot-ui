@@ -28,7 +28,7 @@ For this reason you can customize or even manipulate all elements using standard
 
 ## Demo
 
-Demo [here](https://rockiot-ui.firebaseapp.com)
+Demo [here](https://rockiot-gauge.firebaseapp.com)
 
 ## How to use
 
