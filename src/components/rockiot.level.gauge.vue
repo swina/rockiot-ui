@@ -1,12 +1,19 @@
 <template>
   <div :class="$attrs.gaugeClass" :ref="$attrs.serial" :width="$attrs.svgwidth" :height="$attrs.svgwidth" :id="$attrs.serial" :style="'width:'+$attrs.svgwidth+'px;height:'+$attrs.svgheight+'px;' + $attrs.svgStyle" :value="$attrs.value">
     <div class="rockiot-gauge-level-wrapper">
-      <div class="rockiot-level" :style="level"></div>
-      <div class="rockiot-mask" :style="'height:' + mask + '%'"></div>
-      <svg style="position:absolute;top:0;left:0" width="100%" height="100%">
-        <circle cx="110" cy="110" r="105" :stroke="levelStroke" fill="none"/>
+      <svg :ref="'rockiot-gauge-level-' + $attrs.serial" width="100%" height="100%">
+        <linearGradient :id="'lg-'+$attrs.serial" x1="0.5" y1="1" x2="0.5" y2="0">
+            <stop offset="0%" stop-opacity="1" :stop-color="level"/>
+            <stop :offset="mask +'%'" stop-opacity="1" :stop-color="level">
+              <animate attributeName="offset" values="0;1;0" repeatCount="1" dur="1s" begin="0s"/>
+            </stop>
+            <stop :offset="mask +'%'" stop-opacity="0" :stop-color="level">
+              <animate attributeName="offset" values="0;1;0" repeatCount="1" dur="1s"  begin="0s"/>
+            </stop>
+            <stop offset="100%" stop-opacity="0" :stop-color="level"/>
+        </linearGradient>
+        <circle cx="50%" cy="50%" r="45%" :fill="'url(#lg-' + $attrs.serial + ')'" :stroke="$attrs.barBorderColor" stroke-width="8"/>
       </svg>
-      <!--<div class="rockiot-level-border"></div>-->
     </div>
     <div class="rockiot-level-value" :style="'color:' + this.$attrs.valueColor"><animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number></div>
   </div>
@@ -19,8 +26,12 @@ export default {
   data:()=>({
     perc:0,
     oldValue: 0,
+    maskV:0,
     aniValue:0,
-    range:100
+    range:100,
+    border:'',
+    colors:null,
+    ranges:null
   }),
   watch:{
       '$attrs.value'(v){
@@ -31,19 +42,27 @@ export default {
   computed:{
     mask(){
       let pc = this.normalize(parseFloat(this.$attrs.value))
-      return (100-pc)
+      if ( pc < 10 ){
+        this.border = 'border-bottom-left-radius:2rem;border-bottom-right-radius:2rem;'
+      } else {
+        this.border = ''
+      }
+      return (pc)
+    },
+    container(){
+      return 'background:' + this.$attrs.barColor
     },
     level(){
       if ( parseInt(this.$attrs.value) < 30 && parseInt(this.$attrs.value) > 15 ){
-        return 'background:#ff8800'
+        return '#ff8800'
       }
       if ( parseInt(this.$attrs.value) < 15 ){
-        return 'background:#ff0000'
+        return '#ff0000'
       }
       if ( parseInt(this.$attrs.value) > 75 ){
-        return 'background:#00ff00'
+        return '#00ff00'
       }
-      return 'background:' + this.$attrs.progressColor
+      return this.$attrs.progressColor
     },
     levelStroke(){
       if ( parseInt(this.$attrs.value) < 15 ){
@@ -64,6 +83,7 @@ export default {
       }
     },
     formatter(num){
+      this.maskV = num
       return num.toFixed(this.$attrs.precision)
     },
     normalize(val){
@@ -74,6 +94,12 @@ export default {
     this.range = Number(this.$attrs.max) - Number(this.$attrs.min)
     this.aniValue = parseInt(this.$attrs.value)
     this.perc = this.normalize(parseFloat(this.$attrs.value))
+    if ( this.$attrs.progressColor.split(';').length > 1 ){
+      this.colors = this.$attrs.progressColor.split(';')[1]
+      this.ranges = this.$attrs.progressColor.split(';')[0]
+    } else {
+      this.colors = this.$attrs.progressColor
+    }
   },
   mounted(){
 

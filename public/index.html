@@ -137,25 +137,6 @@
 
             </div>
           </div>
-          <!--<rockiot-ui
-            class="rockiot-element"
-            type="chart"
-            id="chart_1"
-            serial="chart_1"
-            name="Chart 1"
-            min="0"
-            max="100"
-            value="20"
-            units="%"
-            click-action="test"
-            text-color="#bababa"
-            scale-text-color="#bababa"
-            progress-color="#4ea5f1"
-            control-color="#bababa"
-            control-bg="none"
-            svgwidth="300"
-            svgheight="205">
-          </rockiot-ui>-->
         </div>
         <div class="rockiot-panel">
           <rockiot-ui
@@ -198,15 +179,17 @@
             name="Water Level"
             svgwidth="300"
             svgheight="300"
-            bar-color="#111"
+            bar-color="#222"
+            bar-border-color="#fafafa"
             text-color="yellow"
             progress-color="#4ea5f1"
             click-action="test">
           </rockiot-ui>
+
           <rockiot-ui
             class="rockiot-element"
-            id="level_2"
-            serial="level_2"
+            id="level_3"
+            serial="level_3"
             type="gauge"
             variation="level"
             min="0"
@@ -215,22 +198,12 @@
             units="%"
             name="Pool Level"
             bar-color="#111"
+            bar-border-color="#000"
             progress-color="#4ea5f1"
             click-action="test"/>
         </div>
-
       </div>
 
-
     </div>
-    <script>
-    </script>
-    <script>
-    function fill(obj){
-      obj.style.opacity = 0;
-      obj.style.background = "linear-gradient(to bottom, #fff , #fff 80% , #000 80% , #000 100%)"
-      obj.style.opacity = 1;
-    }
-    </script>
   </body>
 </html>

@@ -142,7 +142,7 @@ export default {
       'control-icons'     : { type: String, required: false, default: '' },
       clickAction         :   { type: String, required: false, default: ''},
       'test-icon'         : { type: String, required: false, default: '1'},
-      minmax              : { type: String, required: false, default: '1' },
+       minmax              : { type: String, required: false, default: '1' },
     },
     methods:{
       settings(e){
