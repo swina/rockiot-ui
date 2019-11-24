@@ -32,6 +32,86 @@ rockiot-ui , .rockiot-element {
   max-width:98%;
 }
 
+.rockiot-panel {
+  display:flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  max-width:40%;
+}
+
+.rockiot-element {
+  background:#272626;
+  color:#ababab;
+  padding:.5rem;
+  opacity:.95;
+  border-radius:.2rem;
+  display:block;
+}
+
+
+
+/* Portrait and Landscape */
+@media (min-width: 320px) and (max-width: 480px) {
+    .rockiot-dashboard {
+      display:flex;
+      flex-direction:column;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      max-width:98%;
+    }
+
+    .rockiot-panel {
+      display:flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-width:100%;
+    }
+
+    .rockiot-element {
+      background:#272626;
+      color:#ababab;
+      padding:.5rem;
+      opacity:.95;
+      border-radius:.2rem;
+      display:block;
+      min-width:100%;
+    }
+
+
+}
+
+/* Portrait */
+@media (min-width: 320px) and (max-width: 640px) {
+    .rockiot-dashboard {
+      display:flex;
+      flex-direction:column;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      max-width:98%;
+    }
+    .rockiot-panel {
+      display:flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-width:100%;
+    }
+
+    .rockiot-element {
+      background:#272626;
+      color:#ababab;
+      padding:.5rem;
+      opacity:.95;
+      border-radius:.2rem;
+      display:block;
+      min-width:100%;
+    }
+
+
+
+}
+
+
+
 .rockiot-dashboard-ui {
   position:fixed;
   top:0;
@@ -72,21 +152,7 @@ rockiot-ui , .rockiot-element {
   font-size:1rem;
 }
 
-.rockiot-panel {
-  display:flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  max-width:40%;
-}
 
-.rockiot-element {
-  background:#272626;
-  color:#ababab;
-  padding:.5rem;
-  opacity:.95;
-  border-radius:.2rem;
-  display:block;
-}
 
 
 rockiot-chart {
