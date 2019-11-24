@@ -1,5 +1,7 @@
 # rockiot-ui
 
+*beta*
+
 
 **rockiot-ui** is a **webcomponent** (custom HTML element) created using Vue.js, to add awesome gauges, charts and other components in your HTML pages.
 

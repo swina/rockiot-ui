@@ -1,5 +1,6 @@
 body {
   overflow-x:hidden!important;
+  margin:0 auto;
 }
 .body-wrapper {
   width:100%;
@@ -29,7 +30,12 @@ rockiot-ui , .rockiot-element {
   flex-direction:row;
   flex-wrap:wrap;
   justify-content:space-between;
-  max-width:98%;
+  max-width:100%;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  margin:0 auto;
 }
 
 .rockiot-panel {
