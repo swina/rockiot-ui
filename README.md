@@ -5,7 +5,7 @@
 
 **rockiot-ui** is a **webcomponent** (custom HTML element) created using Vue.js, to add awesome gauges, charts and other components in your HTML pages.
 
-Typical use of **rockiot-ui** elements
+Typical usage of **rockiot-ui** elements
 
 - IoT dashboards
 - SaaS metric dashboards
@@ -198,7 +198,6 @@ As for standard HTML tags, **rockiot-ui** has different attributes in order to c
 ### NumberBox attributes ###
 |attribute          |required   |default    | description       |remarks|
 |---	            |---	    |---	    |---	            |---	|
-| **variation**  	| no   	    | line   	| Chart type   	    | line / area 	|
 | **value-color**     | no  	    | #cecece  	    | display value color |    	|
 | **value-bg-color**     | no  	    | transparent  	    | display value background color |    	|
 | **value-border-color**     | no  	    | 0px solid #eaeaea  	    | display value border color

@@ -1,6 +1,8 @@
 {
-  "name": "rockiot-gauge",
+  "name": "rockiot-ui",
   "version": "0.1.0",
+  "author": "Antonio Nardone",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "npm run development",
