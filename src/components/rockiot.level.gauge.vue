@@ -53,14 +53,16 @@ export default {
       return 'background:' + this.$attrs.barColor
     },
     level(){
-      if ( parseInt(this.$attrs.value) < 30 && parseInt(this.$attrs.value) > 15 ){
-        return '#ff8800'
-      }
-      if ( parseInt(this.$attrs.value) < 15 ){
-        return '#ff0000'
-      }
-      if ( parseInt(this.$attrs.value) > 75 ){
-        return '#00ff00'
+      if ( this.$attrs.autoColor ){
+        if ( parseInt(this.$attrs.value) < 25 && parseInt(this.$attrs.value) > 10 ){
+          return '#ff8800'
+        }
+        if ( parseInt(this.$attrs.value) < 10 ){
+          return '#ff0000'
+        }
+        if ( parseInt(this.$attrs.value) > 75 ){
+          return '#00ff00'
+        }
       }
       return this.$attrs.progressColor
     },

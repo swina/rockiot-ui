@@ -45,6 +45,10 @@ rockiot-ui , .rockiot-element {
   max-width:40%;
 }
 
+.rockiot-panel-full {
+  min-width:100%;
+}
+
 .rockiot-element {
   background:#272626;
   color:#ababab;

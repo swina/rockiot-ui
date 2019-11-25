@@ -65,7 +65,7 @@ export default {
   watch:{
     '$attrs.value'(v){
       this.n++
-      if ( this.n > 20 ){
+      if ( this.n > parseInt(this.$attrs.ticks) ){
         this.chart.data.splice(1,1)
       }
       let d = new Date()
@@ -78,6 +78,7 @@ export default {
     this.chart.data[0] = ['Time', this.$attrs.value ]
     this.chart.options.title = ''//this.$attrs.name + ' - ' + this.$attrs.units
     this.chart.options.substitle = this.$attrs.units
+    
     //this.chart.data[0].push(['1',this.$attrs.value])
     this.chart.options.width = parseInt(this.$attrs.svgwidth)
     this.chart.options.height = parseInt(this.$attrs.svgheight)

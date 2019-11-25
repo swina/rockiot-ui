@@ -10,9 +10,17 @@
       table { width: 80%; margin:0 auto;}
       td , th { text-align: left; font-size:.8rem; padding:1rem; }
     </style>
-
+    <script>
+    var  icons = {
+      delete : {
+        title: 'Delete',
+        action: 'delete',
+        svg: '<svg width="20" height="20"><rect id="svg_10" height="12.24999" width="9.12499" y="4.90625" x="5.3125" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="17.03125" x2="7.4375" y1="5.15625" x1="7.4375" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="17.0319" x2="9.6875" y1="5.15625" x1="9.6875" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="17.54124" x2="12.0625" y1="5.03125" x1="12.0625" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="3.53125" x2="13.5625" y1="3.53125" x1="5.8125" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#fafafa" fill="_fill_"/></svg>'
+      }
+    }
+    </script>
   </head>
-  <body style="min-height:100vh;width:100vw;margin:0;padding:0;background:#374353;background:url('img/demo-1-bg.jpg') no-repeat center center;background-size:cover;font-family:monospace">
+  <body style="min-height:100vh;width:100vw;margin:0;padding:0;background:#374353;background-size:cover;font-family:monospace">
     <noscript>
       <strong>We're sorry but rockiot-gauge doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
@@ -24,7 +32,9 @@
       <div class="rockiot-dashboard" style="margin-top:2.5rem;">
 
         <div class="rockiot-panel">
-
+          <div class="rockiot-element">
+            <p><strong>To start/stop a test for each gauge/chart click on the gauge/chart itself then click on the wrench icon on top right corner</strong></p>
+          </div>
           <rockiot-ui
             class="rockiot-element"
             type="chart"
@@ -183,27 +193,41 @@
             bar-border-color="#fafafa"
             text-color="yellow"
             progress-color="#4ea5f1"
+            svgwidth="300"
+            svgheight="300"
             click-action="test">
           </rockiot-ui>
-
+        </div>
+        <div class="rockiot-panel rockiot-panel-full">
           <rockiot-ui
             class="rockiot-element"
-            id="level_3"
-            serial="level_3"
-            type="gauge"
-            variation="level"
-            min="0"
-            max="100"
-            value="0"
-            units="%"
-            name="Pool Level"
-            bar-color="#111"
-            bar-border-color="#000"
-            progress-color="#4ea5f1"
-            click-action="test"/>
+            type="chart"
+            variation="line"
+            id="line_2"
+            serial="line_2"
+            name="Line Long"
+            scale-text-color="#eaeaea"
+            progress-color="#555"
+            ticks="100"
+            svgwidth="1200"
+            svgheight="150"/>
         </div>
       </div>
-
+      <script>
+      var el = document.getElementById('level_1')
+      el.setAttribute('control-icons',JSON.stringify(icons))
+      document.addEventListener("DOMContentLoaded", function(event) {
+        el.addEventListener('delete',()=>{
+          alert('delete =>',this)
+        })
+        el.addEventListener('fullscreen',()=>{
+          //alert('fullscreen =>',this)
+        })
+        el.addEventListener('setting',(e)=>{
+          alert('setting =>',e)
+        })
+      })
+      </script>
     </div>
   </body>
 </html>

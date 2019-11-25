@@ -1,5 +1,5 @@
 <template>
-    <div class="rockiot-wrapper">
+    <div :class="'rr rockiot-wrapper ' + isfullscreen" :ref="'rockiot-ui-' + serial">
 
       <div v-if="type!='dashboard'" class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
       <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type" @click="showControl=!showControl">
@@ -8,11 +8,10 @@
               v-bind="_props"
               :showControl="showControl"
               @startTest="clickGauge=!clickGauge"
-              @setting="settings"
-              @connect="connect"
-              @delete="$emit('delete',_props.serial)"
-              @save="$emit('save')"
-              @fullscreen="$emit('fullscreen')"></rockiot-ui-control>
+              @setting="$emit('setting')"
+              @connect="$emit('connect')"
+              @custom="emitAction"
+              @fullscreen="fullscreen=!fullscreen,$emit('fullscreen')"></rockiot-ui-control>
 
             <component v-if="type==='chart'" :is="chartComponent" :component="chartComponent" :type="areaChart" v-bind="_props" :value="updatedValue" />
 
@@ -39,7 +38,10 @@ export default {
         showChart: false,
         showControl: false,
         clickGauge: false,
-        areaChart: false
+        areaChart: false,
+        action:'click',
+        extra:null,
+        fullscreen:false
     }),
     computed:{
         classe(){
@@ -70,6 +72,12 @@ export default {
         },
         valueStyle(){
             return 'color:' + this.valueColor + ';background:' + this.valueBg + ';border:' + this.valueBorder + ';'
+        },
+        isfullscreen(){
+          if ( this.fullscreen ) {
+            return ''
+          }
+          return ''
         },
         gaugeComponent(){
           if ( this.variation === 'linear' && this.orientation === 'vertical' ){
@@ -137,15 +145,23 @@ export default {
       'needle-color'      : { type: String, required: false, default: '#777' },
       'needle-stroke'     : { type: String, required: false, default: '#000'},
       'chart-class'       : { type: String, required: false, default: '' },
-      'control-color'     : { type: String, required: false, default: '#333' },
-      'control-bg'        : { type: String, required: false, default: '#fff' },
-      'control-icons'     : { type: String, required: false, default: '' },
+      'control-color'     : { type: String, required: false, default: '#eee' },
+      'control-bg'        : { type: String, required: false, default: 'none' },
+      'control-icons'     : {  required: false, default: '' },
+      'auto-color'        : { required: false, default: '0' },
+      'auto-test'         : { default: '1' },
       clickAction         :   { type: String, required: false, default: ''},
       'test-icon'         : { type: String, required: false, default: '1'},
        minmax              : { type: String, required: false, default: '1' },
     },
     methods:{
-      settings(e){
+
+      emitAction(e){
+        console.log ( e )
+        this.$emit(e)
+      },
+      setting(e){
+        console.log ( 'setting' )
         this.$emit(e)
       },
       connect(e){
@@ -171,6 +187,25 @@ export default {
     },
     mounted(){
       Number(this.value) < Number(this.min) ? this.updatedValue = Number(this.min) : Number(this.value) > Number(this.max) ? this.updatedValue = Number(this.max) : this.updatedValue = this.value
+      if ( this.autoTest === '1' ){
+        this.clicked()
+      }
     }
 }
 </script>
+
+<style scoped>
+.fullscreen {
+  position:fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width:50%;
+  height:auto;
+  z-index:200;
+  background:#000;
+  display:flex;
+  align-items:center;
+  z-index:200;
+}
+</style>

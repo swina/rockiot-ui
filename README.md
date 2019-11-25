@@ -37,12 +37,43 @@ For this reason you can customize or even manipulate all elements using standard
 
 ## Demo
 
+A dashboard demo using **rockiot-ui**
+
 Demo [here](https://rockiot-gauge.firebaseapp.com)
 
 **demo** *folder contains all files to run a demo on a web server*
 
 
 ## How to use
+
+Include the main library in your HTML head.
+
+```
+<html>
+  <head>
+  //...
+  <script src="js/rockiot.ui.min.js"></script>
+  //...
+
+```
+
+If you plan to use all the elements 
+
+```
+<!-- linear gauge -->
+<script src="js/rockiot.gauge.linear.js"></script>
+<!-- radial, level gauge -->
+<script src="js/rockiot.gauge.radial.js"></script>
+<!-- charts -->
+<script src="js/rockiot.chart.js"></script>
+```
+
+Otherwise include only the element library
+
+- ```js/rockiot.gauge.linear.js``` for all linear gauges
+- ```js/rockiot.gauge.radial.js``` for all radial gauges
+- ```js/rockiot.chart.js``` for all charts
+
 
 **Gauges**
 
@@ -185,6 +216,7 @@ As for standard HTML tags, **rockiot-ui** has different attributes in order to c
 | **scale-text-color**     | no  	    | #aaa  	    | Gauge scale text color |    	|
 | **needle-color**     | no  	    | #777  	    | Gauge needle fill color |    	|
 | **needle-stroke-color**     | no  	    | #000  	    | Gauge needle stroke color |    	|
+| **auto-color**     | no  	    | 0  	    | Level gauge auto color | < 10%(red) <br> < 25%(orange) <br> < 75%(user) <br> > 75%(green)|    	|
 
 ### Charts attributes ###
 |attribute          |required   |default    | description       |remarks|
@@ -218,7 +250,38 @@ You can even customize **rockiot-ui** changing the default CSS classes
 | **.rockiot-ui-control**             | Component control icons bar             |  	|
 | **.rockiot-ui-control-gauge-linear-vertical**             | Component control icons bar for linear vertical gauge           |  	|
 
+## Events
 
+By default **rockiot-ui** emits 2 default events.
+- setting
+- connect
+
+Each event returns the element attribute ```serial```
+
+How to attach your function to emitted events by ```rockiot-ui```
+
+
+```
+document.getElementById(your_element_id)
+  .addEventListener('setting',(serial)=>{
+    console.log(serial)
+    ....
+})
+```
+
+To attach a common function to all ```rockiot-ui``` components:
+
+```
+document.querSelectorAll('rockiot-ui')
+  .addEventListener('setting',(serial){
+      console.log ( serial )
+      .... //your function
+})
+```
+
+### Add custom events
+
+You can add custom events using the ```control-icons``` attributes. In this way you can add 
 
 ## VUE Project setup
 The source code has been created using Vue.js so you can create your vue project and change it as per you needs.

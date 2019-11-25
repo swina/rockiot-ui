@@ -2,7 +2,7 @@
   <div>
     <div :class="'rockiot-ui-control ' + controlClass + ' rockiot-ui-control-' + $attrs.type + '-' + $attrs.variation + '-' + $attrs.orientation">
       <span title="Test" v-if="$attrs.testIcon==='1'">
-        <svg height="20" width="20" title="Test" @click="$emit('startTest')">
+        <svg height="20" width="20" title="Test" @click="$emit('startTest',$attrs.serial)">
             <g>
                 <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>
                 <path :stroke="$attrs.controlColor" id="svg_4" d="m32.06051,3.03514c-4.74208,0 -8.58619,3.84411 -8.58619,8.58619c0,4.74208 3.84411,8.58619 8.58619,8.58619c4.74208,0 8.58619,-3.84411 8.58619,-8.58619c0,-4.74208 -3.84411,-8.58619 -8.58619,-8.58619zm4.95416,7.97652c-0.8572,0.98599 -2.18938,1.31209 -3.3585,0.93695l-4.24643,4.88327c-0.45253,0.51987 -1.24002,0.57304 -1.75989,0.12111s-0.57482,-1.24002 -0.12288,-1.75989l4.25233,-4.88859c-0.52755,-1.10178 -0.38813,-2.45995 0.46493,-3.44062c0.80758,-0.93046 2.03991,-1.27074 3.15942,-0.98894l-1.62697,1.89754l0.53228,1.5484l1.60806,0.31252l1.6311,-1.90227c0.44189,1.07165 0.27943,2.34652 -0.53346,3.28052z" stroke-width="null" fill="none"/>
@@ -10,7 +10,7 @@
             </g>
         </svg>
       </span>
-      <span title="Settings" @click="$emit('setting')">
+      <span title="Settings" @click="$emit('setting','setting',$attrs.serial)">
         <svg width="20" height="20">
             <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>
             <path :stroke="$attrs.controlColor" id="svg_4" d="m32.06051,3.03514c-4.74208,0 -8.58619,3.84411 -8.58619,8.58619c0,4.74208 3.84411,8.58619 8.58619,8.58619c4.74208,0 8.58619,-3.84411 8.58619,-8.58619c0,-4.74208 -3.84411,-8.58619 -8.58619,-8.58619zm4.95416,7.97652c-0.8572,0.98599 -2.18938,1.31209 -3.3585,0.93695l-4.24643,4.88327c-0.45253,0.51987 -1.24002,0.57304 -1.75989,0.12111s-0.57482,-1.24002 -0.12288,-1.75989l4.25233,-4.88859c-0.52755,-1.10178 -0.38813,-2.45995 0.46493,-3.44062c0.80758,-0.93046 2.03991,-1.27074 3.15942,-0.98894l-1.62697,1.89754l0.53228,1.5484l1.60806,0.31252l1.6311,-1.90227c0.44189,1.07165 0.27943,2.34652 -0.53346,3.28052z" stroke-width="null" fill="none"/>
@@ -18,20 +18,21 @@
 
         </svg>
       </span>
-      <span title="Connect" @click="$emit('connect')">
+      <span title="Connect" @click="$emit('connect','connect',$attrs.serial)">
         <svg width="20" height="20">
             <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>
             <path :stroke="$attrs.controlColor" id="svg_4" d="m32.06051,3.03514c-4.74208,0 -8.58619,3.84411 -8.58619,8.58619c0,4.74208 3.84411,8.58619 8.58619,8.58619c4.74208,0 8.58619,-3.84411 8.58619,-8.58619c0,-4.74208 -3.84411,-8.58619 -8.58619,-8.58619zm4.95416,7.97652c-0.8572,0.98599 -2.18938,1.31209 -3.3585,0.93695l-4.24643,4.88327c-0.45253,0.51987 -1.24002,0.57304 -1.75989,0.12111s-0.57482,-1.24002 -0.12288,-1.75989l4.25233,-4.88859c-0.52755,-1.10178 -0.38813,-2.45995 0.46493,-3.44062c0.80758,-0.93046 2.03991,-1.27074 3.15942,-0.98894l-1.62697,1.89754l0.53228,1.5484l1.60806,0.31252l1.6311,-1.90227c0.44189,1.07165 0.27943,2.34652 -0.53346,3.28052z" stroke-width="null" fill="none"/>
             <path id="svg_17" d="m15.19678,9.64773l-2.01723,-0.80057l1.62498,-4.09353c0.14509,-0.36531 -0.03316,-0.77984 -0.39951,-0.92493c-0.36634,-0.14509 -0.78036,0.03368 -0.92493,0.39951l-1.62498,4.09353l-2.52866,-1.00369l1.62446,-4.09353c0.14561,-0.36583 -0.03316,-0.78036 -0.39899,-0.92545c-0.36583,-0.14457 -0.78036,0.03368 -0.92493,0.39951l-1.62498,4.09353l-2.01619,-0.80005l-0.83632,2.10687l1.11406,0.44252l-1.31459,3.31161c-0.31608,0.79798 0.0741,1.70115 0.87208,2.01827l0.84254,0.33474l-0.45443,1.1436c-0.21089,0.53112 0.04923,1.13375 0.58138,1.34516l0.4819,0.1912c0.53164,0.21141 1.13375,-0.04923 1.34516,-0.58087l0.45443,-1.1436l0.96276,0.38189c0.79798,0.3166 1.70166,-0.07358 2.01878,-0.87156l1.31356,-3.31161l0.99385,0.39433l0.83581,-2.10687z" fill-opacity="null" stroke-width="null" :stroke="$attrs.controlColor" fill="none"/>
         </svg>
       </span>
+      <span title="Fullscreen" @click="$emit('fullscreen','fullscreen',$attrs.serial)">
+        <svg width="20" height="20">
+          <path :stroke="$attrs.controlColor" id="svg_17" d="m5.90211,10.09707l-3.04135,-3.0796l0,1.5398l-1.21941,0l0,-6.77671l6.69252,0l0,1.23475l-1.52067,0l3.04135,3.0796l3.04135,-3.0796l-1.52067,0l0,-1.23475l6.69252,0l0,6.77671l-1.21941,0l0,-1.5398l-3.04135,3.0796l3.04135,3.0796l0,-1.5398l1.21941,0l0,6.77671l-6.69252,0l0,-1.23475l1.52067,0l-3.04135,-3.0796l-3.04135,3.0796l1.52067,0l0,1.23475l-6.69252,0l0,-6.77671l1.21941,0l0,1.5398l3.04135,-3.0796z" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="none"/>
+        </svg>
+      </span>
       <template v-for="(icon,index) in icons">
-        <span :key="'rockiot-ui-icon-' + index" :title="icon.action" @click="$emit(icon.action,$attrs.serial)">
-
-          <svg width="20" height="20">
-            <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>
-            <g v-html="renderIcon(extra_icons[icon.icon])"/>
-          </svg>
+        <span :key="'rockiot-ui-icon-' + index" :title="icon.title" @click="$emit('custom',icon.action)">
+          <span v-html="icon.svg"></span>
         </span>
       </template>
     </div>
@@ -47,7 +48,7 @@ export default {
     name: 'RockiotUIControl',
     data:()=>({
       icons: [],
-      extra_icons:{}
+      extra_icons:[]
     }),
     computed:{
         controlClass(){
@@ -68,17 +69,30 @@ export default {
         return str.replace(new RegExp(find, 'g'), replace);
       }
     },
-    beforeMount(){
+    mounted(){
       if ( this.$attrs.controlIcons ){
+        /* eslint-disable */
+        console.log ( 'adding events=>' , JSON.parse(this.$attrs.controlIcons) )
+        let icons = JSON.parse(this.$attrs.controlIcons)
+        console.log ( Object.keys(icons) )
+        this.icons = Object.keys(icons).map(icon=>{
+          return icons[icon]
+        })
+        //this.icons.push ( ...icons )
+        console.log ( this.icons )
+        /*
         let array = this.$attrs.controlIcons.split(';')
         this.icons = array.map( i => {
           return {
             icon: i.split(',')[0],
-            action: i.split(',')[1]
+            action: i.split(',')[1],
+            svg: i.split(',')[2]
           }
         })
+        */
+      } else {
+        this.extra_icons = extra_icons
       }
-      this.extra_icons = extra_icons
     }
 
 }
