@@ -468,7 +468,7 @@ rockiot-chart {
     z-index:50;
 }
 
-.rockiot-ui-control-gauge-linear-vertical {
+.rockiot-ui-control-gauge-linear-vertical , .rockiot-ui-control-number-box-radial-vertical {
     display: flex;
     flex-direction: row;
     align-items: center;

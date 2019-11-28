@@ -1,8 +1,8 @@
 <template>
-    <div :class="'rr rockiot-wrapper ' + isfullscreen" :ref="'rockiot-ui-' + serial">
+    <div :class="'rr rockiot-wrapper ' + isfullscreen" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
 
       <div v-if="type!='dashboard'" class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
-      <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type" @click="showControl=!showControl">
+      <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type">
 
             <rockiot-ui-control
               v-bind="_props"
@@ -14,6 +14,8 @@
               @fullscreen="fullscreen=!fullscreen,$emit('fullscreen')"></rockiot-ui-control>
 
             <component v-if="type==='chart'" :is="chartComponent" :component="chartComponent" :type="areaChart" v-bind="_props" :value="updatedValue" />
+
+            <component v-if="type==='d3'" :is="d3Component" :component="d3Component" :type="areaChart" v-bind="_props" :value="updatedValue" />
 
             <component v-if="type==='gauge'" :is="gaugeComponent" :component="gaugeComponent" v-bind="_props" :value="updatedValue"/>
 
@@ -93,6 +95,7 @@ export default {
             return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.level.gauge' )
           }
         },
+        
         chartComponent(){
             return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.chart.line.svg' )
         },
