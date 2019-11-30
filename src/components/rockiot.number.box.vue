@@ -1,44 +1,32 @@
 <template>
   <div class="rockiot-box-value">
-    <h2 :style="'color:' + this.$attrs.valueColor + ';' + style"><animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number></h2>
+    <h2 :style="'color:' + this.$attrs.valueColor + ';' + style">
+       <rockiot-animated-number 
+          :ref="'num_' + this.$attrs.serial" 
+          :precision="$attrs.precision" 
+          :duration="$attrs.animation"
+          :from="oldValue" 
+          :to="$attrs.value" 
+          @end="oldValue=$attrs.value"/>
+    </h2> 
   </div>
 </template>
 
 <script>
 /* eslint-disable */
+import RockiotAnimatedNumber from './rockiot.animated.number.vue'
 export default {
   name: 'RockiotBoxNumber',
+  components: {
+    RockiotAnimatedNumber
+  },
   data:()=>({
     oldValue: 0,
-    aniValue:0
   }),
-  watch:{
-      '$attrs.value'(v){
-          this.animateReset(v)
-      },
-  },
   computed:{
     style(){
         return this.$attrs.valueBorder + ';background:' + this.$attrs.valueBg + ';'
     },
   },
-  methods:{
-    animateReset(v){
-      this.aniValue = parseInt(v)
-      this.$refs['num_' + this.$attrs.serial].reset(this.oldValue,v)
-      this.$refs['num_' + this.$attrs.serial].start()
-    },
-    animateEnd(){
-      if ( this.oldValue != 0 ){
-        this.oldValue = this.$attrs.value
-      }
-    },
-    formatter(num){
-      return num.toFixed(this.$attrs.precision)
-    },
-  },
-  beforeMount(){
-    this.aniValue = parseInt(this.$attrs.value)
-  }
 }
 </script>

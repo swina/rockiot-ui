@@ -38,16 +38,28 @@
             {{this.$attrs.name}} {{this.$attrs.units}}
 
           </div>
-          <h2 :class="'rockiot-gauge-' + $attrs.variation + '-' + $attrs.orientation + '-value'"><animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" duration="500" :animate-end="animateEnd" :formatter="formatter"></animate-number></h2>
+          <h2 :class="'rockiot-gauge-' + $attrs.variation + '-' + $attrs.orientation + '-value'">
+              <rockiot-animated-number 
+                :ref="'num_' + this.$attrs.serial" 
+                :precision="$attrs.precision" 
+                :duration="$attrs.animation"
+                :from="oldValue" 
+                :to="$attrs.value" 
+                @end="oldValue=$attrs.value"/>
+              <!--<animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" duration="500" :animate-end="animateEnd" :formatter="formatter"></animate-number>-->
+          </h2>
         </div>
       </div>
 </template>
 
 <script>
 /* eslint-disable */
-
+import RockiotAnimatedNumber from './rockiot.animated.number'
 export default {
     name: 'RockiotSvgLinearV',
+    components: {
+        RockiotAnimatedNumber
+    },
     data:()=>({
         svgwidth:120,
         svgheight:370,
@@ -96,7 +108,8 @@ export default {
             } else {
               this.pos = this.normalize(v)*this.posFactor
             }
-            this.animateReset(v)
+            this.aniValue = v
+            //this.animateReset(v)
 
             //this.$refs['num_' + this.$attrs.serial].reset(this.oldValue,v)
             //this.$refs['num_' + this.$attrs.serial].start()

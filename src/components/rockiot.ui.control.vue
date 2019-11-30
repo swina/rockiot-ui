@@ -72,14 +72,11 @@ export default {
     mounted(){
       if ( this.$attrs.controlIcons ){
         /* eslint-disable */
-        console.log ( 'adding events=>' , JSON.parse(this.$attrs.controlIcons) )
         let icons = JSON.parse(this.$attrs.controlIcons)
-        console.log ( Object.keys(icons) )
         this.icons = Object.keys(icons).map(icon=>{
           return icons[icon]
         })
         //this.icons.push ( ...icons )
-        console.log ( this.icons )
         /*
         let array = this.$attrs.controlIcons.split(';')
         this.icons = array.map( i => {

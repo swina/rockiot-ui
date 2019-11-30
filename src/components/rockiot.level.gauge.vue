@@ -15,14 +15,27 @@
         <circle cx="50%" cy="50%" r="45%" :fill="'url(#lg-' + $attrs.serial + ')'" :stroke="$attrs.barBorderColor" stroke-width="8"/>
       </svg>
     </div>
-    <div class="rockiot-level-value" :style="'color:' + this.$attrs.valueColor"><animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number></div>
+    <div class="rockiot-level-value" :style="'color:' + this.$attrs.valueColor">
+      <rockiot-animated-number 
+                :ref="'num_' + this.$attrs.serial" 
+                :precision="$attrs.precision" 
+                :duration="$attrs.animation"
+                :from="oldValue" 
+                :to="$attrs.value" 
+                @end="oldValue=$attrs.value"/>
+      <!--<animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number>-->
+      </div>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
+import RockiotAnimatedNumber from './rockiot.animated.number.vue'
 export default {
   name: 'RockiotGaugeLevel',
+  components: {
+    RockiotAnimatedNumber
+  },
   data:()=>({
     perc:0,
     oldValue: 0,
@@ -33,12 +46,6 @@ export default {
     colors:null,
     ranges:null
   }),
-  watch:{
-      '$attrs.value'(v){
-
-          this.animateReset(v)
-      },
-  },
   computed:{
     mask(){
       let pc = this.normalize(parseFloat(this.$attrs.value))
@@ -74,20 +81,6 @@ export default {
     }
   },
   methods:{
-    animateReset(v){
-      this.aniValue = parseInt(v)
-      this.$refs['num_' + this.$attrs.serial].reset(this.oldValue,v)
-      this.$refs['num_' + this.$attrs.serial].start()
-    },
-    animateEnd(){
-      if ( this.oldValue != 0 ){
-        this.oldValue = this.$attrs.value
-      }
-    },
-    formatter(num){
-      this.maskV = num
-      return num.toFixed(this.$attrs.precision)
-    },
     normalize(val){
       return (Number(val) + (parseInt(this.$attrs.min)*-1))/(this.range)*100
     }
@@ -102,9 +95,6 @@ export default {
     } else {
       this.colors = this.$attrs.progressColor
     }
-  },
-  mounted(){
-
   }
 }
 </script>

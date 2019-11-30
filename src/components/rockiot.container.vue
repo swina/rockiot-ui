@@ -28,11 +28,12 @@
 /* eslint-disable */
 import RockiotUiControl from './rockiot.ui.control.vue'
 import RockiotNumberBox from './rockiot.number.box.vue'
+
 export default {
     name: 'RockiotUI',
     components: {
         RockiotUiControl,
-        RockiotNumberBox
+        RockiotNumberBox,
     },
     data:()=>({
         updatedValue: 0,
@@ -174,7 +175,6 @@ export default {
         this.$emit(e)
       },
       setting(e){
-        console.log ( 'setting' )
         this.$emit(e)
       },
       connect(e){
@@ -200,8 +200,7 @@ export default {
     },
     mounted(){
       Number(this.value) < Number(this.min) ? this.updatedValue = Number(this.min) : Number(this.value) > Number(this.max) ? this.updatedValue = Number(this.max) : this.updatedValue = this.value
-      console.log ( 'autotest=>',this.autoTest )
-      if ( this.autoTest === '1' ){
+       if ( this.autoTest === '1' ){
         this.clicked()
       }
     }

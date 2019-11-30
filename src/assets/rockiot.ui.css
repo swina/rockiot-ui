@@ -348,6 +348,10 @@ rockiot-chart {
     font-size:.22rem;
 }
 
+.rockiot-svg , .rockiot-linear-vertical  {
+  margin-top:1rem;
+}
+
 .rockiot-svg.rockiot-gauge-linear-vertical {
     transform: rotate(180deg);
 }

@@ -17,10 +17,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@toast-ui/vue-chart": "^1.1.2",
-    "tui-chart": "^3.9.0",
+    "shifty": "^2.8.0",
     "vue": "^2.6.10",
-    "vue-animate-number": "^0.4.2",
     "vue-custom-element": "^3.2.10",
     "vue-google-charts": "^0.3.2"
   },
