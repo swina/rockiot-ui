@@ -280,9 +280,6 @@ document.querSelectorAll('rockiot-ui')
 })
 ```
 
-### Add custom events
-
-You can add custom events using the ```control-icons``` attributes. In this way you can add 
 
 ## VUE Project setup
 The source code has been created using Vue.js so you can create your vue project and change it as per you needs.
