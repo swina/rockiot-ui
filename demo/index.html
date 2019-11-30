@@ -61,27 +61,7 @@
           <div class="rockiot-element">
             <p><strong>To start/stop a test for each gauge/chart click on the gauge/chart itself then click on the wrench icon on top right corner</strong> <button id="btnTest" style="font-size:.7rem;padding:2px 4px 2px 4px;border:0 ;outline:none;cursor:pointer;background:#000;margin:4px;color:#fafafa;" onclick="stopTest()">Stop Test</button></p>
           </div>
-          <!--<rockiot-ui
-            class="rockiot-element"
-            type="tui"
-            variation="area"
-            id="chart_tui"
-            serial="chart_tui"
-            name="Bandwidth"
-            min="0"
-            max="100"
-            value="0"
-            units="Mb/s"
-            click-action="test"
-            text-color="#bababa"
-            scale-text-color="#bababa"
-            progress-color="#4ea5f1"
-            control-color="#888"
-            control-bg="none"
-            svgwidth="300"
-            svgheight="255">
-          </rockiot-ui>
-        -->
+    
           <rockiot-ui
             class="rockiot-element"
             type="chart"
@@ -102,7 +82,7 @@
             svgwidth="450"
             svgheight="295">
           </rockiot-ui>
-          
+
           <rockiot-ui
           class="rockiot-element"
           type="chart"
@@ -184,7 +164,39 @@
                 precision="0"
                 click-action="test">
               </rockiot-ui>
-
+            </div>
+            <div style="display:flex;flex-direction:row;justify-content:space-around;">
+              <rockiot-ui
+                id="box_3"
+                serial="box_3"
+                type="number-box"
+                min="0"
+                max="3000"
+                value="0"
+                units=""
+                name="Pages Visited"
+                value-color="#00ff00"
+                value-border="border:1px solid #eaeaea;border-radius:99rem;"
+                control-color="#888"
+                precision="0"
+                click-action="test">
+              </rockiot-ui>
+              <rockiot-ui
+                id="box_4"
+                serial="box_4"
+                type="number-box"
+                min="0"
+                max="50"
+                value="0"
+                units=""
+                name="Errors"
+                value-color="#fff"
+                value-border="border:1px solid #eaeaea;border-radius:99rem;"
+                value-bg="red"
+                control-color="#888"
+                precision="0"
+                click-action="test">
+              </rockiot-ui>
             </div>
           </div>
         </div>
