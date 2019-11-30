@@ -18,7 +18,20 @@
         svg: '<svg width="20" height="20"><rect id="svg_10" height="12.24999" width="9.12499" y="4.90625" x="5.3125" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="17.03125" x2="7.4375" y1="5.15625" x1="7.4375" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="17.0319" x2="9.6875" y1="5.15625" x1="9.6875" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="17.54124" x2="12.0625" y1="5.03125" x1="12.0625" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="3.53125" x2="13.5625" y1="3.53125" x1="5.8125" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#fafafa" fill="_fill_"/></svg>'
       }
     }
+    var autotest = 1
+    function stopTest(){
+      autotest =! autotest
+      var flag, btn
+      autotest ? flag = '1' : flag = '0' 
+      autotest ? btn = 'Stop Test' : btn = 'Start Test'
+      document.getElementById('btnTest').innerText = btn
+      let els = document.querySelectorAll('rockiot-ui')
+      els.forEach( (e)=>{
+        e.setAttribute('auto-test', autotest )
+      })
+    }
     </script>
+    
   </head>
   <body style="min-height:100vh;width:100vw;margin:0;padding:0;background:#374353;background-size:cover;font-family:monospace">
     <noscript>
@@ -33,9 +46,29 @@
 
         <div class="rockiot-panel">
           <div class="rockiot-element">
-            <p><strong>To start/stop a test for each gauge/chart click on the gauge/chart itself then click on the wrench icon on top right corner</strong></p>
+            <p><strong>To start/stop a test for each gauge/chart click on the gauge/chart itself then click on the wrench icon on top right corner</strong> <button id="btnTest" style="font-size:.7rem;padding:2px 4px 2px 4px;border:0 ;outline:none;cursor:pointer;background:#000;margin:4px;color:#fafafa;" onclick="stopTest()">Stop Test</button></p>
           </div>
-          
+          <!--<rockiot-ui
+            class="rockiot-element"
+            type="tui"
+            variation="area"
+            id="chart_tui"
+            serial="chart_tui"
+            name="Bandwidth"
+            min="0"
+            max="100"
+            value="0"
+            units="Mb/s"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            progress-color="#4ea5f1"
+            control-color="#888"
+            control-bg="none"
+            svgwidth="300"
+            svgheight="255">
+          </rockiot-ui>
+        -->
           <rockiot-ui
             class="rockiot-element"
             type="chart"
@@ -56,33 +89,20 @@
             svgwidth="450"
             svgheight="295">
           </rockiot-ui>
-
+          
           <rockiot-ui
-            class="rockiot-element"
-            type="gauge"
-            variation="linear"
-            orientation="horizontal"
-            id="linear_1"
-            serial="linear_1"
-            name="Level"
-            min="20"
-            max="100"
-            value="60"
-            units="%"
-            size="md"
-            click-action="test"
-            text-color="#bababa"
-            scale-text-color="#bababa"
-            bar-color="#111"
-            progress-color="#4ea5f1"
-            control-bg="none"
-            control-color="#888"
-            scale="1"
-            smallscale="1"
-            needle="1"
-            needle-color="#ff0000"
-            background="#000">
-          </rockiot-ui>
+          class="rockiot-element"
+          type="chart"
+          variation="line"
+          id="line_2"
+          serial="line_2"
+          name="Line Long"
+          scale-text-color="#eaeaea"
+          progress-color="#4ea5f1"
+          ticks="100"
+          svgwidth="1200"
+          svgheight="150"/>
+          
 
         </div>
         <div class="rockiot-panel">
@@ -129,6 +149,9 @@
                 units=""
                 name="Visitors"
                 value-color="#4ea5f1"
+                control-color="#888"
+                value-border="border:1px solid #eaeaea;border-radius:99rem;"
+                value-bg="#000"
                 precision="0"
                 click-action="test">
               </rockiot-ui>
@@ -142,6 +165,9 @@
                 units=""
                 name="New Visitors"
                 value-color="#00ff00"
+                value-border="border:1px solid #eaeaea;border-radius:99rem;"
+                value-bg="black"
+                control-color="#888"
                 precision="0"
                 click-action="test">
               </rockiot-ui>
@@ -169,6 +195,7 @@
             progress-color="#4ea5f1"
             control-bg="none"
             control-color="#888"
+            zones="#ff0000,#00ff00"
             scale="1"
             smallscale="1"
             needle="1"
@@ -198,21 +225,38 @@
             svgheight="300"
             click-action="test">
           </rockiot-ui>
-        </div>
-        <div class="rockiot-panel rockiot-panel-full">
           <rockiot-ui
             class="rockiot-element"
-            type="chart"
-            variation="line"
-            id="line_2"
-            serial="line_2"
-            name="Line Long"
-            scale-text-color="#eaeaea"
-            progress-color="#555"
-            ticks="100"
-            svgwidth="1200"
-            svgheight="150"/>
+            type="gauge"
+            variation="linear"
+            orientation="horizontal"
+            id="linear_1"
+            serial="linear_1"
+            name="Level"
+            min="20"
+            max="100"
+            value="60"
+            units="%"
+            size="md"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            bar-color="#111"
+            progress-color="#4ea5f1"
+            control-bg="none"
+            control-color="#888"
+            scale="1"
+            smallscale="1"
+            needle="1"
+            needle-color="#ff0000"
+            background="#000">
+          </rockiot-ui>
         </div>
+        
+        <div class="rockiot-panel rockiot-panel-full">
+         
+        </div>
+        
       </div>
       <script>
       var el = document.getElementById('level_1')

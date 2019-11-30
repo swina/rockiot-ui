@@ -1,6 +1,6 @@
 <template>
   <div class="rockiot-box-value">
-    <h2 :style="'color:' + this.$attrs.valueColor"><animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number></h2>
+    <h2 :style="'color:' + this.$attrs.valueColor + ';' + style"><animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number></h2>
   </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
       '$attrs.value'(v){
           this.animateReset(v)
       },
+  },
+  computed:{
+    style(){
+        return this.$attrs.valueBorder + ';background:' + this.$attrs.valueBg + ';'
+    },
   },
   methods:{
     animateReset(v){

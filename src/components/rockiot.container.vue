@@ -1,5 +1,5 @@
 <template>
-    <div :class="'rr rockiot-wrapper ' + isfullscreen" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
+    <div :class="'rockiot-wrapper ' + isfullscreen" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
 
       <div v-if="type!='dashboard'" class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
       <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type">
@@ -15,7 +15,7 @@
 
             <component v-if="type==='chart'" :is="chartComponent" :component="chartComponent" :type="areaChart" v-bind="_props" :value="updatedValue" />
 
-            <component v-if="type==='d3'" :is="d3Component" :component="d3Component" :type="areaChart" v-bind="_props" :value="updatedValue" />
+            <!--<component v-if="type==='tui'" :is="tuiComponent" :component="tuiComponent" :type="areaChart" v-bind="_props" :value="updatedValue" />-->
 
             <component v-if="type==='gauge'" :is="gaugeComponent" :component="gaugeComponent" v-bind="_props" :value="updatedValue"/>
 
@@ -99,6 +99,10 @@ export default {
         chartComponent(){
             return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.chart.line.svg' )
         },
+
+        //tuiComponent(){
+        //    return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.tui.area.chart.svg' )
+        //},
     },
     watch:{
         value(v){
@@ -106,6 +110,10 @@ export default {
         },
         clickGauge(v){
             this.clicked()
+        },
+        autoTest(v){
+          console.log('autotest changed')
+          this.clicked()
         }
     },
     props: {
@@ -132,7 +140,9 @@ export default {
       ticks               : { type: String, required: false, default: '10'},
       minorTicks          : { type: String, required: false, default: '0'},
       needle              : { type: String, required: false, default: '0'},
+      zones               : { type: String, required: false, default: '' },
       'svg-style'         : { type: String, required: false, default: '' },
+
       background          : { type: String, required: false, default: 'none' },
       'text-color'        :  { type: String, required: false, default: '#777' },
       'bar-color'         : { type: String, required: false, default: '#444' },
@@ -190,6 +200,7 @@ export default {
     },
     mounted(){
       Number(this.value) < Number(this.min) ? this.updatedValue = Number(this.min) : Number(this.value) > Number(this.max) ? this.updatedValue = Number(this.max) : this.updatedValue = this.value
+      console.log ( 'autotest=>',this.autoTest )
       if ( this.autoTest === '1' ){
         this.clicked()
       }

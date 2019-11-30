@@ -22,6 +22,16 @@
                 :y="pos+offsetY"
                 :x="offsetX"
                 :width="barHeight" :fill="$attrs.needleColor"/>
+
+            <template v-for="(zone,i) in limitzones">
+                <rect :key="'zone-' + i" class="rockiot-zones" :id="'zones-' + i + '-' + $attrs.serial"
+                :fill="zone" 
+                :x="offsetX-6"
+                :height="zoneHeight"
+                :width="5"
+                :y="offsetY+(zoneHeight*i)"/>    
+            </template>
+
         </svg>
         <div class="rockiot-gauge-linear-vertical-output">
           <div class="rockiot-gauge-linear-vertical-name">
@@ -54,6 +64,7 @@ export default {
         snapObject: null,
         oldValue: 0,
         aniValue: 0,
+        limitzones:null
     }),
     computed:{
         scaleStyle(){
@@ -70,6 +81,10 @@ export default {
         fillStyle(){
             return 'fill:' + this.$attrs.progressColor + ';stroke:transparent;'
         },
+        zoneHeight(){
+            let height = this.svgheight-(this.offsetY*2)
+            return (this.svgheight-(this.offsetY*2))/this.limitzones.length
+        }
     },
     watch:{
         '$attrs.barColor'(v){
@@ -226,6 +241,9 @@ export default {
         this.pos = this.normalize(Number(this.$attrs.value)) * this.posFactor
         if ( !! parseInt(this.$attrs.scale) ){
             this.createScale()
+        }
+        if ( this.$attrs.zones  ){
+            this.limitzones = this.$attrs.zones.split(',')
         }
     }
 }
