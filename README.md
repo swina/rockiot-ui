@@ -217,6 +217,7 @@ As for standard HTML tags, **rockiot-ui** has different attributes in order to c
 | **needle-color**     | no  	    | #777  	    | Gauge needle fill color |    	|
 | **needle-stroke-color**     | no  	    | #000  	    | Gauge needle stroke color |    	|
 | **auto-color**     | no  	    | 0  	    | Level gauge auto color | < 10%(red) <br> < 25%(orange) <br> < 75%(user) <br> > 75%(green)|    	|
+| **zones**     | no  	    | ''  	    | Zones Limits  | String of colors separated by comma<br>*linear gauges only*    	|
 
 ### Charts attributes ###
 |attribute          |required   |default    | description       |remarks|
