@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+    <script src="js/rockiot.ui.min.js"></script>
+    <script src="js/rockiot.gauge.linear.js"></script>
+    <script src="js/rockiot.gauge.radial.js"></script>
+    <script src="js/rockiot.chart.js"></script>
+    <title>rockiot-ui</title>
+    <script>
+    var  icons = {
+      delete : {
+        title: 'Delete',
+        action: 'delete',
+        svg: '<svg width="20" height="20"><rect id="svg_10" height="12.24999" width="9.12499" y="4.90625" x="5.3125" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="17.03125" x2="7.4375" y1="5.15625" x1="7.4375" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="17.0319" x2="9.6875" y1="5.15625" x1="9.6875" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="17.54124" x2="12.0625" y1="5.03125" x1="12.0625" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="3.53125" x2="13.5625" y1="3.53125" x1="5.8125" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#fafafa" fill="_fill_"/></svg>'
+      }
+    }
+    var autotest = 1
+    function stopTest(){
+      autotest =! autotest
+      var flag, btn
+      autotest ? flag = '1' : flag = '0' 
+      autotest ? btn = 'Stop Test' : btn = 'Start Test'
+      document.getElementById('btnTest').innerText = btn
+      let els = document.querySelectorAll('rockiot-ui')
+      els.forEach( (e)=>{
+        e.setAttribute('auto-test', autotest )
+      })
+    }
+    </script>
+    
+  </head>
+  <body style="min-height:100vh;width:100vw;margin:0;padding:0;background:#374353;background-size:cover;font-family:monospace">
+    <noscript>
+      <strong>We're sorry but rockiot-gauge doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div class="body-wrapper"></div>
+    <div  style="display:flex;flex-direction:column;align-items:center;max-width:100%;flex-wrap:wrap">
+
+      <div style="width:20rem;text-align:center;position:absolute;top:0;background:#272626;color:white;border-bottom-right-radius:.5rem;border-bottom-left-radius:.5rem;padding:.4rem;font-size:1.4rem;">rockiot-ui</div>
+      <rockiot-ui type="dashboard"></rockiot-ui>
+      <div class="rockiot-dashboard" style="margin-top:2.5rem;">
+
+        <div class="rockiot-panel">
+          <div class="rockiot-element">
+            <p><strong>To start/stop a test for each gauge/chart click on the gauge/chart itself then click on the wrench icon on top right corner</strong> <button id="btnTest" style="font-size:.7rem;padding:2px 4px 2px 4px;border:0 ;outline:none;cursor:pointer;background:#000;margin:4px;color:#fafafa;" onclick="stopTest()">Stop Test</button></p>
+          </div>
+        
+          <rockiot-ui
+            class="rockiot-element"
+            type="chart"
+            variation="area"
+            id="chart_0"
+            serial="chart_0"
+            name="Bandwidth"
+            min="0"
+            max="100"
+            value="0"
+            units="Mb/s"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            progress-color="#4ea5f1"
+            control-color="#888"
+            control-bg="none"
+            svgwidth="450"
+            svgheight="295">
+          </rockiot-ui>
+
+          <rockiot-ui
+          class="rockiot-element"
+          type="chart"
+          variation="line"
+          id="line_2"
+          serial="line_2"
+          name="Line Long"
+          scale-text-color="#eaeaea"
+          progress-color="#4ea5f1"
+          ticks="100"
+          svgwidth="1200"
+          svgheight="150"/>
+          
+
+        </div>
+        <div class="rockiot-panel">
+          <rockiot-ui
+            class="rockiot-element"
+            type="gauge"
+            variation="radial"
+            id="radial_0"
+            serial="radial_0"
+            name="Humidity"
+            min="0"
+            max="100"
+            value="20"
+            units="%"
+            precision="2"
+            value-class="rockiot-radial-value-text"
+            scale="1"
+            smallscale="1"
+            ticks="5"
+            size="md"
+            radius="lg"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            bar-color="#00000060"
+            progress-color="#4ea5f1"
+            control-bg="none"
+            control-color="#888"
+            needle="1"
+            svgwidth="300"
+            svgheight="300"
+            needle-color="#ff0000"
+            background="#000">
+          </rockiot-ui>
+          <div class="rockiot-element">
+            <div style="display:flex;flex-direction:row;justify-content:space-around;">
+              <rockiot-ui
+                id="box_1"
+                serial="box_1"
+                type="number-box"
+                min="100"
+                max="5000"
+                value="0"
+                units=""
+                name="Visitors"
+                value-color="#4ea5f1"
+                control-color="#888"
+                value-border="border:1px solid #eaeaea;border-radius:99rem;"
+                value-bg="#000"
+                precision="0"
+                click-action="test">
+              </rockiot-ui>
+              <rockiot-ui
+                id="box_2"
+                serial="box_2"
+                type="number-box"
+                min="0"
+                max="50"
+                value="0"
+                units=""
+                name="New Visitors"
+                value-color="#00ff00"
+                value-border="border:1px solid #eaeaea;border-radius:99rem;"
+                value-bg="black"
+                control-color="#888"
+                precision="0"
+                click-action="test">
+              </rockiot-ui>
+            </div>
+            <div style="display:flex;flex-direction:row;justify-content:space-around;">
+              <rockiot-ui
+                id="box_3"
+                serial="box_3"
+                type="number-box"
+                min="0"
+                max="3000"
+                value="0"
+                units=""
+                name="Pages Visited"
+                value-color="#00ff00"
+                value-border="border:1px solid #eaeaea;border-radius:99rem;"
+                control-color="#888"
+                precision="0"
+                click-action="test">
+              </rockiot-ui>
+              <rockiot-ui
+                id="box_4"
+                serial="box_4"
+                type="number-box"
+                min="0"
+                max="50"
+                value="0"
+                units=""
+                name="Errors"
+                value-color="#fff"
+                value-border="border:1px solid #eaeaea;border-radius:99rem;"
+                value-bg="red"
+                control-color="#888"
+                precision="0"
+                click-action="test">
+              </rockiot-ui>
+            </div>
+          </div>
+        </div>
+        <div class="rockiot-panel">
+          <rockiot-ui
+            class="rockiot-element"
+            type="gauge"
+            variation="linear"
+            id="linear_0"
+            serial="linear_0"
+            name="Pool"
+            min="15"
+            max="32"
+            value="22"
+            units="°C"
+            size="sm"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            bar-color="#111"
+            progress-color="#4ea5f1"
+            control-bg="none"
+            control-color="#888"
+            zones="#ff0000,#00ff00"
+            scale="1"
+            smallscale="1"
+            needle="1"
+            needle-color="#ff0000"
+            background="#000">
+          </rockiot-ui>
+        </div>
+        <div class="rockiot-panel">
+          <rockiot-ui
+            class="rockiot-element"
+            id="level_1"
+            serial="level_1"
+            type="gauge"
+            variation="level"
+            min="0"
+            max="100"
+            value="0"
+            units="%"
+            name="Water Level"
+            svgwidth="300"
+            svgheight="300"
+            bar-color="#222"
+            bar-border-color="#fafafa"
+            text-color="yellow"
+            progress-color="#4ea5f1"
+            svgwidth="300"
+            svgheight="300"
+            click-action="test">
+          </rockiot-ui>
+          <rockiot-ui
+            class="rockiot-element"
+            type="gauge"
+            variation="linear"
+            orientation="horizontal"
+            id="linear_1"
+            serial="linear_1"
+            name="Level"
+            min="20"
+            max="100"
+            value="60"
+            units="%"
+            size="md"
+            click-action="test"
+            text-color="#bababa"
+            scale-text-color="#bababa"
+            bar-color="#111"
+            progress-color="#4ea5f1"
+            control-bg="none"
+            control-color="#888"
+            scale="1"
+            smallscale="1"
+            needle="1"
+            needle-color="#ff0000"
+            background="#000">
+          </rockiot-ui>
+        </div>
+        
+        <div class="rockiot-panel rockiot-panel-full">
+         
+        </div>
+        
+      </div>
+      <script>
+      var el = document.getElementById('level_1')
+      el.setAttribute('control-icons',JSON.stringify(icons))
+      document.addEventListener("DOMContentLoaded", function(event) {
+        el.addEventListener('delete',()=>{
+          alert('delete =>',this)
+        })
+        el.addEventListener('fullscreen',()=>{
+          //alert('fullscreen =>',this)
+        })
+        el.addEventListener('setting',(e)=>{
+          alert('setting =>',e)
+        })
+      })
+      </script>
+    </div>
+  </body>
+</html>

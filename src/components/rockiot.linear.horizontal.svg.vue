@@ -17,7 +17,7 @@
                 :y="offsetY-barHeight">
             </rect>
 
-            <rect :id="'needle-' + $attrs.serial" class="needle" :style="animate('x')" width="1"
+            <rect v-if="$attrs.needle==='1'" :id="'needle-' + $attrs.serial" class="needle" :style="animate('x')" width="1"
                 :x="this.pos + this.offsetX"
                 :y="offsetY-barHeight-5"
                 :height="barHeight+10" :fill="$attrs.needleColor"/>
