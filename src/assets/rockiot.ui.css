@@ -193,7 +193,7 @@ rockiot-chart {
   background:transparent;
   margin:0 auto;
   margin-bottom:.5rem;
-  margin-top:1rem;
+  margin-top:2rem;
   padding:0;
 
 }
@@ -255,6 +255,7 @@ rockiot-chart {
 .rockiot-wrapper-title {
   position:absolute;
   margin:0 auto;
+  cursor:pointer;
 }
 
 .rockiot-box-value > h2 {
@@ -446,7 +447,7 @@ rockiot-chart {
     align-items: center;
     justify-content: center;
     font-size: 0.5rem;
-    background: #757575;
+    background: #4b4b4b;
     padding: .2rem;
     border-radius: 99rem;
     margin: 0 auto;
@@ -529,4 +530,5 @@ rockiot-chart {
 .rockiot-chart-wrapper {
     padding:.2rem;
     margin:0 auto;
+    margin-top:1rem;
 }

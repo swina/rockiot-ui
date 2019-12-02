@@ -19,7 +19,7 @@ export default {
   },
   data:()=>({
     n: 1,
-    width:400,
+    width:500,
     height:280,
     chart: {
       data: [
@@ -27,7 +27,7 @@ export default {
           ['0',0]
       ],
       options: {
-        width:350,
+        width:500,
         height:230,
         title: 'chart',
         chartArea: {width: '88%', height: '75%'},
@@ -82,13 +82,14 @@ export default {
     this.chart.options.substitle = this.$attrs.units
     
     //this.chart.data[0].push(['1',this.$attrs.value])
-    this.width = document.getElementById(this.$attrs.serial).clientWidth - 20
+    /*this.width = document.getElementById(this.$attrs.serial).clientWidth - 20
             this.height = this.width*.65
             if ( this.width > 800 ){
                 this.height = this.width*.20
             }
             this.chart.options.width = this.width//document.getElementById(this.$attrs.serial).clientWidth
             this.chart.options.height = this.height//this.chart.options.chart.width*.70
+    */
     //this.chart.options.width = parseInt(this.$attrs.svgwidth)
     //this.chart.options.height = parseInt(this.$attrs.svgheight)
     this.chart.options.titleTextStyle.color = this.$attrs.textColor

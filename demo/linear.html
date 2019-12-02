@@ -42,32 +42,92 @@
     background="#000">
   </rockiot-ui>
 
+ 
   <rockiot-ui
-    class="rockiot-element"
     type="gauge"
     variation="linear"
-    orientation="horizontal"
-    id="linear_1"
-    serial="linear_1"
-    name="Pool"
-    min="15"
-    max="40"
+    id="linear_2"
+    serial="linear_2"
+    name="Linear 2"
+    min="0"
+    max="50"
     value="22"
-    units="°C"
+    units="%"
     size="md"
     click-action="test"
     text-color="#bababa"
     scale-text-color="#bababa"
     bar-color="#111"
-    progress-color="#4ea5f1"
+    progress-color="#ff0000"
     control-bg="none"
     control-color="#888"
-    zones="#ff0000,#00ff00"
+    zones="#ff0000,#ff8800,#00ff00"
     scale="1"
     smallscale="1"
     needle="1"
     needle-color="#ff0000"
     background="#000">
   </rockiot-ui>
+
+  <div style="width:450px;">
+    <rockiot-ui
+        style="flex:1 auto;"
+        class="rockiot-element"
+        type="gauge"
+        variation="linear"
+        orientation="horizontal"
+        id="linear_1"
+        serial="linear_1"
+        name="Pool"
+        min="20"
+        max="60"
+        value="40"
+        units="°C"
+        size="md"
+        click-action="test"
+        text-color="#bababa"
+        scale-text-color="#bababa"
+        bar-color="#111"
+        progress-color="#4ea5f1"
+        control-bg="none"
+        control-color="#888"
+        zones="#ff0000,#00ff00"
+        scale="1"
+        smallscale="1"
+        needle="1"
+        needle-color="#ff0000"
+        background="#000">
+    </rockiot-ui>
+    <rockiot-ui
+            style="flex:1 auto;"
+            svgwidth="400"
+            svgheight="100"
+            type="gauge"
+            variation="linear"
+            orientation="horizontal"
+            id="linear_1"
+            serial="linear_1"
+            name="Pool"
+            min="20"
+            max="60"
+            value="40"
+            units="°C"
+            size="md"
+            click-action="test"
+            text-color="#cecece"
+            scale-text-color="#bababa"
+            bar-color="#111"
+            progress-color="#4ea5f1"
+            control-bg="none"
+            control-color="#888"
+            zones="#ff0000,#00ff00"
+            scale="1"
+            smallscale="1"
+            needle="1"
+            needle-color="#ff0000"
+            background="#000">
+        </rockiot-ui>
+      </div>
+  </div>
 </body>
 </html>

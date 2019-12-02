@@ -437,7 +437,6 @@ export default (function(global, factory) {
 
         function drawNeedle(){
           var needleCoord = document.querySelector('.rockiot-value-' + serial).getAttribute('d').split(' ')
-
           if ( document.querySelector('.rockiot-needle-' + serial) ){
             document.querySelector('.rockiot-needle-' + serial).remove()
           }

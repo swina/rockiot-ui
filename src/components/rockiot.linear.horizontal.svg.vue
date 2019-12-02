@@ -24,7 +24,7 @@
 
             <template v-for="(zone,i) in limitzones">
                 
-                <rect :key="'zone-' + i" class="rockiot-zones" :id="'zones-' + i + '-' + $attrs.serial"
+                <rect v-if="zone" :key="'zone-' + i" class="rockiot-zones" :id="'zones-' + i + '-' + $attrs.serial"
                 :fill="zone"
                  :x="offsetX + (zoneWidth*i)"
                 :width="zoneWidth"
@@ -76,7 +76,7 @@ export default {
         aniPos:[0,0],
         oldValue: 0,
         aniValue:0,
-        limitzones:['#00ff00','#ff8800','#ff0000']
+        limitzones:null
     }),
     computed:{
         scaleStyle(){
@@ -108,19 +108,12 @@ export default {
 
     },
     methods:{
-      animateReset(v){
-        this.aniValue = parseInt(v)
-        this.$refs['num_' + this.$attrs.serial].reset(this.oldValue,v)
-        this.$refs['num_' + this.$attrs.serial].start()
-      },
-      animateEnd(){
-        if ( this.oldValue != 0 ){
-          this.oldValue = this.$attrs.value
-        }
-      },
-      formatter(num){
-        return num.toFixed(this.$attrs.precision)
-      },
+        calcWidth(v){
+            if ( Number(v) > Number(this.$attrs.max) ){
+              v = Number(this.$attrs.max)  
+            }
+            this.pos = (this.svgwidth-this.offsetX*2)*this.normalize(Number(v))/100
+        },
         normalize(val){
             return (val + (parseInt(this.$attrs.min)*-1))/(this.range)*100
         },
@@ -220,6 +213,7 @@ export default {
     },
     beforeMount(){
       this.aniValue = parseInt(this.$attrs.value)
+
     },
     mounted(){
         let id = this.$attrs.serial
@@ -233,8 +227,9 @@ export default {
             this.svgheight = this.$attrs.svgwidth
         }
         var width = parseInt(this.svgwidth) - ( this.offsetX*2 )
-        this.svgwidth = document.getElementById(this.$attrs.serial).clientWidth - this.offsetX*2
-        width = this.svgwidth
+        
+        //this.svgwidth = document.getElementById(this.$attrs.serial).clientWidth - this.offsetX*2
+        //width = this.svgwidth
         this.svg = this.$refs[id]
         this.svg.scale = this.$refs['scale-' + id]
         this.posFactor = width / parseInt(this.$attrs.max )
@@ -244,12 +239,17 @@ export default {
             this.$attrs.value = this.$attrs.max
         }
         //this.pos = this.normalize(Number(this.$attrs.value))*this.posFactor
-        this.pos = this.svgwidth*this.normalize(Number(this.$attrs.value))/100 - this.offsetX
+        //this.pos = this.svgwidth*this.normalize(Number(this.$attrs.value))/100 - this.offsetX
         this.gaugeSize()
         if ( !! parseInt(this.$attrs.scale) ){
             this.createScale()
         }
+        if ( this.$attrs.zones.split(',') ){
+            this.limitzones = this.$attrs.zones.split(',')
+        }
+
         this.aniPos[1] = this.pos//this.factor
+        this.calcWidth(this.$attrs.value)
     }
 }
 </script>

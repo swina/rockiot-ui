@@ -1,6 +1,6 @@
 <template>
   <div :class="$attrs.gaugeClass" :ref="$attrs.serial" :width="$attrs.svgwidth" :height="$attrs.svgwidth" :id="$attrs.serial" :style="'width:'+$attrs.svgwidth+'px;height:'+$attrs.svgheight+'px;' + $attrs.svgStyle" :value="$attrs.value">
-    <div class="rockiot-gauge-level-wrapper">
+    <div class="rockiot-gauge-level-wrapper" :style="'background:' + $attrs.barColor">
       <svg :ref="'rockiot-gauge-level-' + $attrs.serial" width="100%" height="100%">
         <linearGradient :id="'lg-'+$attrs.serial" x1="0.5" y1="1" x2="0.5" y2="0">
             <stop offset="0%" stop-opacity="1" :stop-color="level"/>
@@ -12,7 +12,7 @@
             </stop>
             <stop offset="100%" stop-opacity="0" :stop-color="level"/>
         </linearGradient>
-        <circle cx="50%" cy="50%" r="45%" :fill="'url(#lg-' + $attrs.serial + ')'" :stroke="$attrs.barBorderColor" stroke-width="8"/>
+        <circle cx="50%" cy="50%" r="48%" :fill="'url(#lg-' + $attrs.serial + ')'" :stroke="$attrs.barBorderColor" stroke-width="8"/>
       </svg>
     </div>
     <div class="rockiot-level-value" :style="'color:' + this.$attrs.valueColor">
@@ -57,7 +57,7 @@ export default {
       return (pc)
     },
     container(){
-      return 'background:' + this.$attrs.barColor
+      return this.$attrs.levelCss
     },
     level(){
       if ( this.$attrs.autoColor ){

@@ -1,5 +1,5 @@
 <template>
-    <div :class="'rockiot-wrapper ' + isfullscreen" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
+    <div :id="'rockiot-wrapper-' + serial"  :class="'rockiot-wrapper ' + isfullscreen" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
 
       <div v-if="type!='dashboard'" class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
       <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type">
@@ -44,7 +44,8 @@ export default {
         areaChart: false,
         action:'click',
         extra:null,
-        fullscreen:false
+        fullscreen:false,
+        calculatedWidth:null
     }),
     computed:{
         classe(){
@@ -143,8 +144,7 @@ export default {
       needle              : { type: String, required: false, default: '0'},
       zones               : { type: String, required: false, default: '' },
       'svg-style'         : { type: String, required: false, default: '' },
-
-      background          : { type: String, required: false, default: 'none' },
+      'level-css'         : { type: String, required: false, default: 'background:#333;border:1rem solid #888;'},
       'text-color'        :  { type: String, required: false, default: '#777' },
       'bar-color'         : { type: String, required: false, default: '#444' },
       'bar-border-color'  : { type: String, required: false, default: 'transparent' },
@@ -159,7 +159,7 @@ export default {
       'needle-color'      : { type: String, required: false, default: '#777' },
       'needle-stroke'     : { type: String, required: false, default: '#000'},
       'chart-class'       : { type: String, required: false, default: '' },
-      'control-color'     : { type: String, required: false, default: '#eee' },
+      'control-color'     : { type: String, required: false, default: '#cecece' },
       'control-bg'        : { type: String, required: false, default: 'none' },
       'control-icons'     : {  required: false, default: '' },
       'auto-color'        : { required: false, default: '0' },
@@ -199,10 +199,13 @@ export default {
       }
     },
     mounted(){
+      this.calculatedWidth = document.getElementById('rockiot-wrapper-' + this.serial).width
+      console.log ( this.serial , this.calculatedWidth )
       Number(this.value) < Number(this.min) ? this.updatedValue = Number(this.min) : Number(this.value) > Number(this.max) ? this.updatedValue = Number(this.max) : this.updatedValue = this.value
        if ( this.autoTest === '1' ){
         this.clicked()
       }
+
     }
 }
 </script>
