@@ -36,7 +36,7 @@
           <div class="rockiot-gauge-linear-vertical-name">
             {{this.$attrs.name}} {{this.$attrs.units}}
           </div>
-            <h2 :class="'rockiot-gauge-' + $attrs.variation + '-' + $attrs.orientation + '-value'">
+            <div :class="'rockiot-gauge-value rockiot-gauge-' + $attrs.variation + '-' + $attrs.orientation + '-value'">
                 <rockiot-animated-number 
                     :ref="'num_' + this.$attrs.serial" 
                     :precision="$attrs.precision" 
@@ -44,20 +44,15 @@
                     :from="oldValue" 
                     :to="$attrs.value" 
                     @end="oldValue=$attrs.value"/>
-                <!--<animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number>-->
-            </h2>
+            </div>
         </div>
       </div>
 </template>
 
 <script>
 /* eslint-disable */
-import RockiotAnimatedNumber from './rockiot.animated.number.vue'
 export default {
     name: 'RockiotSvgLinearH',
-    components:{
-        RockiotAnimatedNumber
-    },
     data:()=>({
         svgwidth:370,
         svgheight:90,

@@ -4,9 +4,6 @@
     </div>
 </template>
 <script>
-/* eslint-disable */
-//import SvgGauge from 'svg-gauge'
-//import '../plugins/rockiot.radial'
 export default {
     name: 'RockiotRadialSvg',
     data:()=>({
@@ -17,16 +14,7 @@ export default {
     }),
     watch:{
         '$attrs.value'(v){
-            //this.gauge.setValue(v)
             this.gauge.setValueAnimated(v,Number(this.$attrs.animation)/1000)
-            /*
-            if ( this.progressColor.length > 1 ){
-                this.gauge.setValueAnimated(v,this.$attrs.animation)
-                this.setColor()
-            } else {
-                this.gauge.setValueAnimated(v,this.$attrs.animation)
-            }
-            */
         }
     },
     computed:{
@@ -58,14 +46,15 @@ export default {
         createGauge(){
             let self = this
             let value = parseFloat(this.$attrs.value)
+            /* eslint-disable */
             this.gauge = Gauge(self.$refs[self.$attrs.serial], {
                 dialRadius: self.dialRadius,
                 dialStartAngle: parseInt(self.$attrs.startangle),
                 dialEndAngle: parseInt(self.$attrs.endangle),
                 min: parseInt(self.$attrs.min),
                 max: parseInt(self.$attrs.max),
-                label: function(value) {
-                    return Math.round(self.$attrs.value)// + "/" + self.$attrs.max;
+                label: function() {
+                    return Math.round(self.$attrs.value)
                 },
                 ticks: self.$attrs.ticks,
                 precision: Number(self.$attrs.precision),
@@ -103,24 +92,18 @@ export default {
         if ( this.$attrs.progressColor.split(';').length > 1 ){
             this.progressColor = this.$attrs.progressColor.split(';')
         }
-
         this.createGauge()
         this.setColor()
-
-        //let pippo = document.querySelector('.gauge-' + this.$attrs.serial)
         this.svg = document.querySelector('.gauge-' + this.$attrs.serial)
-
         this.svg.hasscale = this.$attrs.scale
         this.svg.ticks = this.$attrs.ticks
         this.svg.factor = this.factor
         this.svg.degree = this.$attrs.degree
         this.svg.offset = 10
         this.svg.id = this.$attrs.serial
-        let rad = Math.PI / parseInt(this.$attrs.degree )
         this.svg.W = this.$attrs.svgwidth
         this.svg.min = this.$attrs.min
         this.svg.max = this.$attrs.max
-
     }
 }
 </script>

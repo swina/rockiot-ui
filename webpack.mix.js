@@ -13,6 +13,10 @@ let mix = require('laravel-mix');
  mix.options({
    vue: {
      esModule: true
+   },
+   purifyCss: true,
+   terser: {
+    test: /\.js(\?.*)?$/i
    }
  });
 

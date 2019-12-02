@@ -1,5 +1,5 @@
 <template>
-    <div :id="'rockiot-wrapper-' + serial"  :class="'rockiot-wrapper ' + isfullscreen" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
+    <div :id="'rockiot-wrapper-' + serial"  class="rockiot-wrapper" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
 
       <div v-if="type!='dashboard'" class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
       <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type">
@@ -13,14 +13,27 @@
               @custom="emitAction"
               @fullscreen="fullscreen=!fullscreen,$emit('fullscreen')"></rockiot-ui-control>
 
-            <component v-if="type==='chart'" :is="chartComponent" :component="chartComponent" :type="areaChart" v-bind="_props" :value="updatedValue" />
+            <component 
+              v-if="type==='chart'" 
+              :is="chartComponent" 
+              :component="chartComponent" 
+              :type="areaChart" 
+              v-bind="_props" 
+              :value="updatedValue" />
 
-            <!--<component v-if="type==='tui'" :is="tuiComponent" :component="tuiComponent" :type="areaChart" v-bind="_props" :value="updatedValue" />-->
+            <component 
+              v-if="type==='gauge'" 
+              :is="gaugeComponent" 
+              :component="gaugeComponent" 
+              v-bind="_props" 
+              :value="updatedValue"/>
 
-            <component v-if="type==='gauge'" :is="gaugeComponent" :component="gaugeComponent" v-bind="_props" :value="updatedValue"/>
-
-            <rockiot-number-box v-if="type==='number-box'" v-bind="_props" :value="updatedValue"/>
+            <rockiot-number-box 
+              v-if="type==='number-box'" 
+              v-bind="_props" 
+              :value="updatedValue"/>
         </div>
+        
     </div>
 </template>
 
@@ -43,94 +56,21 @@ export default {
         clickGauge: false,
         areaChart: false,
         action:'click',
-        extra:null,
-        fullscreen:false,
-        calculatedWidth:null
+        extra:null
     }),
-    computed:{
-        classe(){
-            return this.chartClass + ' rockiot-' + this.type + '-' + this.serial
-        },
-        componentClass(){
-            if ( !this.showChart ){
-                return 'rockiot-gauge-' + this.variation + '-' + this.orientation
-            } else {
-                return 'rockiot-gauge-' + this.variation + '-' + this.orientation
-            }
-        },
-
-        controlClass(){
-            if ( !this.showControl ){
-                return 'no-visible'
-            } else {
-                return ''
-            }
-        },
-        formatDec(){
-            let v = parseFloat(this.updatedValue).toFixed(this.precision).toString()
-            let num = v.split('.')
-            return num[1]
-        },
-        textStyle(){
-            return 'color:' + this.textColor + ';'
-        },
-        valueStyle(){
-            return 'color:' + this.valueColor + ';background:' + this.valueBg + ';border:' + this.valueBorder + ';'
-        },
-        isfullscreen(){
-          if ( this.fullscreen ) {
-            return ''
-          }
-          return ''
-        },
-        gaugeComponent(){
-          if ( this.variation === 'linear' && this.orientation === 'vertical' ){
-            return () => import ( /*webpackChunkName: "build/rockiot.gauge.linear" */ './rockiot.linear.vertical.svg' )
-          }
-          if ( this.variation === 'linear' && this.orientation === 'horizontal' ){
-            return () => import ( /*webpackChunkName: "build/rockiot.gauge.linear" */ './rockiot.linear.horizontal.svg' )
-          }
-          if ( this.variation === 'radial' ){
-            return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.radial.svg' )
-          }
-          if ( this.variation === 'level' ){
-            return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.level.gauge' )
-          }
-        },
-        
-        chartComponent(){
-            return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.chart.line.svg' )
-        },
-
-        //tuiComponent(){
-        //    return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.tui.area.chart.svg' )
-        //},
-    },
-    watch:{
-        value(v){
-            this.updatedValue = v
-        },
-        clickGauge(v){
-            this.clicked()
-        },
-        autoTest(v){
-          console.log('autotest changed')
-          this.clicked()
-        }
-    },
     props: {
       serial              : { type: String, required: false, default: 'rockiot001'},
       type                : { type: String, required: false, default: 'gauge' },
       variation           : { type: String, required: false, default: 'radial' },
       orientation         : { type: String, required: false, default: 'vertical' },
-      name                    : { type: String, required: false, default: 'Gauge'},
-      min                     : { type: String, required: false, default: '0' },
-      max                     : { type: String, required: false, default: '100' },
-      value                   : { type: String, required: false, default: '0' },
-      precision               : { type: String, required: false, default: '2'},
-      units                   : { type: String, required: false, default: '%'},
-      animation               : { type: String, required: false, default: '500' },
-      svgwidth                : { type: String, required: false, default: '300' },
+      name                : { type: String, required: false, default: 'Gauge'},
+      min                 : { type: String, required: false, default: '0' },
+      max                 : { type: String, required: false, default: '100' },
+      value               : { type: String, required: false, default: '0' },
+      precision           : { type: String, required: false, default: '2'},
+      units               : { type: String, required: false, default: '%'},
+      animation           : { type: String, required: false, default: '500' },
+      svgwidth            : { type: String, required: false, default: '300' },
       svgheight           : { type: String, required: false, default: '300' },
       size                : { type: String, required: false, default: 'lg' },
       startangle          : { type: String, required: false, default: '135' },
@@ -154,7 +94,7 @@ export default {
       'value-bg'          :   { type: String, required: false, default: 'transparent' } ,
       'value-border'      :   { type: String, required: false, default: '0px solid #fac83c'},
       'value-class'       : { type: String, required: false, default: '' },
-      'scale-color'          : { type: String, required: false, default: '#aaa'},
+      'scale-color'       : { type: String, required: false, default: '#aaa'},
       'scale-text-color'  : { type: String, required: false, default: '#111' },
       'needle-color'      : { type: String, required: false, default: '#777' },
       'needle-stroke'     : { type: String, required: false, default: '#000'},
@@ -164,12 +104,60 @@ export default {
       'control-icons'     : {  required: false, default: '' },
       'auto-color'        : { required: false, default: '0' },
       'auto-test'         : { default: '0' },
-      clickAction         :   { type: String, required: false, default: ''},
-      'test-icon'         : { type: String, required: false, default: '1'},
-       minmax              : { type: String, required: false, default: '1' },
+      clickAction         : { type: String, required: false, default: ''},
+      'test-icon'         : { type: String, required: false, default: '1'}
     },
-    methods:{
+    computed:{
+        classe(){
+            return this.chartClass + ' rockiot-' + this.type + '-' + this.serial
+        },
+        componentClass(){
+            if ( !this.showChart ){
+                return 'rockiot-gauge-' + this.variation + '-' + this.orientation
+            } else {
+                return 'rockiot-gauge-' + this.variation + '-' + this.orientation
+            }
+        },
+        controlClass(){
+            if ( !this.showControl ){
+                return 'no-visible'
+            } else {
+                return ''
+            }
+        },
+        gaugeComponent(){
+          if ( this.variation === 'linear' && this.orientation === 'vertical' ){
+            return () => import ( /*webpackChunkName: "build/rockiot.gauge.linear" */ './rockiot.linear.vertical.svg' )
+          }
+          if ( this.variation === 'linear' && this.orientation === 'horizontal' ){
+            return () => import ( /*webpackChunkName: "build/rockiot.gauge.linear" */ './rockiot.linear.horizontal.svg' )
+          }
+          if ( this.variation === 'radial' ){
+            return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.radial.svg' )
+          }
+          if ( this.variation === 'level' ){
+            return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.level.gauge' )
+          }
+        },
+        
+        chartComponent(){
+            return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.chart.line.svg' )
+        },
+    },
 
+    watch:{
+        value(v){
+            this.updatedValue = v
+        },
+        clickGauge(v){
+            this.clicked()
+        },
+        autoTest(v){
+          this.clicked()
+        }
+    },
+    
+    methods:{
       emitAction(e){
         console.log ( e )
         this.$emit(e)
@@ -182,7 +170,6 @@ export default {
       },
       clicked(){
         let self = this
-
         if ( !this.timer[this.serial]){
             this.timer[this.serial] = setInterval ( () => {
                 self.updatedValue= (Math.random() * (parseInt(self.max) - (parseInt(self.min))) + 1) + (parseInt(self.min))},1000)
@@ -199,29 +186,10 @@ export default {
       }
     },
     mounted(){
-      this.calculatedWidth = document.getElementById('rockiot-wrapper-' + this.serial).width
-      console.log ( this.serial , this.calculatedWidth )
       Number(this.value) < Number(this.min) ? this.updatedValue = Number(this.min) : Number(this.value) > Number(this.max) ? this.updatedValue = Number(this.max) : this.updatedValue = this.value
        if ( this.autoTest === '1' ){
         this.clicked()
       }
-
     }
 }
 </script>
-
-<style scoped>
-.fullscreen {
-  position:fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width:50%;
-  height:auto;
-  z-index:200;
-  background:#000;
-  display:flex;
-  align-items:center;
-  z-index:200;
-}
-</style>

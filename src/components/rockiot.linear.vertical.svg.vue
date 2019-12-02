@@ -38,7 +38,7 @@
             {{this.$attrs.name}} {{this.$attrs.units}}
 
           </div>
-          <h2 :class="'rockiot-gauge-' + $attrs.variation + '-' + $attrs.orientation + '-value'">
+          <div :class="'rockiot-gauge-value rockiot-gauge-' + $attrs.variation + '-' + $attrs.orientation + '-value'">
               <rockiot-animated-number 
                 :ref="'num_' + this.$attrs.serial" 
                 :precision="$attrs.precision" 
@@ -46,20 +46,15 @@
                 :from="oldValue" 
                 :to="$attrs.value" 
                 @end="oldValue=$attrs.value"/>
-              <!--<animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" duration="500" :animate-end="animateEnd" :formatter="formatter"></animate-number>-->
-          </h2>
+          </div>
         </div>
       </div>
 </template>
 
 <script>
 /* eslint-disable */
-import RockiotAnimatedNumber from './rockiot.animated.number'
 export default {
     name: 'RockiotSvgLinearV',
-    components: {
-        RockiotAnimatedNumber
-    },
     data:()=>({
         svgwidth:120,
         svgheight:370,
@@ -73,7 +68,6 @@ export default {
         scaleX: 90,
         offsetText: 10,
         pos: 0,
-        snapObject: null,
         oldValue: 0,
         aniValue: 0,
         limitzones:null
@@ -109,27 +103,10 @@ export default {
               this.pos = this.normalize(v)*this.posFactor
             }
             this.aniValue = v
-            //this.animateReset(v)
-
-            //this.$refs['num_' + this.$attrs.serial].reset(this.oldValue,v)
-            //this.$refs['num_' + this.$attrs.serial].start()
         },
 
     },
     methods:{
-        animateReset(v){
-          this.aniValue = parseInt(v)
-          this.$refs['num_' + this.$attrs.serial].reset(this.oldValue,v)
-          this.$refs['num_' + this.$attrs.serial].start()
-        },
-        animateEnd(){
-          if ( this.oldValue != 0 ){
-            this.oldValue = this.$attrs.value
-          }
-        },
-        formatter(num){
-          return num.toFixed(this.$attrs.precision)
-        },
         normalize(val){
             if ( Number(this.$attrs.min) < 0 ){
                 return (Number(this.$attrs.max)-(val + (parseInt(this.$attrs.min)*-1))/(this.range)*100)
