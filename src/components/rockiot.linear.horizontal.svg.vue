@@ -6,7 +6,7 @@
 
             <rect class="outline" :id="'outline-' + $attrs.serial" :style="outlineStyle"
                 :x="offsetX"
-                :width="$attrs.max*posFactor"
+                :width="svgwidth-offsetX*2"
                 :height="barHeight"
                 :y="offsetY-barHeight"/>
 
@@ -92,7 +92,7 @@ export default {
             return 'fill:' + this.$attrs.progressColor + ';stroke:transparent;' + this.animate('width')
         },
         zoneWidth(){
-            return (this.$attrs.max*this.posFactor)/this.limitzones.length
+            return (this.svgwidth-this.offsetX*2)/this.limitzones.length
         }
     },
     watch:{
@@ -100,13 +100,10 @@ export default {
             this.fillStyle()
         },
         '$attrs.value'(v){
-
-            if ( parseFloat(v) > parseInt(this.$attrs.max) ){
-              this.pos = this.normalize(parseFloat(this.$attrs.max))*this.posFactor
-            } else {
-              this.pos = this.normalize(v)*this.posFactor//this.pos = this.normalize(v)*this.posFactor
+            if ( Number(v) > Number(this.$attrs.max) ){
+              v = Number(this.$attrs.max)  
             }
-            //this.animateReset(v)
+            this.pos = (this.svgwidth-this.offsetX*2)*this.normalize(Number(v))/100
         },
 
     },
@@ -236,6 +233,8 @@ export default {
             this.svgheight = this.$attrs.svgwidth
         }
         var width = parseInt(this.svgwidth) - ( this.offsetX*2 )
+        this.svgwidth = document.getElementById(this.$attrs.serial).clientWidth - this.offsetX*2
+        width = this.svgwidth
         this.svg = this.$refs[id]
         this.svg.scale = this.$refs['scale-' + id]
         this.posFactor = width / parseInt(this.$attrs.max )
@@ -244,7 +243,8 @@ export default {
         if ( parseInt(this.$attrs.value) > parseInt(this.$attrs.max) ){
             this.$attrs.value = this.$attrs.max
         }
-        this.pos = this.normalize(Number(this.$attrs.value))*this.posFactor
+        //this.pos = this.normalize(Number(this.$attrs.value))*this.posFactor
+        this.pos = this.svgwidth*this.normalize(Number(this.$attrs.value))/100 - this.offsetX
         this.gaugeSize()
         if ( !! parseInt(this.$attrs.scale) ){
             this.createScale()

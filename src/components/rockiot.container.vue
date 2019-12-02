@@ -163,7 +163,7 @@ export default {
       'control-bg'        : { type: String, required: false, default: 'none' },
       'control-icons'     : {  required: false, default: '' },
       'auto-color'        : { required: false, default: '0' },
-      'auto-test'         : { default: '1' },
+      'auto-test'         : { default: '0' },
       clickAction         :   { type: String, required: false, default: ''},
       'test-icon'         : { type: String, required: false, default: '1'},
        minmax              : { type: String, required: false, default: '1' },

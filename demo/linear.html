@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+    <script src="js/rockiot.ui.min.js"></script>
+    <script src="js/rockiot.gauge.linear.js"></script>
+    <script src="js/rockiot.gauge.radial.js"></script>
+    <script src="js/rockiot.chart.js"></script>
+    <title>rockiot-ui</title>
+    <style>
+        body { font-family: monospace; }
+    </style>
+</head>
+<body>
+    <rockiot-ui
+    class="rockiot-element"
+    type="gauge"
+    variation="linear"
+    id="linear_0"
+    serial="linear_0"
+    name="Pool"
+    min="15"
+    max="32"
+    value="22"
+    units="°C"
+    size="sm"
+    click-action="test"
+    text-color="#bababa"
+    scale-text-color="#bababa"
+    bar-color="#111"
+    progress-color="#4ea5f1"
+    control-bg="none"
+    control-color="#888"
+    zones="#ff0000,#00ff00"
+    scale="1"
+    smallscale="1"
+    needle="1"
+    needle-color="#ff0000"
+    background="#000">
+  </rockiot-ui>
+
+  <rockiot-ui
+    class="rockiot-element"
+    type="gauge"
+    variation="linear"
+    orientation="horizontal"
+    id="linear_1"
+    serial="linear_1"
+    name="Pool"
+    min="15"
+    max="40"
+    value="22"
+    units="°C"
+    size="md"
+    click-action="test"
+    text-color="#bababa"
+    scale-text-color="#bababa"
+    bar-color="#111"
+    progress-color="#4ea5f1"
+    control-bg="none"
+    control-color="#888"
+    zones="#ff0000,#00ff00"
+    scale="1"
+    smallscale="1"
+    needle="1"
+    needle-color="#ff0000"
+    background="#000">
+  </rockiot-ui>
+</body>
+</html>
