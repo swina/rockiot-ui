@@ -10,27 +10,7 @@
     <script src="js/rockiot.gauge.radial.js"></script>
     <script src="js/rockiot.chart.js"></script>
     <title>rockiot-ui</title>
-    <script>
-    var  icons = {
-      delete : {
-        title: 'Delete',
-        action: 'delete',
-        svg: '<svg width="20" height="20"><rect id="svg_10" height="12.24999" width="9.12499" y="4.90625" x="5.3125" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="17.03125" x2="7.4375" y1="5.15625" x1="7.4375" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="17.0319" x2="9.6875" y1="5.15625" x1="9.6875" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="17.54124" x2="12.0625" y1="5.03125" x1="12.0625" fill-opacity="null" stroke-opacity="null" stroke="#fafafa" fill="none"/><line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="3.53125" x2="13.5625" y1="3.53125" x1="5.8125" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#fafafa" fill="_fill_"/></svg>'
-      }
-    }
-    var autotest = 1
-    function stopTest(){
-      autotest =! autotest
-      var flag, btn
-      autotest ? flag = '1' : flag = '0' 
-      autotest ? btn = 'Stop Test' : btn = 'Start Test'
-      document.getElementById('btnTest').innerText = btn
-      let els = document.querySelectorAll('rockiot-ui')
-      els.forEach( (e)=>{
-        e.setAttribute('auto-test', autotest )
-      })
-    }
-    </script>
+   
     
   </head>
   <body style="min-height:100vh;width:100vw;margin:0;padding:0;background:#374353;background-size:cover;font-family:monospace">
@@ -63,6 +43,7 @@
             click-action="test"
             text-color="#bababa"
             scale-text-color="#bababa"
+            chart-background="#000"
             progress-color="#4ea5f1"
             control-color="#888"
             control-bg="none"
@@ -272,19 +253,25 @@
         
       </div>
       <script>
-      var el = document.getElementById('level_1')
-      el.setAttribute('control-icons',JSON.stringify(icons))
-      document.addEventListener("DOMContentLoaded", function(event) {
-        el.addEventListener('delete',()=>{
-          alert('delete =>',this)
+        var autotest = 1
+        var btn = 'Stop Test'
+        document.getElementById('btnTest').innerText = btn
+        var els = document.querySelectorAll('rockiot-ui')
+        els.forEach( (el) => {
+          el.setAttribute('auto-test',1)
         })
-        el.addEventListener('fullscreen',()=>{
-          //alert('fullscreen =>',this)
-        })
-        el.addEventListener('setting',(e)=>{
-          alert('setting =>',e)
-        })
-      })
+
+        function stopTest(){
+          autotest =! autotest
+          var flag
+          autotest ? flag = '1' : flag = '0' 
+          autotest ? btn = 'Stop Test' : btn = 'Start Test'
+          document.getElementById('btnTest').innerText = btn
+          let els = document.querySelectorAll('rockiot-ui')
+          els.forEach( (e)=>{
+            e.setAttribute('auto-test', autotest )
+          })
+        }
       </script>
     </div>
   </body>

@@ -45,7 +45,7 @@
 
       <div style="width:20rem;text-align:center;position:fixed;z-index:201;top:0;background:#272626;color:white;border-bottom-right-radius:.5rem;border-bottom-left-radius:.5rem;padding:.4rem;font-size:1.4rem;">rockiot-ui</div>
       <div class="menu">
-        <a href="linear.html">Linear Gauges</a> <a href="radial.html">Radial Gauges</a> <a href="https://github.com/swina/rockiot-ui" target="_blank">GitHub</a>
+        <a href="dashboard.html">Dashboard Demo</a> <a href="https://github.com/swina/rockiot-ui" target="_blank">GitHub</a>
       </div>
       <div class="rockiot-element" style="margin-top:3rem;text-align:center;">
           <button id="btnTest" style="font-size:.7rem;padding:2px 4px 2px 4px;border:0 ;outline:none;cursor:pointer;background:#000;margin:4px;color:#fafafa;z-index:200;" onclick="stopTest()"></button>
@@ -417,16 +417,10 @@
           code += '&gt;&lt;/rockiot-ui&gt';
           innerCode.innerHTML = code
           myCode.style = "transform: translateX(0%)"
-          //myCode.width = "20rem"
-          //myCode.style.minWidth = "20rem"
-          //myCode.style.padding = "1rem"
           displayCode =! displayCode
         } else {
           displayCode =! displayCode
           myCode.style = "transform: translateX(100%)"
-          //myCode.width = "0rem"
-          //myCode.style.minWidth = "0rem"
-          //myCode.style.padding = "0"
         }
       }
       
