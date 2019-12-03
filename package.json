@@ -1,9 +1,8 @@
 {
   "name": "rockiot-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Antonio Nardone",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "dev": "npm run development",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -16,6 +15,7 @@
     "build-bundle": "vue-cli-service build --target wc --name rockiot-gauge src/components/rockiot.container.vue",
     "lint": "vue-cli-service lint"
   },
+  "unpkg": "build/rockiot.ui.min.js",
   "dependencies": {
     "shifty": "^2.8.0",
     "vue": "^2.6.10",
@@ -51,6 +51,10 @@
     "vue-loader": "^15.7.2",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.41.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swina/rockiot-ui.git"
   },
   "eslintConfig": {
     "root": true,

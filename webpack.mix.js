@@ -24,7 +24,7 @@ mix.babelConfig({
   plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
 
-mix.js('src/main.js', 'build/rockiot.ui.min.js').css('assets/rockiot.gauge.css', 'build/')
+mix.js('src/main.js', 'dist/rockiot.ui.min.js').css('assets/rockiot.gauge.css', 'dist/')
 
 // Full API
 // mix.js(src, output);
