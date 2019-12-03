@@ -181,27 +181,28 @@ As for standard HTML tags, **rockiot-ui** has different attributes in order to c
 |---	            |---	    |---	    |---	            |---	|
 | **serial**   	    | yes       | gauge   	| Unique id   	    | You can also add a different id attribute   	|
 | **type**  	| no   	    | gauge   	| Component type   	    | gauge / chart / number-box  	|
-| **name**  	    | no  	    | component title  	|    	|   	|
-| **units**  	    | no  	    |     	    | Gauge value units |   	|
+| **name**  	    | no  	    | Gauge  	| Component title   	| *empty values supported*  	|
+| **units**  	    | no  	    |     	    | Component value units | *empty values supported*  	|
 | **min**  	        | no  	    | 0  	    | Minimum value   	|   	|
 | **max**  	        | no  	    | 100  	    | Maximum value   	|   	|
 | **value**         | yes  	    | 0  	    | Initial value   	|   	|
 | **precision**     | no  	    | 2  	    | Value precision   | 0 - 5  	|
-| **animation**     | no        | 500       | Animation duration (ms)| 0=no animation *keep below value update rating* |
+| **animation**     | no        | 500       | Animation duration (ms)| 0=no animation <br>*keep below value update rating* |
 | **text-color**     | no  	    | #777  	    | title and units color |    	|
 | **value-color**     | no  	    | #cecece  	    | display value color |    	|
 | **value-bg-color**     | no  	    | transparent  	    | display value background color |    	|
-| **value-border-color**     | no  	    | 0px solid #eaeaea  	    | display value border color
+| **value-border-color**     | no  	    | 0px solid #eaeaea  	    | display value border color | |
 | **control-color**     | no  	    | #000  	    | Control icons color |    	|
 | **control-bg**     | no  	    | #fff  	    | Control icons bg color |    	|
-| **test-icon**     | no  	    |   	    | Add Autotest icon to the control icons bar |    	|
+| **test-icon**     | no  	    |   	    | Add Autotest icon to the control icons bar | *wrench icon*   	|
+| **auto-test**     | no        | 0       | Run autotest automatically |
 
 ### Gauges attributes ###
 
 |attribute          |required   |default    | description       |remarks|
 |---	            |---	    |---	    |---	            |---	|
 | **variation**  	| no   	    | radial   	| Gauge type   	    | radial / linear / level 	|
-| **orientation**   | no  	    | vertical  | Gauge orientation | *applied only for linear gauges*   	|
+| **orientation**   | no  	    | vertical  | Gauge orientation | horizontal / vertical <br>*applied only for linear gauges*   	|
 | **startangle**    | no  	    | 135  	    | Gauge start angle | *applied only for radial gauges*   	|
 | **endtangle**     | no  	    | 45  	    | Gauge end angle   | *applied only for radial gauges*   	|
 | **radius**        | no  	    | 40  	    | Gauge bar radius  | *applied only for radial gauges*   	|
