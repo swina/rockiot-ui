@@ -52,7 +52,7 @@ Include the main library in your HTML head.
 <html>
   <head>
   //...
-  <script src="js/rockiot.ui.min.js"></script>
+  <script src="https://unpkg.com/rockiot-ui@latest/build/rockiot.ui.min.js"></script>
   //...
 
 ```
@@ -61,18 +61,18 @@ If you plan to use all the elements
 
 ```
 <!-- linear gauge -->
-<script src="js/rockiot.gauge.linear.js"></script>
+<script src="https://unpkg.com/rockiot-ui@latest/build/rockiot.gauge.linear.js"></script>
 <!-- radial, level gauge -->
-<script src="js/rockiot.gauge.radial.js"></script>
+<script src="https://unpkg.com/rockiot-ui@latest/build/rockiot.gauge.radial.js"></script>
 <!-- charts -->
-<script src="js/rockiot.chart.js"></script>
+<script src="https://unpkg.com/rockiot-ui@latest/build/rockiot.chart.js"></script>
 ```
 
 Otherwise include only the element library
 
-- ```js/rockiot.gauge.linear.js``` for all linear gauges
-- ```js/rockiot.gauge.radial.js``` for all radial gauges
-- ```js/rockiot.chart.js``` for all charts
+- ```https://unpkg.com/rockiot-ui@latest/build/rockiot.gauge.linear.js``` for all linear gauges
+- ```https://unpkg.com/rockiot-ui@latest/build/rockiot.gauge.radial.js``` for all radial gauges
+- ```https://unpkg.com/rockiot-ui@latest/build/rockiot.chart.js``` for all charts
 
 
 **Gauges**
