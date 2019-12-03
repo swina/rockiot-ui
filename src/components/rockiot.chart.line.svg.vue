@@ -95,7 +95,7 @@ export default {
     this.chart.options.titleTextStyle.color = this.$attrs.textColor
     this.chart.options.vAxis.textStyle.color = this.$attrs.scaleTextColor
     this.chart.options.hAxis.textStyle.color = this.$attrs.scaleTextColor
-    this.chart.options.backgroundColor.fill = this.$attrs.background
+    this.chart.options.backgroundColor.fill = this.$attrs.chartBackground
   }
 }
 </script>

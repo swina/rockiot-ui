@@ -223,8 +223,8 @@ As for standard HTML tags, **rockiot-ui** has different attributes in order to c
 |attribute          |required   |default    | description       |remarks|
 |---	            |---	    |---	    |---	            |---	|
 | **variation**  	      | no   	    | line     | Chart type   	    | line / area 	|
-| **backgrorund**       | no  	    | #ff0000  | Background color   |    	|
-| **progress-color**    | no  	    | #ff0000  | Chart color        |    	|
+| **chart-background**       | no  	    | #ff0000  | Background color   |    	|
+| **progress-color**    | no  	    | #ff0000  | Chart line/area color        |    	|
 | **scale-color**       | no  	    | #aaa     | Axis color         |    	|
 | **scale-text-color**  | no  	    | #aaa  	 | Axis text color    |    	|
 
@@ -243,9 +243,6 @@ You can even customize **rockiot-ui** changing the default CSS classes
 | CSS class                         | description                       | remarks    |  
 |---	                            |---	                            |---	    |
 | **rockiot-ui**                     | Component main container          | Component HTML Tag  &lt;rockiot-ui/&gt; 	|
-| **.rockiot-dashboard**             | Flex box settings to create a dashboard  | flex-direction=row <br>flex-wrap=wrap    	|
-| **.rockiot-panel**                 | Flex box settings to create a panel      | flex-direction=column   	|
-| **.rockiot-element**                | Component class           | You can add directly with<br> &lt;rockiot-ui class="rockiot-element"&gt;  	|
 | **.rockiot-wrapper**                | Component wrapper           | Component container wrapper 	|
 | **.rockiot-wrapper-title**          | Component title/name             |  	|
 | **.rockiot-ui-control**             | Component control icons bar             |  	|

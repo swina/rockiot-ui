@@ -99,6 +99,7 @@ export default {
       'needle-color'      : { type: String, required: false, default: '#777' },
       'needle-stroke'     : { type: String, required: false, default: '#000'},
       'chart-class'       : { type: String, required: false, default: '' },
+      'chart-background'  : { type: String, required: false, default: 'none' },
       'control-color'     : { type: String, required: false, default: '#cecece' },
       'control-bg'        : { type: String, required: false, default: 'none' },
       'control-icons'     : {  required: false, default: '' },
