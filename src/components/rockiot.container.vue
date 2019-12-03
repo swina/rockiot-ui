@@ -160,7 +160,6 @@ export default {
     
     methods:{
       emitAction(e){
-        console.log ( e )
         this.$emit(e)
       },
       setting(e){
