@@ -4,17 +4,24 @@
     </div>
 </template>
 <script>
+/* eslint-disable */
 export default {
     name: 'RockiotRadialSvg',
     data:()=>({
         svg: {},
         gauge: null,
         progressColor: '',
-        customize: null
+        customize: null,
+        isChanged: false
     }),
     watch:{
         '$attrs.value'(v){
             this.gauge.setValueAnimated(v,Number(this.$attrs.animation)/1000)
+        },
+        '$attrs.setting'(v){
+            console.log ( v )
+            this.createGauge()
+            this.$emit('updated')
         }
     },
     computed:{
@@ -47,6 +54,7 @@ export default {
             let self = this
             let value = parseFloat(this.$attrs.value)
             /* eslint-disable */
+            this.$refs[this.$attrs.serial].innerHTML = ''
             this.gauge = Gauge(self.$refs[self.$attrs.serial], {
                 dialRadius: self.dialRadius,
                 dialStartAngle: parseInt(self.$attrs.startangle),

@@ -1,5 +1,5 @@
 {
-    "/dist/rockiot.ui.min.js": "/dist/rockiot.ui.min.js",
+    "/build/rockiot.ui.min.js": "/build/rockiot.ui.min.js",
     "/build/rockiot.chart.js": "/build/rockiot.chart.js",
     "/build/rockiot.gauge.linear.js": "/build/rockiot.gauge.linear.js",
     "/build/rockiot.gauge.radial.js": "/build/rockiot.gauge.radial.js"

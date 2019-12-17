@@ -70,11 +70,12 @@ export default {
         pos: 0,
         oldValue: 0,
         aniValue: 0,
-        limitzones:null
+        limitzones:null,
+        showScale: true
     }),
     computed:{
         scaleStyle(){
-            return 'stroke:' + this.$attrs.scaleColor + ';stroke-width:1;'
+            return this.showScale ? 'stroke:' + this.$attrs.scaleColor + ';' : 'display:none;stroke:' + this.$attrs.scaleColor + ';' 
         },
         scaleTextColor(){
             if ( this.$attrs.scaleTextColor ){
@@ -93,9 +94,7 @@ export default {
         }
     },
     watch:{
-        '$attrs.barColor'(v){
-            this.fillStyle()
-        },
+       
         '$attrs.value'(v){
             if ( parseFloat(v) > parseInt(this.$attrs.max) ){
               this.pos = this.normalize(parseFloat(this.$attrs.max))*this.posFactor
@@ -104,6 +103,14 @@ export default {
             }
             this.aniValue = v
         },
+        '$attrs'(v){
+            if ( v.scale === '0' ){
+                this.showScale = false
+            } else {
+                this.showScale = true
+            } 
+            this.createGauge()
+        }
 
     },
     methods:{
@@ -164,32 +171,48 @@ export default {
             }
         },
         createScale(){
+            this.svg.scale = this.$refs['scale-' + this.$attrs.serial]
+            this.svg.scale.children.length ? this.svg.scale.innerHTML = '' : null
             var NS = "http://www.w3.org/2000/svg";
             var height = parseInt(this.svgheight) - (this.offsetY*2)
             var minor = parseInt(this.$attrs.smallscale) ? 10 : 1
+            var ticks = parseInt(this.$attrs.ticks)*minor
             var fs =  height / parseInt(this.$attrs.ticks) / minor
             var txt = 0
-
-            for (var n = 0; n <= (parseInt(this.$attrs.ticks)*minor) ; n++) {
+            for (var n = 0; n <= ticks ; n++) {
                 var scaleLine = document.createElementNS(NS, "line");
-                var h = 10
-                if ( !! parseInt(this.$attrs.smallscale) ){
-                    if ( n % 10 === 0 || n === 0 ){
+                var h = 15
+                if ( minor > 1 ){
+                    if ( n % 10 != 0 && n > 0 ){
+                        h = 10 
+                    } else {
                         h = 15
                     }
+                    var xPos = (this.svgwidth/2)
+                    var scaleLineObj = {
+                        class: "scale rockiot-scale",
+                        style: this.scaleStyle,
+                        x1: this.scaleX,
+                        y1: (n*fs) + this.offsetY,
+                        x2: this.scaleX + h,
+                        y2: (n*fs) + this.offsetY
+                    };
+                    this.setSVGAttributes(scaleLine, scaleLineObj);
+                    this.svg.scale.appendChild(scaleLine);
+                } else {
+                    var xPos = (this.svgwidth/2)
+                    var scaleLineObj = {
+                        class: "scale rockiot-scale",
+                        style: this.scaleStyle,
+                        x1: this.scaleX,
+                        y1: (n*fs) + this.offsetY,
+                        x2: this.scaleX + h,
+                        y2: (n*fs) + this.offsetY
+                    };
+                    this.setSVGAttributes(scaleLine, scaleLineObj);
+                    this.svg.scale.appendChild(scaleLine);
                 }
-
-                var xPos = (this.svgwidth/2)
-                var scaleLineObj = {
-                    class: "scale rockiot-scale",
-                    style: this.scaleStyle,
-                    x1: this.scaleX,
-                    y1: (n*fs) + this.offsetY,
-                    x2: this.scaleX + h,
-                    y2: (n*fs) + this.offsetY
-                };
-                this.setSVGAttributes(scaleLine, scaleLineObj);
-                this.svg.scale.appendChild(scaleLine);
+               
                 var mg = 0
                 if ( n === 0 || n === parseInt(this.$attrs.ticks)){
                     mg = 4
@@ -212,6 +235,26 @@ export default {
                 }
             }
         },
+        createGauge(){
+            let id = this.$attrs.serial
+            var height = parseInt(this.svgheight) - ( this.offsetY*2 )
+            this.svg = this.$refs[id]
+            this.svg.scale = this.$refs['scale-' + id]
+            this.factor = height / (parseInt(this.$attrs.max )-parseInt(this.$attrs.min))
+            this.posFactor = height / Number(this.$attrs.max)
+            this.gaugeSize()
+            if ( parseInt(this.$attrs.value) > parseInt(this.$attrs.max) ){
+                this.$attrs.value = 0
+            }
+            this.range = Number(this.$attrs.max) - Number(this.$attrs.min)
+            this.pos = this.normalize(Number(this.$attrs.value)) * this.posFactor
+            if ( !! parseInt(this.$attrs.scale) ){
+                this.createScale()
+            }
+            if ( this.$attrs.zones  ){
+                this.limitzones = this.$attrs.zones.split(',')
+            }
+        }
     },
     beforeMount(){
       this.aniValue = parseInt(this.$attrs.value)

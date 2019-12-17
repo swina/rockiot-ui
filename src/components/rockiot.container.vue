@@ -1,17 +1,18 @@
 <template>
     <div :id="'rockiot-wrapper-' + serial"  class="rockiot-wrapper" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
-
+      <rockiot-ui-attributes  @attributes="setAttributes" v-bind="_props" v-if="settings && displayAttributes" :display="displayAttributes" @setting="settingsChanged=true"></rockiot-ui-attributes>
       <div v-if="type!='dashboard'" class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
-      <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type">
+      <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type" :style="'background:' + chartBackground + ';'">
 
             <rockiot-ui-control
               v-bind="_props"
               :showControl="showControl"
               @startTest="clickGauge=!clickGauge"
-              @setting="$emit('setting')"
+              @setting="displayAttributes=!displayAttributes"
               @connect="$emit('connect')"
               @custom="emitAction"
               @fullscreen="fullscreen=!fullscreen,$emit('fullscreen')"></rockiot-ui-control>
+
 
             <component 
               v-if="type==='chart'" 
@@ -24,13 +25,15 @@
             <component 
               v-if="type==='gauge'" 
               :is="gaugeComponent" 
-              :component="gaugeComponent" 
-              v-bind="_props" 
+              :component="gaugeComponent"
+              :setting="settingsChanged"
+              @updated="settingsChanged=false"
+              v-bind="elementAttributes" 
               :value="updatedValue"/>
 
             <rockiot-number-box 
               v-if="type==='number-box'" 
-              v-bind="_props" 
+              v-bind="elementAttributes" 
               :value="updatedValue"/>
         </div>
         
@@ -41,12 +44,14 @@
 /* eslint-disable */
 import RockiotUiControl from './rockiot.ui.control.vue'
 import RockiotNumberBox from './rockiot.number.box.vue'
+import RockiotUiAttributes from './rockiot.ui.attributes.vue'
 
 export default {
     name: 'RockiotUI',
     components: {
         RockiotUiControl,
         RockiotNumberBox,
+        RockiotUiAttributes
     },
     data:()=>({
         updatedValue: 0,
@@ -56,12 +61,14 @@ export default {
         clickGauge: false,
         areaChart: false,
         action:'click',
-        extra:null
+        displayAttributes: false,
+        elementAttributes: null,
+        settingsChanged: false
     }),
     props: {
       serial              : { type: String, required: false, default: 'rockiot001'},
       type                : { type: String, required: false, default: 'gauge' },
-      variation           : { type: String, required: false, default: 'radial' },
+      variation           : { type: String, required: false, default: '' },
       orientation         : { type: String, required: false, default: 'vertical' },
       name                : { type: String, required: false, default: 'Gauge'},
       min                 : { type: String, required: false, default: '0' },
@@ -97,16 +104,24 @@ export default {
       'scale-color'       : { type: String, required: false, default: '#aaa'},
       'scale-text-color'  : { type: String, required: false, default: '#111' },
       'needle-color'      : { type: String, required: false, default: '#777' },
-      'needle-stroke'     : { type: String, required: false, default: '#000'},
+      'needle-stroke'     : { coerce: str => str.toString() , required: false, default: '#000'},
+      'number-box-circle' : { coerce: str => parseInt(str) , default: 0 },
+      'number-box-width'  : { type: String , coerce: str => str.toString() , default: '120px' },
       'chart-class'       : { type: String, required: false, default: '' },
       'chart-background'  : { type: String, required: false, default: 'none' },
+      'chart-area'        : { required: false, default: '.3'},
+      'chart-line'        : { required: false, default: '1' },
+      'chart-point'       : { required: false, default: '0' },
+      'chart-x-labels'    : { coerce: str => parseInt(str) , required:false, default: 1 },
+      'chart-x-data'      : { coerce: str => str.toString() , required: false, default: 'count' }, //time,date possible
       'control-color'     : { type: String, required: false, default: '#cecece' },
       'control-bg'        : { type: String, required: false, default: 'none' },
       'control-icons'     : {  required: false, default: '' },
-      'auto-color'        : { required: false, default: '0' },
-      'auto-test'         : { default: '0' },
-      clickAction         : { type: String, required: false, default: ''},
-      'test-icon'         : { type: String, required: false, default: '1'}
+      'auto-color'        : { coerce: str => parseInt(str) , required: false, default: 0 },
+      'auto-test'         : { coerce: str => parseInt(str) , default: 1 },
+      clickAction         : { required: false, default: ''},
+      'test-icon'         : { required: false, coerce: str => str.toString(), default: '1'},
+      settings             : { coerce: str => parseInt(str) , required:false , default: 1 }
     },
     computed:{
         classe(){
@@ -139,10 +154,17 @@ export default {
           if ( this.variation === 'level' ){
             return () => import ( /*webpackChunkName: "build/rockiot.gauge.radial" */ './rockiot.level.gauge' )
           }
+         
         },
         
         chartComponent(){
-            return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.chart.line.svg' )
+          //if ( this.type === 'chart' ){
+          //  return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.chart.line.svg' )
+          //}
+          //if ( this.type === 'chartist' ){
+            //return RockiotChart
+            return () => import ( /*webpackChunkName: "build/rockiot.chart" */ './rockiot.charts.vue' )
+          //}
         },
     },
 
@@ -151,10 +173,10 @@ export default {
             this.updatedValue = v
         },
         clickGauge(v){
-            this.clicked()
+            this.autoTest ? this.clicked() : null
         },
         autoTest(v){
-          this.clicked()
+          v ? this.clicked() : null
         }
     },
     
@@ -167,6 +189,9 @@ export default {
       },
       connect(e){
         this.$emit(e)
+      },
+      setAttributes(a){
+        this.displayAttributes =! this.displayAttributes
       },
       clicked(){
         let self = this
@@ -190,6 +215,7 @@ export default {
        if ( this.autoTest === '1' ){
         this.clicked()
       }
+      this.elementAttributes = this._props
     }
 }
 </script>

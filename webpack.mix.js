@@ -1,5 +1,4 @@
 let mix = require('laravel-mix');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -24,8 +23,8 @@ mix.babelConfig({
   plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
 
-mix.js('src/main.js', 'dist/rockiot.ui.min.js').css('assets/rockiot.gauge.css', 'dist/')
-
+mix.js(['src/main.js'], 'build/rockiot.ui.min.js').css(['assets/rockiot.gauge.css','assets/rockiot.chart.css'], 'build/')
+//mix.combine(['build/rockiot.chart.js','vendors-build/rockiot.chart.js'],'build/rockiot.chart.js')
 // Full API
 // mix.js(src, output);
 // mix.react(src, output); <-- Identical to mix.js(), but registers React Babel compilation.

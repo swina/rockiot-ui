@@ -1,7 +1,18 @@
 # rockiot-ui
 
-*beta*
 
+## v. 0.1.3 release notes (12/15/2019)
+
+- charts using built-in library (removed google charts dependency )
+- new attributes for charts:
+  - chart-area : opacity settings for area charts
+  - chart-line : line charts line width
+  - chart-point: point width (line intersection)
+  - chart-x-labels : set xAxis labels interval ( ex. 3 = display xAxis label every 3 measures)  
+  - chart-x-data: xAxis label type ( count = counter , now = current mins:secs , time = hrs:mins:secs , date = current date ) 
+- new settings attribute (all): see settings panel below
+
+## Features
 
 **rockiot-ui** is a **webcomponent** (custom HTML element) created using Vue.js, to add awesome gauges, charts and other components in your HTML pages.
 
@@ -26,9 +37,10 @@ For this reason you can customize or even manipulate all elements using standard
 - linear horizontal
 - level
 
-**Charts** *using google charts*
+**Charts** 
 - line charts
 - area charts
+- bar charts
 
 **Other**
 - number box
@@ -97,48 +109,11 @@ radial
 </rockiot-ui>
 ```
 
-linear vertical
-```
-<rockiot-ui
-   type="gauge"
-   variation="linear"
-   serial="001"
-   min="0"
-   max="100"
-   value="22">
-</rockiot-ui>
-```
-
-linear horizontal
-```
-<rockiot-ui
-  type="gauge"
-  variation="linear"
-  orientation="horizontal"
-  serial="001"
-  min="0"
-  max="100"
-  value="22">
-</rockiot-ui>
-```
-
-level
-```
-<rockiot-ui
-  type="gauge"
-  variation="level"
-  serial="001"
-  min="0"
-  max="100"
-  value="22">
-</rockiot-ui>
-```
 
 **Charts**
 
-*In order to use charts elements you need an active internet connection*
 
-line chart
+
 ```
 <rockiot-ui
   type="chart"
@@ -164,6 +139,19 @@ A number box is simply a box with an animated number value.
   value="22">
 </rockiot-ui>
 ```
+
+## Settings Panel (new)
+
+From this realease if attributes ```settings```  is set to 1, clicking on the settings icon you will access to the element setting panel.
+
+You can change any attribute (not the id or the serial) and then apply to the element without page refresh needed.
+
+The setting panel has also a Code button that will show the HTML element that reflects the current attributes. In this way you can easily configure your element, copy the HTML code and paste in your page.
+
+## Charts (new)
+
+From this release the chart element doesn't have any external dependency and works offline as well. 
+The charts library has been completely recoded and extended and is based on chartist.js
 
 
 
@@ -196,6 +184,7 @@ As for standard HTML tags, **rockiot-ui** has different attributes in order to c
 | **control-bg**     | no  	    | #fff  	    | Control icons bg color |    	|
 | **test-icon**     | no  	    |   	    | Add Autotest icon to the control icons bar | *wrench icon*   	|
 | **auto-test**     | no        | 0       | Run autotest automatically |
+| **settings**     | no        | 1       | Enable element settings panel (clicking on the settings icon) |
 
 ### Gauges attributes ###
 
@@ -223,8 +212,13 @@ As for standard HTML tags, **rockiot-ui** has different attributes in order to c
 ### Charts attributes ###
 |attribute          |required   |default    | description       |remarks|
 |---	            |---	    |---	    |---	            |---	|
-| **variation**  	      | no   	    | line     | Chart type   	    | line / area 	|
+| **variation**  	      | no   	    | line     | Chart type   	    | line / area / bar	|
 | **chart-background**       | no  	    | #ff0000  | Background color   |    	|
+| **chart-area**        | no  	    | .3  | Area opacity <br>*area/bar charts*   |    	|
+| **chart-line**        | no  	    | 1   | Line stroke width    |    	|
+| **chart-point**       | no  	    | 0   | Line intersection point width   |    	|
+| **chart-x-labels**    | no  	    | 0   | 0 = no labels <br> n = display label every n times   |    	|
+| **chart-x-data**      | no  	    | count    | count = increment  <br>now = min:secs <br>time = hrs:min:secs<br>date = date   |    	|
 | **progress-color**    | no  	    | #ff0000  | Chart line/area color        |    	|
 | **scale-color**       | no  	    | #aaa     | Axis color         |    	|
 | **scale-text-color**  | no  	    | #aaa  	 | Axis text color    |    	|
@@ -318,6 +312,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Roadmap
+
+- Styling with Tailwindcss
 
 ### Credits
 For radial gauge used and adapted JS library from [naikus](https://github.com/naikus/svg-gauge)

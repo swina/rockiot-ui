@@ -284,7 +284,7 @@ export default (function(global, factory) {
             y: 65,
             fill: valueColor,
             "class": valueTextClass,
-            "font-size": "100%",
+            "font-size": '0.' + ( opts.dialRadius + 10 )+ 'rem',
             "font-family": "sans-serif",
             "font-weight": "normal",
             "text-anchor": "middle",
@@ -384,7 +384,9 @@ export default (function(global, factory) {
               limit -= Math.abs(min)
             }
             for ( var n=0 ; n < (ticks*10)+1 ; n++ ){
+                
                 var yT = 50-opts.dialRadius+(opts.dialRadius/10)
+                
                 if ( opts.dialRadius > 40 ){
                   yT -= 2
                 }
@@ -509,8 +511,7 @@ export default (function(global, factory) {
           }
         }
 
-
-
+        
         function setGaugeColor(value, duration) {
           var c = gaugeColor(value),
               dur = duration * 1000,
@@ -532,6 +533,9 @@ export default (function(global, factory) {
         }
 
         instance = {
+          setOptions : function(options) {
+            console.log ( options )
+          },
           setMaxValue: function(max) {
             limit = max;
           },

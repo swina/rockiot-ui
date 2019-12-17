@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div :class="'rockiot-ui-control ' + controlClass + ' rockiot-ui-control-' + $attrs.type + '-' + $attrs.variation + '-' + $attrs.orientation">
-      <span title="Test" v-if="$attrs.testIcon==='1'">
+    <div :title="$attrs.name" :class="'rockiot-ui-control ' + controlClass + ' rockiot-ui-control-' + $attrs.type + '-' + $attrs.variation + '-' + $attrs.orientation">
+      
+      <span title="Test" v-if="$attrs.testIcon">
         <svg height="20" width="20" title="Test" @click="$emit('startTest',$attrs.serial)">
             <g>
                 <ellipse stroke="null" ry="9.33827" rx="9.33827" id="svg_5" cy="9.86682" cx="10" stroke-width="null" :fill="$attrs.controlBg"/>

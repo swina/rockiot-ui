@@ -23,7 +23,6 @@
                 :from="oldValue" 
                 :to="$attrs.value" 
                 @end="oldValue=$attrs.value"/>
-      <!--<animate-number :ref="'num_' + $attrs.serial" :from="oldValue" :to="aniValue" :duration="$attrs.animation" :animate-end="animateEnd" :formatter="formatter"></animate-number>-->
       </div>
   </div>
 </template>

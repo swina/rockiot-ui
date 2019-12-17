@@ -3,6 +3,7 @@ node_modules
 dev
 trash
 test
+vanilla
 
 # local env files
 .env.local

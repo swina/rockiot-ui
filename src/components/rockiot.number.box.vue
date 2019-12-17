@@ -1,6 +1,6 @@
 <template>
   <div class="rockiot-box-value">
-    <h2 :style="'color:' + this.$attrs.valueColor + ';' + style">
+    <div class="rockiot-number-box-wrapper" :style="'color:' + this.$attrs.valueColor + ';' + style">
        <rockiot-animated-number 
           :ref="'num_' + this.$attrs.serial" 
           :precision="$attrs.precision" 
@@ -8,7 +8,7 @@
           :from="oldValue" 
           :to="$attrs.value" 
           @end="oldValue=$attrs.value"/>
-    </h2> 
+    </div> 
   </div>
 </template>
 
@@ -25,8 +25,24 @@ export default {
   }),
   computed:{
     style(){
-        return this.$attrs.valueBorder + ';background:' + this.$attrs.valueBg + ';'
+        let borderRadius = ''
+        if ( this.$attrs.numberBoxCircle ){
+          borderRadius = 'border-radius:99rem;'
+        }
+        return 'width:' + this.$attrs.numberBoxWidth + ';height:' + this.$attrs.numberBoxWidth + ';border:' + this.$attrs.valueBorder + ';background:' + this.$attrs.valueBg + ';' + borderRadius
     },
   },
 }
 </script>
+<style scoped>
+.rockiot-number-box-wrapper {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:1.5rem;
+}
+
+.rockiot-number-box-wrapper > span {
+  font-size:2rem;
+}
+</style>
