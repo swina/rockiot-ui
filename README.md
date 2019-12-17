@@ -272,6 +272,28 @@ document.querSelectorAll('rockiot-ui')
 })
 ```
 
+## Roadmap
+
+- Styling with Tailwindcss
+
+## Versions
+
+### 0.1.3 
+
+- charts using built-in library (removed google charts dependency )
+- new attributes for charts:
+  - chart-area : opacity settings for area charts
+  - chart-line : line charts line width
+  - chart-point: point width (line intersection)
+  - chart-x-labels : set xAxis labels interval ( ex. 3 = display xAxis label every 3 measures)  
+  - chart-x-data: xAxis label type ( count = counter , now = current mins:secs , time = hrs:mins:secs , date = current date ) 
+- new settings attribute (all): see settings panel below
+
+### 0.1.2   
+Initial release
+
+
+
 
 ## VUE Project setup
 The source code has been created using Vue.js so you can create your vue project and change it as per you needs.
@@ -313,9 +335,7 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-## Roadmap
 
-- Styling with Tailwindcss
 
 ### Credits
 For radial gauge used and adapted JS library from [naikus](https://github.com/naikus/svg-gauge)
