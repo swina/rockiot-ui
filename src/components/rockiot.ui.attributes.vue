@@ -3,6 +3,7 @@
         <div class="rockiot-attributes-buttons">
             <button @click="$emit('attributes')">Close</button> 
             <button @click="getHTML">Code</button>
+            <button @click="getJSON">JSON</button>
             <button  @click="update">Apply</button>
 
         </div>    
@@ -102,9 +103,12 @@ export default {
         fromCamel(str){
             return str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
         },
+        
         getHTML(){
             this.tagcode = '<rockiot-ui \nid=\"' + this.$attrs.serial + '\"\n'
-            
+            this.tagcode += 'type=\"' + this.$attrs.type + '\"\n'
+            this.tagcode += 'variation=\"' + this.$attrs.variation  + '\"\n'
+            this.tagcode += 'orientation=\"' + this.$attrs.orientation  + '\"\n'
             Object.keys(this.attributes).forEach((attr)=>{
                 this.currentTab = ''
                 //this.$refs[attr] ? this.$refs[attr].className = 'rockiot-attributes-collapsable' : null
@@ -116,6 +120,25 @@ export default {
             })
             this.tagcode += '></rockiot-ui>'
             this.viewCode =! this.viewCode
+        },
+        getJSON(){
+            let attribs = { 
+                id: this.$attrs.serial , 
+                serial: this.$attrs.serial , 
+                type: this.$attrs.type , 
+                variation: this.$attrs.variation,
+                orientation: this.$attrs.orientation
+            }
+            Object.keys(this.attributes).forEach((attr)=>{
+                this.attributes[attr].forEach( (key) => {
+                    if ( attr === 'common' || attr === this.$attrs.variation ){
+                        attribs[this.fromCamel(key)] = this.data[key] 
+                    }    
+                })
+            })
+            this.tagcode = JSON.stringify(attribs)
+
+            console.log ( attribs )
         }
     },
     mounted(){

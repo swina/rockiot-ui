@@ -99,7 +99,8 @@ export default {
             if ( parseFloat(v) > parseInt(this.$attrs.max) ){
               this.pos = this.normalize(parseFloat(this.$attrs.max))*this.posFactor
             } else {
-              this.pos = this.normalize(v)*this.posFactor
+              this.pos = (this.normalize(v)-(parseFloat(this.$attrs.min)*-1))*this.posFactor
+              console.log ( pos )
             }
             this.aniValue = v
         },
@@ -267,8 +268,11 @@ export default {
         this.factor = height / (parseInt(this.$attrs.max )-parseInt(this.$attrs.min))
         this.posFactor = height / Number(this.$attrs.max)
         this.gaugeSize()
-        if ( parseInt(this.$attrs.value) > parseInt(this.$attrs.max) ){
-            this.$attrs.value = 0
+        
+        if ( parseFloat(this.$attrs.value) > parseInt(this.$attrs.max) ){
+              this.pos = this.normalize(parseFloat(this.$attrs.max))*this.posFactor
+        } else {
+            this.pos = (this.normalize(this.$attrs.value)-(parseFloat(this.$attrs.min)*-1))*this.posFactor
         }
         this.range = Number(this.$attrs.max) - Number(this.$attrs.min)
         this.pos = this.normalize(Number(this.$attrs.value)) * this.posFactor
