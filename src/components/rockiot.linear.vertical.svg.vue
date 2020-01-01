@@ -100,8 +100,8 @@ export default {
               this.pos = this.normalize(parseFloat(this.$attrs.max))*this.posFactor
             } else {
               this.pos = (this.normalize(v)-(parseFloat(this.$attrs.min)*-1))*this.posFactor
-              console.log ( pos )
             }
+            console.log ( v )
             this.aniValue = v
         },
         '$attrs'(v){
@@ -117,7 +117,9 @@ export default {
     methods:{
         normalize(val){
             if ( Number(this.$attrs.min) < 0 ){
-                return (Number(this.$attrs.max)-(val + (parseInt(this.$attrs.min)*-1))/(this.range)*100)
+
+                let n = Number(this.$attrs.max)-(Number(this.$attrs.max)*(((parseFloat(val).toFixed(this.$attrs.precision)-Number(this.$attrs.min))/this.range)*100)/100)
+                return n
             } else {
               if ( Number(this.$attrs.min) > 0 ){
                 let n = Number(this.$attrs.max)-(Number(this.$attrs.max)*(((val-Number(this.$attrs.min))/this.range)*100)/100)
@@ -265,15 +267,11 @@ export default {
         var height = parseInt(this.svgheight) - ( this.offsetY*2 )
         this.svg = this.$refs[id]
         this.svg.scale = this.$refs['scale-' + id]
+        this.range = parseInt(this.$attrs.max)-parseInt(this.$attrs.min)
         this.factor = height / (parseInt(this.$attrs.max )-parseInt(this.$attrs.min))
         this.posFactor = height / Number(this.$attrs.max)
         this.gaugeSize()
         
-        if ( parseFloat(this.$attrs.value) > parseInt(this.$attrs.max) ){
-              this.pos = this.normalize(parseFloat(this.$attrs.max))*this.posFactor
-        } else {
-            this.pos = (this.normalize(this.$attrs.value)-(parseFloat(this.$attrs.min)*-1))*this.posFactor
-        }
         this.range = Number(this.$attrs.max) - Number(this.$attrs.min)
         this.pos = this.normalize(Number(this.$attrs.value)) * this.posFactor
         if ( !! parseInt(this.$attrs.scale) ){

@@ -1,7 +1,7 @@
 <template>
     <div :id="'rockiot-wrapper-' + serial"  class="rockiot-wrapper" :ref="'rockiot-ui-' + serial" @click="showControl=!showControl">
       <rockiot-ui-attributes  @attributes="setAttributes" v-bind="_props" v-if="settings && displayAttributes" :display="displayAttributes" @setting="settingsChanged=true"></rockiot-ui-attributes>
-      <div v-if="type!='dashboard'" class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
+      <div v-if="type!='dashboard' && type != 'gauge' || variation === 'level' " class="rockiot-wrapper-title" :style="'color:' + this.textColor">{{name}} {{units}}</div>
       <div v-if="type!='dashboard'" :class="classe + ' rockiot-ui-' + type" :style="'background:' + chartBackground + ';'">
 
             <rockiot-ui-control

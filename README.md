@@ -1,21 +1,9 @@
 # rockiot-ui
 
-## v. 0.1.5 fixed readme
+## v. 0.1.6 release notes (01/02/2020)
 
-## v. 0.1.4 release notes (01/01/2020)
+- remove double name display for gauges
 
-- fixed linear vertical display value with negative min setting
-
-## v. 0.1.3 release notes (12/15/2019)
-
-- charts using built-in library (removed google charts dependency )
-- new attributes for charts:
-  - chart-area : opacity settings for area charts
-  - chart-line : line charts line width
-  - chart-point: point width (line intersection)
-  - chart-x-labels : set xAxis labels interval ( ex. 3 = display xAxis label every 3 measures)  
-  - chart-x-data: xAxis label type ( count = counter , now = current mins:secs , time = hrs:mins:secs , date = current date ) 
-- new settings attribute (all): see settings panel below
 
 ## Features
 
@@ -276,6 +264,27 @@ document.querSelectorAll('rockiot-ui')
       .... //your function
 })
 ```
+
+# Release notes
+
+
+## v. 0.1.5 fixed readme
+
+## v. 0.1.4 release notes (01/01/2020)
+
+- fixed linear vertical display value with negative min setting
+
+## v. 0.1.3 release notes (12/15/2019)
+
+- charts using built-in library (removed google charts dependency )
+- new attributes for charts:
+  - chart-area : opacity settings for area charts
+  - chart-line : line charts line width
+  - chart-point: point width (line intersection)
+  - chart-x-labels : set xAxis labels interval ( ex. 3 = display xAxis label every 3 measures)  
+  - chart-x-data: xAxis label type ( count = counter , now = current mins:secs , time = hrs:mins:secs , date = current date ) 
+- new settings attribute (all): see settings panel below
+
 
 ## Roadmap
 
