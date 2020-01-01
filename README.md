@@ -1,5 +1,10 @@
 # rockiot-ui
 
+## v. 0.1.5 fixed readme
+
+## v. 0.1.4 release notes (01/01/2020)
+
+- fixed linear vertical display value with negative min setting
 
 ## v. 0.1.3 release notes (12/15/2019)
 
