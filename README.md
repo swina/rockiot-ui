@@ -2,7 +2,7 @@
 
 ## v. 0.1.6 release notes (01/02/2020)
 
-- remove double name display for gauges
+- removed double name display for gauges
 
 
 ## Features
