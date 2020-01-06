@@ -101,7 +101,6 @@ export default {
             } else {
               this.pos = (this.normalize(v)-(parseFloat(this.$attrs.min)*-1))*this.posFactor
             }
-            console.log ( v )
             this.aniValue = v
         },
         '$attrs'(v){

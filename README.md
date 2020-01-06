@@ -1,5 +1,10 @@
 # rockiot-ui
 
+## v. 0.1.7 release notes (01/06/2020)
+
+- minor fixes
+
+
 ## v. 0.1.6 release notes (01/02/2020)
 
 - removed double name display for gauges
