@@ -18,7 +18,7 @@
   "unpkg": "build/rockiot.ui.min.js",
   "dependencies": {
     "shifty": "^2.8.0",
-    "vue": "^2.6.10",
+    "vue": "^2.6.14",
     "vue-custom-element": "^3.2.10"
   },
   "devDependencies": {
